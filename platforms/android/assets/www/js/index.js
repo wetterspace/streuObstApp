@@ -58,12 +58,17 @@ getLocation();
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
+
+      
+
+
             
     
     function onSuccess(position) {
             var lat = pos.coords.latitude;
             var lng = pos.coords.longitude;
             alert("lat : "+lat+" lng : " +lng);
+
 
         }
 

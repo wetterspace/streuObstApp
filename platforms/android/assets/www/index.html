@@ -26,88 +26,47 @@
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
   
-   <!--     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> -->
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /> 
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+        <title>Tree</title>
+      <!--     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" /> -->
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-        <title>Hello World</title>
     </head>
     <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Tree</a>
-    </div>
+        <div id="navbar_container"></div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
 
         <div class="container" style="margin-top:70px">
             <div class="row">
 
                 <div class="col-lg-4">
                     <h3>Übersicht</h3>
-<p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+                    <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
 
-<hr>
+                    <hr>
 
-<h4>Bäume:</h4>
+                    <h4>Bäume:</h4>
 
-<ul class="list-group" id="baum_liste">
+                    <ul class="list-group" id="baum_liste">
 
-</ul>
+                    </ul>
 
 
-<hr>
+                    <hr>
 
-<h4>Deine Position:</h4>
+                    <h4>Deine Position:</h4>
 
-<p id="demo"> </p>
-
-<img src="http://t0.gstatic.com/images?q=tbn:ANd9GcQe7dQpGFP53UL3Pr0sEsKommizsgyLdvweGv7QyDOLTE9KBbEuo5aE"/>
-
+                    <p id="demo"> </p>
                 </div>
 
                 <div class="col-lg-4">
 
                     <h3>Karte</h3>
 
-<img src="https://maps.googleapis.com/maps/api/staticmap?maptype=satellite&amp;center=52.4549468,13.5184839&amp;zoom=14&amp;size=300x400&amp;key=AIzaSyA4rAT0fdTZLNkJ5o0uaAwZ89vVPQpr_Kc">
+<img src="https://maps.googleapis.com/maps/api/staticmap?maptype=satellite&amp;center=52.4549468,13.5184839&amp;zoom=14&amp;size=300x400&amp;key=AIzaSyA4rAT0fdTZLNkJ5o0uaAwZ89vVPQpr_Kc"  class="img-responsive" style="width:100%"/>
 
                 </div>
 
@@ -142,10 +101,13 @@
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="lib/jquery.js"></script>
+
         <script type="text/javascript" src="js/index.js"></script>
 
         <script src="lib/firebase.js"></script>
         <script type="text/javascript">
+
+          $("#navbar_container").load("navbar.html");
 
 
             
