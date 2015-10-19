@@ -22,3 +22,11 @@
 
 3. Will man die die App packen,[kann man dies local machen](http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface_build_the_app), dafür werden aber die SDK für die Plattformen benötigt.
     Oder man 
+
+### Datenbank
+
+
+
+### Layout
+
+
