@@ -28,5 +28,7 @@
 
 
 ### Layout
-
+Das Layout baut auf Bootstrap auf. 
+Die verschiedenen Elemente können hier gefunden werden.
+https://bootswatch.com/flatly/
 
