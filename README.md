@@ -21,11 +21,10 @@
 2. Will man seine Änderungen <b>direkt auf dem Iphone/Android oder Windows Gerät sehen</b> folgt man diesem 5 Schritte [Tutorial](http://app.phonegap.com/) 
 
 3. Will man die die App packen,[kann man dies local machen](http://docs.phonegap.com/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface_build_the_app), dafür werden aber die SDK für die Plattformen benötigt.
-    Oder man 
+    Oder man geht zu https://build.phonegap.com/ und lädt dort den www-Ordner im zip Format hoch.
 
 ### Datenbank
-
-
+Die Firebase Datenbank kann hier gefunden werden https://incandescent-torch-1365.firebaseio.com/ 
 
 ### Layout
 Das Layout baut auf Bootstrap auf. 
