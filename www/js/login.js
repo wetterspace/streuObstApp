@@ -37,8 +37,11 @@ Login.prototype.showLogin = function(){
 		$('#buttonLogin').click(function(){
 			var wiesenName = $('#inputWiesenName').val();
 			var wiesenPassword = $('#inputWiesenPassword').val();
-
-			this.checkLogin(wiesenName, wiesenPassword);
+			var out = sjcl.hash.sha1.hash(wiesenPassword);
+			var hashedPassword = sjcl.codec.hex.fromBits(out)
+			
+			
+			this.checkLogin(wiesenName, hashedPassword);
 		}.bind(this));
 	}.bind(this);
 

@@ -1,3 +1,5 @@
+
+
 var Register = function(){
 	this.showCard();
 };
@@ -301,9 +303,11 @@ Register.prototype.saveWieseCoords = function(wiese_img, coordinates){
 
 			var wiesenName = $('#inputWiesenName').val();
 			var wiesenPassword = $('#inputWiesenPassword').val();
+			var out = sjcl.hash.sha1.hash(wiesenPassword);
+			var hashedPassword = sjcl.codec.hex.fromBits(out)
 
 			var wiesenObj = {
-				password: wiesenPassword,
+				password: hashedPassword,
       			coordinates: coordinates
 			}
 
