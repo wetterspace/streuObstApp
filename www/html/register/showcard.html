@@ -1,0 +1,59 @@
+<style>
+  .tooltip {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    opacity: 0.7;
+    white-space: nowrap;
+  }
+  .tooltip-measure {
+    opacity: 1;
+    font-weight: bold;
+  }
+  .tooltip-static {
+    background-color: #ffcc33;
+    color: black;
+    border: 1px solid white;
+  }
+  .tooltip-measure:before,
+  .tooltip-static:before {
+    border-top: 6px solid rgba(0, 0, 0, 0.5);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    margin-left: -7px;
+    left: 50%;
+  }
+  .tooltip-static:before {
+    border-top-color: #ffcc33;
+  }
+</style>
+
+
+
+<div class="col-lg-12">
+	<h3 class="text-center">Geben sie die Koordinaten ihrer Wiese an</h3>
+
+	<p class="text-center">Klicken sie dafür auf die Eckpunkte ihrer Wiese in der Karte</p>
+
+
+</div>
+
+<div class="col-lg-12">
+
+		  <form class="form-inline">
+            <label>Geometry type &nbsp;</label>
+              <select id="type">
+                <option value="length">Length</option>
+                <option value="area">Area</option>
+              </select>
+          </form>
+
+	<div id="map" class="map"></div>
+
+
+</div>
