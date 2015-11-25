@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+<script type="text/javascript" src="lib/jquery.js"></script>
+<script src="http://openlayers.org/en/v3.10.1/build/ol.js" type="text/javascript"></script>
+
+<body>
+<div id="navbar_container"></div>
+
+<style>
+	.inputText{
+		display:inline-block;
+		float:left;
+		width:200px;
+		margin-top:2px;
+	}
+	
+	.inputDropDown{
+		display:inline-block;
+		float:left;
+		width:200px;
+		margin-top:5px;
+		margin-left:-50px;
+		
+		text-align:center;
+	}
+	
+	.inputDropDownMid{
+		display:inline-block;
+		float:left;
+		width:140px;
+		margin-top:5px;
+		
+		text-align:center;
+	}
+	
+	.inputBox{
+		display:inline-block;
+		margin-top:8px;
+	}
+	
+	.inputBoxMid{
+		display:inline-block;
+		margin-top:8px;
+		
+		width:140px;
+	}
+	
+	#userPosition,#selectedDate{
+		display:inline-block;
+		width:200px;
+		margin-top:10px;
+		margin-left:-50px;
+	}
+	
+	#posButton{
+		display:block;
+		width:120px;
+		
+		clear:left;
+	}
+	
+	
+	.options{
+		clear:both;
+	}
+	
+	.treePic{
+		width:150px;
+	}
+</style>
+
+<div class="col-lg-4">
+<h1> Baum ID </h1>
+	<p class="inputText"> ObstArt </p>
+	<select class="inputDropDown" id="selectedObstArt">
+		<option>Apfel</option>
+		<option>Birne</option>
+		<option>Pflaume</option>
+		<option>Nuss</option>
+	</select>
+	
+	<p class="inputText"> Sortenname </p>
+	<select class="inputDropDown" id="selectedSortname">
+	
+	</select>
+	
+	<p class="inputText"> Position </p>
+	<input class="inputBox" id="userPosition" type="text"></input>
+	<button id="posButton" type="button">Position laden</button>
+	
+	<p class="inputText"> Diploid/Triploid </p>
+	<select class="inputDropDown" id="selectedPloid">
+		<option>Diploid</option>
+		<option>Triploid</option>
+	</select>
+	
+	<p class="inputText"> Gepflanzt: </p>
+	<input class="inputBox" type="text" id="selectedDate"></input>
+</div>
+
+<div class="col-lg-4">
+<h1> Pflegezustand </h1>
+	<p class="inputText"> Krone beschnitten </p>
+	<input class="inputBoxMid" type="date" id="kroneInfo"></input>
+	
+	<p class="inputText"> Baumscheibe gereinigt </p>
+	<input class="inputBoxMid" type="text" id="baumscheibeInfo"></input>
+	
+	<p class="inputText"> Baumstamm gekalkt </p>
+	<input  class="inputBoxMid" type="text" id="stammInfo"></input>
+	
+	<p class="inputText"> Schädlinge </p>
+	<input  class="inputBoxMid" type="text" id="schadInfo"></input>
+	
+	<p class="inputText"> Verbissspuren </p>
+	<select class="inputDropDownMid" id="selectedVerbiss">
+		<option>Ja</option>
+		<option>Nein</option>
+	</select>
+	
+	<p class="inputText"> beseitigt </p>
+	<select class="inputDropDownMid" id="selectedBeseitigt">
+		<option>Ja</option>
+		<option>Nein</option>
+	</select>
+	
+	<p class="inputText"> Höhe der Krone </p>
+	<input class="inputBoxMid" type="text" id="heightInfo"></input>
+	
+	<p class="inputText"> Zeitstempel </p>
+	<input class="inputBoxMid" type="text" id="timeInfo"></input>
+	<button class="options" type="button" id="timeStampButton">Zeitstempel laden</button>
+</div>
+
+
+<img class="treePic" src="./img/Baum.jpg"/>
+<div>
+	
+	<h1> Blüte und Ertrag </h1>
+	
+	<p class="inputText"> Beginn </p>
+	<input class="inputBox" type="text" id="begin"></input>
+	
+	<p class="inputText"> Ende </p>
+	<input class="inputBox" type="text" id="end"></input>
+	
+	<p class="inputText"> Blühintensität </p>
+	<input class="inputBox" type="number" step="1" value="0" min="0" max="5" id="bloomLevel"></input>
+	
+	<p class="inputText"> Temperatur bei Beginn </p>
+	<input class="inputBox" type="text" id="tempStart"></input>
+	
+	<p class="inputText"> Temperatur bei Ende </p>
+	<input class="inputBox" type="text" id="tempEnd"></input>
+	
+	<p class="inputText"> Ertragsintensität </p>
+	<input class="inputBox" type="text" id="cropInfo"></input>
+	
+</div>
+		
+		<p class="options" id="saveTree"> Baum erstellen! </p>
+		<p id="cancelButton"> Abbrechen </p>
+		
+</body>
+</html>
