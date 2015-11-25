@@ -50,7 +50,11 @@ Wiese.prototype.init_map = function(){
 
 Wiese.prototype.init_page = function() {
 	$('#wiesenName').html(this.name);
-
+	$('#buttonCreateTree').click(function(){
+		$('#holeContent').load("./html/menu/createTree.html",function(){
+			Tree(this);
+		}.bind(this));
+	}.bind(this));
 };
 
 Wiese.prototype.init = function(){
