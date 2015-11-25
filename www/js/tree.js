@@ -7,6 +7,30 @@
 		$('#posButton').click(function(){
 			getLocation();
 		});
+		
+		$('#cancelButton').click(function(){
+			wiese.show();
+		});
+		
+		$('#timeStampButton').click(function(){
+			getCurrentTimeStamp();
+		});
+		
+		document.getElementById("selectedObstArt").addEventListener("change",function(){
+			setOptions();
+		});
+		
+		document.getElementById("tempStart").addEventListener("change",function(){
+			setCelsius(this);
+		});
+		
+		document.getElementById("tempEnd").addEventListener("change",function(){
+			setCelsius(this);
+		});
+		
+		
+		
+		
 			
 		function initOptions(){
 			var e = document.getElementById("selectedObstArt");
@@ -173,7 +197,6 @@
 		
 		var myTree = new Tree(type,sortType,lon,lat,ploid,date,crownState,plateState,logState,dmgState,verbissState,adjustedState,crownHeight,timeStamp,begin,end,bloomLevel,tempStart,tempEnd,cropState);
 		
-		alert("test");
 		saveTree(myTree);
 		
 		}
@@ -233,7 +256,7 @@
   				if(err){
   					alert("Fehler" + err);
   				}else{
-					alert("Hat geklappt!");
+					wiese.show();
   				}
   			});
 		}
