@@ -6,7 +6,9 @@ var init = function(){
 	if(currentWiese == null){
 		new Login();
 
-		new TreeForm().show_form();
+		//tree_form = new TreeForm( )
+		//tree_form.set_wiese(new Wiese())
+		//tree_form.show_form();
 	}
 
 };
