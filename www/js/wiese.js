@@ -15,6 +15,10 @@ console.log(this.data);
 	}.bind(this));
 }
 
+Wiese.prototype.getDB = function(){
+	return new DB().getWiesenDB().child(this.name);
+};
+
 Wiese.prototype.init_map = function(){
 
 	var vectorSource = new ol.source.Vector({});
@@ -66,12 +70,50 @@ Wiese.prototype.init_map = function(){
     this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
 }
 
+Wiese.prototype.list_trees = function(){
+	var ele;
+
+	if(this.data.trees){
+		ele = $('<div/>', {class: "list-group"});
+
+		Object.keys(this.data.trees).forEach(function(key){
+
+			var tree = this.data.trees[key];
+			var sort = tree[TreeAttr.sortname.id];
+
+			var list_group_item = $('<a/>', {class: "list-group-item", href: "#"}).append(
+										$('<h4/>', {class: "list-group-item-heading", text:  key})
+									).append(
+										$('<p/>', {class: "list-group-item-text", text: sort})
+									);
+
+			$(list_group_item).click(function(){
+				var tree_obj = new Tree()
+					tree_obj.from_server_obj(this.data.trees, key);
+					tree_obj.wiese = this;
+					
+				new TreeForm(tree_obj).show_form();
+			}.bind(this));
+
+			ele.append(list_group_item);
+		}.bind(this));
+
+	}else{
+		ele = $('<div/>', {class: "well", text: "Sie haben noch keine Bäume auf ihrer Wiese plaziert"});
+	}
+	
+	$('#trees_list').html(ele)
+};
+
 Wiese.prototype.init_page = function() {
 	$('#wiesenName').html(this.name);
+
+	this.list_trees();
+
 	$('#buttonCreateTree').click(function(){
-		$('#HauptFenster').load("./html/menu/createTree.html",function(){
-			Tree(this);
-		}.bind(this));
+		var tree_form = new TreeForm();
+			tree_form.set_wiese(this);
+			tree_form.show_form();
 	}.bind(this));
 };
 
@@ -79,8 +121,9 @@ Wiese.prototype.init = function(){
 
 	this.getWiesenDataFromServer(function(){
 		//callback
-		this.init_map();
 		this.init_page();
+		this.init_map();
+		
 	}.bind(this));
 }
 
