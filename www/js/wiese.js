@@ -69,9 +69,7 @@ Wiese.prototype.init_map = function(){
 Wiese.prototype.init_page = function() {
 	$('#wiesenName').html(this.name);
 	$('#buttonCreateTree').click(function(){
-		$('#HauptFenster').load("./html/menu/createTree.html",function(){
-			Tree(this);
-		}.bind(this));
+		new TreeForm().show_form();
 	}.bind(this));
 };
 
