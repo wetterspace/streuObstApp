@@ -1,24 +1,29 @@
 var Login = function(){
+	if(sessionStorage.getItem('user')== null) {
 	this.showLogin();
+	} else {
+	new User(sessionStorage.getItem('user')).show();
+}
 };
 
 
-Login.prototype.checkLogin = function(wiesenName, wiesenPassword){
-	var wiesenDb = new DB().getWiesenDB();
+Login.prototype.checkLogin = function(userName, userPassword){
+	var userDb = new DB().getUserDB();
 
-	wiesenDb.child(wiesenName).once("value", function(snapshot){
-		var wiesenValue = snapshot.val();
+	userDb.child(userName).once("value", function(snapshot){
+		var userValue = snapshot.val();
 
-		if(wiesenValue == null){
+		if(userValue == null){
 			//wiese exisitert nicht
-			alert("Wiese does not exist");
+			alert("User does not exist");
 		}else{
-			if(wiesenValue.password == wiesenPassword){
+			if(userValue.password == userPassword){
 				//wiese existiert, password ist richtig
-				new Wiese(wiesenName, wiesenPassword).show();
+				new User(userName, userPassword).show();
+				sessionStorage.setItem('user', userName);
 			}else{
 				//wiese existiert, password ist aber falsch
-				alert("Password falsch");
+				alert("Passwort falsch");
 			}
 		}
 
@@ -46,5 +51,7 @@ Login.prototype.showLogin = function(){
 	}.bind(this);
 
 	$('#HauptFenster').load('./html/login.html', initializeButtons);
+	
+	
 
 };

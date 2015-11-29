@@ -1,7 +1,5 @@
-// imagewiese
-
-var Register = function(){
-	this.showUserSave();
+var RegisterWiese = function(){
+	this.showCard();
 };
 
 var init_car = function(){
@@ -186,7 +184,7 @@ window.map2 = map;
     	window.map2.once('postcompose', function(event) {
 	      var canvas = event.context.canvas;
 		
-		  new Register().saveWieseCoords(coordinates);	 
+		  new RegisterWiese().saveWieseCoords( canvas.toDataURL('image/png'), coordinates);	 
 	    });
 
         
@@ -288,36 +286,57 @@ addInteraction();
 
 }
 
-Register.prototype.showUserSave = function(){
+RegisterWiese.prototype.showCard = function(){
 
-$('#HauptFenster').load('./html/register/saveUser.html', init_register);
 
-function init_register(){
+	$('#HauptFenster').load('./html/register/showCard.html', init_car);
+}
+
+RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
+
+	var init_register = function(){
+		$('#imagewiese').attr("src", wiese_img);
+
 		$('#buttonSave').click(function(){
-			var userName = $('#inputUserName').val();
-			var userPassword = $('#inputUserPassword').val();
-			var out = sjcl.hash.sha1.hash(userPassword);
-			var hashedPassword = sjcl.codec.hex.fromBits(out)
 
-			var UserObj = {
-				password: hashedPassword,
-			}
+			var wiesenName = $('#inputWiesenName').val();
 			
-			new DB().getUserDB().child(userName).set(UserObj, function(err){
+			var wiesenObjRights = {
+      			name: wiesenName,
+				rights: "write"
+			};
+
+			var wiesenObj = {
+			//	password: hashedPassword,
+      			coordinates: coordinates,
+				image: wiese_img
+			};
+			
+			new DB().getWiesenDB().child(wiesenName).set(wiesenObj, function(err){
   				if(err){
   					alert("Fehler" + err);
   				}else{
-					sessionStorage.setItem('user', userName);
-  					new User(userName, userPassword).show();
+  					new Wiese(wiesenName).show();
   				}
   			});
+			
+			
+			new DB().getUserDB().child(sessionStorage.getItem('user')).child('wiesen').child(wiesenName).set(wiesenObjRights, function(err){
+  				if(err){
+  					alert("Fehler" + err);
+  				}else{
+  					new Wiese(wiesenName).show();
+  				}
+  			});
+			
+			
 		});
 	}
 
+	$('#HauptFenster').load('./html/register/savewiese.html', init_register);
 
+	
 }
-
-
 
 
 

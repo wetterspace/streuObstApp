@@ -1,13 +1,11 @@
-var Wiese = function(name, password){
+var Wiese = function(name){
 	this.name = name;
-	this.password = password;
 };
 
 Wiese.prototype.getWiesenDataFromServer = function(callbac){
 
 	new DB().getWiesenDB().child(this.name).once("value", function(snapshot){
 		var wiesenData = snapshot.val();
-
 		this.data = wiesenData;
 
 		callbac();

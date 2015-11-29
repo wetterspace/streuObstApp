@@ -1,4 +1,5 @@
 function attemptSync() {
+	console.log("Name: " + sessionStorage.getItem('user'));
 	var connectedRef = new Firebase("https://incandescent-torch-1365.firebaseio.com/.info/connected");
     connectedRef.on("value", function(snap) {
       if (snap.val() === true) {
