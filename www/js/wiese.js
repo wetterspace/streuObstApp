@@ -19,25 +19,31 @@ Wiese.prototype.getDB = function(){
 	return new DB().getWiesenDB().child(this.name);
 };
 
+Wiese.prototype.place_trees_on_map = function(vectorSource){
+	if(this.data.trees){
+		Object.keys(this.data.trees).forEach(function(treeKey){
+		
+		var tree = this.data.trees[treeKey];
+		var lon = parseFloat(tree.lon);
+		var lat = parseFloat(tree.lat);
+		
+		var treeDot = ol.proj.fromLonLat([lon,lat]);
+		var treePoint = new ol.geom.Point(treeDot);
+		
+		var polyFeature = new ol.Feature({
+			geometry: treePoint
+		});
+		
+		vectorSource.addFeature(polyFeature);
+		}.bind(this));
+	};
+}
+
 Wiese.prototype.init_map = function(){
 
 	var vectorSource = new ol.source.Vector({});
-	console.log(this.data.trees);
-	Object.keys(this.data.trees).forEach(function(treeKey){
-	
-	var tree = this.data.trees[treeKey];
-	var lon = parseFloat(tree.lon);
-	var lat = parseFloat(tree.lat);
-	
-	var treeDot = ol.proj.fromLonLat([lon,lat]);
-	var treePoint = new ol.geom.Point(treeDot);
-	
-	var polyFeature = new ol.Feature({
-		geometry: treePoint
-	});
-	
-	vectorSource.addFeature(polyFeature);
-	}.bind(this));
+
+	this.place_trees_on_map(vectorSource);
 
     //create polygon from Wiesen coordinates
     var polyFeature = new ol.Feature({
