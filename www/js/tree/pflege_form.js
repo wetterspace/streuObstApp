@@ -6,46 +6,46 @@ var PflegeForm = function(tree){
 		{	
 			id: "pflege_row_1",
 			fields: [
-				{	id: "krone_beschnitten", 
+				{	id: PflegeAttr.krone_beschnitten.id, 
 					form: Form.Text,
-					title: "Krone Beschnitten"},
+					title: PflegeAttr.krone_beschnitten.title},
 
-				{	id: "höhe_der_krone", 
+				{	id: PflegeAttr.hohe_der_krone.id, 
 					form: Form.Text,
-					title: "Höhe der Krone"}
+					title: PflegeAttr.hohe_der_krone.title}
 			]
 		}, 
 		{
 			id: "pflege_row_2",
 			fields:[
 
-				{	id: "baumstamm_gereinigt", 
+				{	id: PflegeAttr.baumstamm_gereinigt.id, 
 					form: Form.Text,
-					title: "Baumstamm gereinigt"},
+					title: PflegeAttr.baumstamm_gereinigt.title},
 
-				{	id: "baumstamm_gekalket", 
+				{	id: PflegeAttr.baumstamm_gekalket.id, 
 					form: Form.Text,
-					title: "Baumstamm gekalkt"}
+					title: PflegeAttr.baumstamm_gekalket.title}
 			]		
 		},
 
 		{
 			id: "pflege_row_3",
 			fields:[
-				{	id: "schädlinge", 
+				{	id: PflegeAttr.schaedline.id, 
 					form: Form.Textarea,
 					rows: 2,
-					title: "Schädlinge"}
+					title: PflegeAttr.schaedline.title}
 			]		
 		},
 
 		{
 			id: "pflege_row_4",
 			fields:[
-				{	id: "verbiss_spuren",
+				{	id: PflegeAttr.verbiss_spuren.id,
 					form: Form.Textarea,
 					rows: 2,
-					title: "Verbissspuren"}
+					title: PflegeAttr.verbiss_spuren.title}
 			]		
 		}
 
