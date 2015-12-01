@@ -84,9 +84,7 @@ PflegeForm.prototype.init_pflegezustände = function(){
 		//render zustände in side menü
 		var pflege_keys = Object.keys(this.tree.pflegezustaende);
 
-		function sortNumber(a,b) {
-    		return b - a;
-		}
+		function sortNumber(a,b) {return b - a;}
 		//sotiere die keys nach dem erstellungsdatum
 		pflege_keys.sort(sortNumber);
 

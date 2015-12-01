@@ -9,6 +9,7 @@ var TreeForm = function(tree){
 		this.pflegeform = new PflegeForm();
 	}
 	
+	this.image_uploader = new ImageUploader();
 
 	this.form_rows = [
 		//row 1
@@ -117,15 +118,8 @@ var TreeForm = function(tree){
 }
 
 TreeForm.prototype.init_take_picture_button = function(){
-
-	$('#take_picture_button').click(function(){
-
-		var camera = new Camera();
-			camera.take_picture_on_click($('#take_picture_button'));
-			camera.show($('#tree_image_box'));
-
-	});
-
+	var imageLoader_btn = document.getElementById('image_upload_btn');
+    imageLoader_btn.addEventListener('change', this.image_uploader.handleImage.bind(this.image_uploader), false);
 }
 
 TreeForm.prototype.init_tabs = function(){
@@ -184,11 +178,15 @@ TreeForm.prototype.save_form = function(){
 			//Tree wird überarbeitet
 			//Wird dort auch gespeichert
 			this.tree.overwrite_attributes(tree_out_of_form);
+			//in case image was uploaded append it to tree images
+			this.image_uploader.add_uploaded_image(this.tree)
 			this.tree.save();
 		}else{
 			//neuer tree muss erstellt werden
 			var tree =  tree_out_of_form;
 				tree.wiese = this.wiese;
+				//in case image was uploaded append it to tree images
+				this.image_uploader.add_uploaded_image(tree)
 				tree.save();
 		}
 	}else{
@@ -229,10 +227,26 @@ TreeForm.prototype.show_form = function(){
 
 }
 
+TreeForm.prototype.show_latest_tree_image = function(){
+	var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
+	function sortNumber(a,b) {return b - a;}
+	//sotiere die keys nach dem erstellungsdatum
+	image_keys.sort(sortNumber);
+
+	if(image_keys.length > 0){
+		var latest_image_url = this.tree[TreeAttr.images.id][image_keys[0]].url;
+		$('#tree_image').attr('src', latest_image_url);
+	}
+}
+
 
 TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 
 	if(this.tree){
+
+		if(this.tree[TreeAttr.images.id]){
+			this.show_latest_tree_image();
+		}
 
 		this.form_rows.forEach(function(row){
 			
@@ -247,6 +261,10 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 					//sets value for each field
 					if(this.tree[field.id]){
 						$("#" + field.id).val(  this.tree[field.id] );
+					}
+					//execute on change of field
+					if(field.onchange){
+						field.onchange(this.tree[field.id]);
 					}
 
 				}.bind(this));
