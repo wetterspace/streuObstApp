@@ -1,6 +1,10 @@
 //tree attributes
 //key und id sind immer gleich
 var TreeAttr = {
+	pflegezustaende: {
+		//wird mit pflege_from angelegt
+	},
+
 	obstart: 	{	id: "obstart",
 					title: "ObstArt"},
 

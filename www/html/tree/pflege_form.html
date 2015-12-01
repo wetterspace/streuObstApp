@@ -12,11 +12,15 @@
 
 <div class="col-lg-8">
 
-	<h4>Neuer Pflegezustand</h4>
+	<h4 id="pflege_form_header">Neuer Pflegezustand</h4>
 
 	<hr>
 
 	<div class="row">
+
+		<div id="hidden_pflege_row"  style="display:none">
+			<!--is inivisbile keeps track of current edited zustand !-->
+		</div>
 
 		<div class="col-lg-6" id="pflege_row_1">
 
@@ -36,6 +40,10 @@
 
 		<div class="col-lg-6" id="pflege_row_4">
 
+		</div>
+
+		<div class="col-lg-12">
+			<a href="#" style="display:none; float:right" id="remove_pflegezustand_btn" class="btn btn-warning">Pflegezustand entfernen</a>
 		</div>
 
 	</div>

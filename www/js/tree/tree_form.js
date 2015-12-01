@@ -3,7 +3,11 @@ var TreeForm = function(tree){
 	if(tree){
 		this.tree = tree;
 		this.wiese = tree.wiese;
-	};
+		//handels pflegezustaende
+		this.pflegeform = new PflegeForm(tree);
+	}else{
+		this.pflegeform = new PflegeForm();
+	}
 	
 
 	this.form_rows = [
@@ -58,9 +62,9 @@ var TreeForm = function(tree){
 
 		{	//Pflegezustände hat eigene Form
 			id: "tree_form_row_2",
-			func: function(tree){
-				new PflegeForm(tree).render($("#tree_form_row_2"));
-			}
+			func: function(){
+				this.pflegeform.render($("#tree_form_row_2"));
+			}.bind(this)
 		},
 
 		//row 3
@@ -164,7 +168,8 @@ TreeForm.prototype.save_form = function(){
 	
 	//Das Baum object das aus der MAske erstellt werden kann
 	var tree_out_of_form = TreeFormHelper.create_tree_object_from_fields(this.form_rows);
-	
+		tree_out_of_form.pflegezustaende = this.pflegeform.get_pflegezustaende_to_save();
+
 	if(this.tree){
 		//Tree wird überarbeitet
 		//Wird dort auch gespeichert
@@ -243,7 +248,8 @@ TreeForm.prototype.render_forms = function(){
 		var form_row = $('#' + row.id);
 
 		if(row.func){
-			row.func(this.tree);
+			//if form has attached function, for eg. Pflegeform, execute it
+			row.func();
 		}
 
 		if(row.fields){
