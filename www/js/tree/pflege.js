@@ -4,8 +4,8 @@ var PflegeAttr = {
 		//gets set in PflegeForm when Is saved
 		//get_pflegezustaende_to_save
 		//selbe wie bei Firebase um bereits gespeicherte Pflegezustände zu finden
-		id: "zustand_id",
-		title: "Zustand Id"
+		id: "created_at_id",
+		title: "reated_at_id"
 	},
 
 	krone_beschnitten: {
@@ -37,13 +37,4 @@ var PflegeAttr = {
 			id: "verbiss_spuren",
 			title: "Verbissspuren"
 	}
-};
-
-
-var Pflege = function(){
-
-}
-
-Pflege.prototype.method_name = function(first_argument) {
-	// body...
 };
