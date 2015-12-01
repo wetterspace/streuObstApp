@@ -23,7 +23,8 @@ var TreeForm = function(tree){
 					options: Obst.getArten(),
 					//when another value gets selected
 					onchange: TreeFormHelper.change_sorten_dropdown,
-					title: TreeAttr.obstart.title},
+					title: TreeAttr.obstart.title
+				},
 
 				{	id: TreeAttr.sortname.id,	
 					form: Form.Dropdown,
@@ -32,11 +33,15 @@ var TreeForm = function(tree){
 
 				{	id: TreeAttr.lon.id,  
 					form: Form.Text,
-					title: TreeAttr.lon.title},
+					title: TreeAttr.lon.title,
+					validation: TreeAttr.lon.validation
+				},
 
 				{	id: TreeAttr.lat.id,
 					form: Form.Text,
-					title: TreeAttr.lat.title}
+					title: TreeAttr.lat.title,
+					validation: TreeAttr.lat.validation
+				}
 			]
 		},
 
@@ -170,16 +175,25 @@ TreeForm.prototype.save_form = function(){
 	var tree_out_of_form = TreeFormHelper.create_tree_object_from_fields(this.form_rows);
 		tree_out_of_form.pflegezustaende = this.pflegeform.get_pflegezustaende_to_save();
 
-	if(this.tree){
-		//Tree wird überarbeitet
-		//Wird dort auch gespeichert
-		this.tree.overwrite_attributes(tree_out_of_form);
-		this.tree.save();
+	//check if tree is valid object anhand von erstelltem objekt und der Form
+	var validator = new Validator();
+	var is_valid = validator.is_valid_object(tree_out_of_form, this.form_rows);
+
+	if(is_valid){
+		if(this.tree){
+			//Tree wird überarbeitet
+			//Wird dort auch gespeichert
+			this.tree.overwrite_attributes(tree_out_of_form);
+			this.tree.save();
+		}else{
+			//neuer tree muss erstellt werden
+			var tree =  tree_out_of_form;
+				tree.wiese = this.wiese;
+				tree.save();
+		}
 	}else{
-		//neuer tree muss erstellt werden
-		var tree =  tree_out_of_form;
-			tree.wiese = this.wiese;
-			tree.save();
+		//not valid show warnings
+		validator.show_warnings();
 	}
 }
 
