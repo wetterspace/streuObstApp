@@ -325,7 +325,8 @@ RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
   				if(err){
   					alert("Fehler" + err);
   				}else{
-  					new Wiese(wiesenName).show();
+  					//new Wiese(wiesenName).show();
+					new Login();
   				}
   			});
 			
