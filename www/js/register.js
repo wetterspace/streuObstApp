@@ -291,7 +291,7 @@ addInteraction();
 Register.prototype.showCard = function(){
 
 
-	$('#HauptFenster').load('./html/register/showCard.html', init_car);
+	$('#HauptFenster').load('./html/register/showcard.html', init_car);
 }
 
 Register.prototype.saveWieseCoords = function(wiese_img, coordinates){
