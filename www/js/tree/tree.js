@@ -1,17 +1,44 @@
 //tree attributes
 //key und id sind immer gleich
 var TreeAttr = {
+	pflegezustaende: {
+		//wird mit pflege_from angelegt
+	},
+
+	images: {
+		//wird  vom Image Uploader festgelegt
+		id: "images",
+		title: "Bilder"
+	},
+
 	obstart: 	{	id: "obstart",
-					title: "ObstArt"},
+					title: "ObstArt"
+				},
 
 	sortname: 	{	id: "sortname",
 					title:"Sortenname"},
 
 	lon: {	id: "lon",
-			title: "Longitude"},
+			title: "Longitude",
+			validation: function(lon){
+				if(isNaN(parseFloat(lon))){
+					return false;
+				}else{
+					return true;
+				}
+			}
+		},
 
 	lat: {	id: "lat",
-			title: "Latitude"},
+			title: "Latitude",
+			validation: function(lat){
+				if(isNaN(parseFloat(lat))){
+					return false;
+				}else{
+					return true;
+				}
+			}
+		},
 
 	ploid: {	id: "ploid",
 				title: "Diploid/Triploid"},

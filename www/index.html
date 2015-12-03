@@ -27,39 +27,48 @@
 
         <div id="navbar_container"></div>
 
-        <div id="HauptFenster" class="container" style="margin-top:70px">
-            <div class="row">
-
-                <div class="col-lg-4">
-
-                </div>
-
-                <div class="col-lg-4">
-
-                </div>
-
-                <div class="col-lg-4">
-
-   
-
-                <div>
+        <div class="container" style="margin-top:70px">
+            <div id="FehlerFenster" class="row">
 
             </div>
+
+            <div id="HauptFenster" class="row">
+                <div class="row">
+
+                    <div class="col-lg-4">
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+       
+
+                    <div>
+
+                </div>
+            </div>
+
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
         <!--Jquery bietet vereinfachte Javascript Funktionen -->
         <script type="text/javascript" src="lib/jquery.js"></script>
+        <!--Bootstrap Javascript -->
+        <script type="text/javascript" src="lib/bootstrap.min.js"></script>
         <!--Firebase um eine Verbindung zum Server herzustellen zu können-->
         <script type="text/javascript" src="lib/firebase.js"></script>
         <!--Openlayers Libaryy -->
-       
         <script type="text/javascript" src="lib/ol.js"></script>
         <!--Zentraler Punkt um mit der Datenbank zu kommunizieren-->
 		<!--Crypto Library-->
 		<script type="text/javascript" src="lib/sjcl/sjcl.js"></script>
 		<script type="text/javascript" src="lib/sjcl/core/sha1.js"></script>
-        <script type="text/javascript" src="js/db.js"></script>
+        <!--Wrapper für FireBase-->
+        <script type="text/javascript" src="js/helper/db.js"></script>
         <!--Enthält Code der dafür zuständig ist die Wiesen anzuzeigen-->
         <script type="text/javascript" src="js/wiese.js"></script>
 		<!--Enthält Code der dafür zuständig ist die User anzuzeigen-->
@@ -73,27 +82,19 @@
         <!--Main enthät den ersten Code der beim öffnen der Seite ausgeführt wird-->
         <script type="text/javascript" src="js/main.js"></script>
 		
-		 <script type="text/javascript" src="js/tree/tree.js"></script>
+        <!-- Bei dem Pflege Status eines Baumes -->
+		<script type="text/javascript" src="js/tree/pflege.js"></script>
+
+        <script type="text/javascript" src="js/tree/tree.js"></script>
+
         <!--Hilft bei der Erstellung eines Baums-Inputs , create update -->
         <script type="text/javascript" src="js/tree/tree_form.js"></script>
         <!--hier sind alle Obstarten die im System vorhanden sien sollen gespeichert -->
         <script type="text/javascript" src="js/tree/tree_form.js"></script>
+
         <script type="text/javascript" src="js/tree/pflege_form.js"></script>
 
         <script type="text/javascript" src="js/tree/tree_form_helper.js"></script>
-
-        <!--definiert Obst Obj -->
-        <script type="text/javascript" src="js/obst/obst.js"></script>
-        <!--ARRRTTTENNN-->
-        <script type="text/javascript" src="js/obst/arten/beerenobst.js"></script>
-        <script type="text/javascript" src="js/obst/arten/exotischefrüchte.js"></script>
-        <!--Kernobst-->
-         <script type="text/javascript" src="js/obst/arten/kernobst.js"></script>
-         <script type="text/javascript" src="js/obst/arten/schalenobst.js"></script>
-        <!--Steinobst-->
-        <script type="text/javascript" src="js/obst/arten/steinobst.js"></script>
-        <script type="text/javascript" src="js/obst/arten/südfrüchte.js"></script>
-
 
         <!--Camera um bei Tree Form Selfies zu machen-->
         <script type="text/javascript" src="js/helper/camera.js"></script>
@@ -102,11 +103,40 @@
         <!--Defines some helper methods for Forms -->
         <script type="text/javascript" src="js/helper/form.js"></script>
 		
-		
-		<!--Enthält Code für die Synchronisation-->
-		<script type="text/javascript" src="js/sync.js"></script>
-		<script type="text/javascript">window.setInterval(attemptSync, 9000);</script>
+
+        <script type="text/javascript" src="js/tree/pflege_form.js"></script>
+        <script type="text/javascript" src="js/tree/pflege_form_helper.js"></script>
         
+
+        <!--definiert Obst Obj -->
+        <script type="text/javascript" src="js/obst/obst.js"></script>
+        <!--ARRRTTTENNN-->
+        <script type="text/javascript" src="js/obst/arten/beerenobst.js"></script>
+        <script type="text/javascript" src="js/obst/arten/exotischefruechte.js"></script>
+        <!--Kernobst-->
+         <script type="text/javascript" src="js/obst/arten/kernobst.js"></script>
+         <script type="text/javascript" src="js/obst/arten/schalenobst.js"></script>
+        <!--Steinobst-->
+        <script type="text/javascript" src="js/obst/arten/steinobst.js"></script>
+        <script type="text/javascript" src="js/obst/arten/suedfruechte.js"></script>
+
+
+        <!--Camera um bei Tree Form Selfies zu machen-->
+        <script type="text/javascript" src="js/helper/camera.js"></script>
+        <!--Lets upload Image to imagur -->
+        <script type="text/javascript" src="js/helper/image_uploader.js"></script>
+
+        <!--Script to handle Postion Queries -->
+        <script type="text/javascript" src="js/helper/position.js"></script>
+        <!--Defines some helper methods for Forms -->
+        <script type="text/javascript" src="js/helper/form.js"></script>
+        <!--Helps to validate data and show errors-->
+        <script type="text/javascript" src="js/helper/validator.js"></script>
+
+        <!--Enthält Code für die Synchronisation-->
+        <script type="text/javascript" src="js/sync.js"></script>
+        <!-- <script type="text/javascript">window.setInterval(attemptSync, 9000);</script> -->
+
         <script type="text/javascript">
             //lädt /www/navbar.html in den navigation-container
             $("#navbar_container").load("navbar.html");

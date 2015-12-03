@@ -3,8 +3,14 @@ var TreeForm = function(tree){
 	if(tree){
 		this.tree = tree;
 		this.wiese = tree.wiese;
-	};
+		//handels pflegezustaende
+		this.pflegeform = new PflegeForm(tree);
+	}else{
+		this.pflegeform = new PflegeForm();
+	}
 	
+	this.image_uploader = new ImageUploader();
+
 
 	this.form_rows = [
 		//row 1
@@ -19,7 +25,8 @@ var TreeForm = function(tree){
 					options: Obst.getArten(),
 					//when another value gets selected
 					onchange: TreeFormHelper.change_sorten_dropdown,
-					title: TreeAttr.obstart.title},
+					title: TreeAttr.obstart.title
+				},
 
 				{	id: TreeAttr.sortname.id,	
 					form: Form.Dropdown,
@@ -28,11 +35,15 @@ var TreeForm = function(tree){
 
 				{	id: TreeAttr.lon.id,  
 					form: Form.Text,
-					title: TreeAttr.lon.title},
+					title: TreeAttr.lon.title,
+					validation: TreeAttr.lon.validation
+				},
 
 				{	id: TreeAttr.lat.id,
 					form: Form.Text,
-					title: TreeAttr.lat.title}
+					title: TreeAttr.lat.title,
+					validation: TreeAttr.lat.validation
+				}
 			]
 		},
 
@@ -58,9 +69,9 @@ var TreeForm = function(tree){
 
 		{	//Pflegezustände hat eigene Form
 			id: "tree_form_row_2",
-			func: function(tree){
-				new PflegeForm(tree).render($("#tree_form_row_2"));
-			}
+			func: function(){
+				this.pflegeform.render($("#tree_form_row_2"));
+			}.bind(this)
 		},
 
 		//row 3
@@ -109,13 +120,8 @@ var TreeForm = function(tree){
 
 TreeForm.prototype.init_take_picture_button = function(){
 
-	$('#take_picture_button').click(function(){
-
-		var camera = new Camera();
-			camera.take_picture_on_click($('#take_picture_button'));
-			camera.show($('#tree_image_box'));
-
-	});
+	var imageLoader_btn = document.getElementById('image_upload_btn');
+    imageLoader_btn.addEventListener('change', this.image_uploader.handleImage.bind(this.image_uploader), false);
 
 }
 
@@ -164,17 +170,31 @@ TreeForm.prototype.save_form = function(){
 	
 	//Das Baum object das aus der MAske erstellt werden kann
 	var tree_out_of_form = TreeFormHelper.create_tree_object_from_fields(this.form_rows);
-	
-	if(this.tree){
-		//Tree wird überarbeitet
-		//Wird dort auch gespeichert
-		this.tree.overwrite_attributes(tree_out_of_form);
-		this.tree.save();
+		tree_out_of_form.pflegezustaende = this.pflegeform.get_pflegezustaende_to_save();
+
+	//check if tree is valid object anhand von erstelltem objekt und der Form
+	var validator = new Validator();
+	var is_valid = validator.is_valid_object(tree_out_of_form, this.form_rows);
+
+	if(is_valid){
+		if(this.tree){
+			//Tree wird überarbeitet
+			//Wird dort auch gespeichert
+			this.tree.overwrite_attributes(tree_out_of_form);
+			//in case image was uploaded append it to tree images
+			this.image_uploader.add_uploaded_image(this.tree)
+			this.tree.save();
+		}else{
+			//neuer tree muss erstellt werden
+			var tree =  tree_out_of_form;
+				tree.wiese = this.wiese;
+				//in case image was uploaded append it to tree images
+				this.image_uploader.add_uploaded_image(tree)
+				tree.save();
+		}
 	}else{
-		//neuer tree muss erstellt werden
-		var tree =  tree_out_of_form;
-			tree.wiese = this.wiese;
-			tree.save();
+		//not valid show warnings
+		validator.show_warnings();
 	}
 }
 
@@ -211,9 +231,26 @@ TreeForm.prototype.show_form = function(){
 }
 
 
+TreeForm.prototype.show_latest_tree_image = function(){
+	var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
+	function sortNumber(a,b) {return b - a;}
+	//sotiere die keys nach dem erstellungsdatum
+	image_keys.sort(sortNumber);
+
+	if(image_keys.length > 0){
+		var latest_image_url = this.tree[TreeAttr.images.id][image_keys[0]].url;
+		$('#tree_image').attr('src', latest_image_url);
+	}
+}
+
+
 TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 
 	if(this.tree){
+
+		if(this.tree[TreeAttr.images.id]){
+			this.show_latest_tree_image();
+		}
 
 		this.form_rows.forEach(function(row){
 			
@@ -230,6 +267,11 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 						$("#" + field.id).val(  this.tree[field.id] );
 					}
 
+					//execute on change of field
+					if(field.onchange){
+						field.onchange(this.tree[field.id]);
+					}
+
 				}.bind(this));
 			}
 		}.bind(this));
@@ -243,7 +285,8 @@ TreeForm.prototype.render_forms = function(){
 		var form_row = $('#' + row.id);
 
 		if(row.func){
-			row.func(this.tree);
+			//if form has attached function, for eg. Pflegeform, execute it
+			row.func();
 		}
 
 		if(row.fields){
