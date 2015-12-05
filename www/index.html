@@ -127,7 +127,8 @@
         <script type="text/javascript" src="js/helper/camera.js"></script>
         <!--Lets upload Image to imagur -->
         <script type="text/javascript" src="js/helper/image_uploader.js"></script>
-
+        <!--gets images from image server -->
+        <script type="text/javascript" src="js/helper/image_helper.js"></script>
         <!--Script to handle Postion Queries -->
         <script type="text/javascript" src="js/helper/position.js"></script>
         <!--Defines some helper methods for Forms -->
@@ -143,6 +144,9 @@
             //lädt /www/navbar.html in den navigation-container
             $("#navbar_container").load("navbar.html");
             
+            var IMAGE_SERVER = 'https://thawing-woodland-2366.herokuapp.com';
+            var IMAGE_SERVER_PASSWORD =  "aepfel_schmecken_lecker";
+
             init();
 
         </script>

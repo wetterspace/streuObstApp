@@ -183,11 +183,11 @@ window.map2 = map;
 
     	window.map2.once('postcompose', function(event) {
 	      var canvas = event.context.canvas;
-		
-		  new RegisterWiese().saveWieseCoords( canvas.toDataURL('image/png'), coordinates);	 
+
+		  new RegisterWiese().saveWieseCoords( canvas.toDataURL('image/png'), coordinates);
 	    });
 
-        
+
 
         // unset sketch
         sketch = null;
@@ -299,44 +299,51 @@ RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
 
 		$('#buttonSave').click(function(){
 
-			var wiesenName = $('#inputWiesenName').val();
-			
-			var wiesenObjRights = {
-      			name: wiesenName,
-				rights: "write"
-			};
+			//first upload image
+      var uploader = new ImageUploader();
+      uploader.uploaded_data_and_make_callback(wiese_img, function(image_id){
 
-			var wiesenObj = {
-			//	password: hashedPassword,
-      			coordinates: coordinates,
-				image: wiese_img
-			};
-			
-			new DB().getWiesenDB().child(wiesenName).set(wiesenObj, function(err){
-  				if(err){
-  					alert("Fehler" + err);
-  				}else{
-  					new Wiese(wiesenName).show();
-  				}
-  			});
-			
-			
-			new DB().getUserDB().child(sessionStorage.getItem('user')).child('wiesen').child(wiesenName).set(wiesenObjRights, function(err){
-  				if(err){
-  					alert("Fehler" + err);
-  				}else{
-  					//new Wiese(wiesenName).show();
-					new Login();
-  				}
-  			});
-			
-			
+          var wiesenName = $('#inputWiesenName').val();
+
+    			var wiesenObjRights = {
+          	name: wiesenName,
+    				rights: "write",
+            image_id: image_id
+    			};
+
+    			var wiesenObj = {
+    			//	password: hashedPassword,
+          		coordinates: coordinates,
+    				  image_id: image_id
+    			};
+
+    			new DB().getWiesenDB().child(wiesenName).set(wiesenObj, function(err){
+      				if(err){
+      					alert("Fehler" + err);
+      				}else{
+      					new Wiese(wiesenName).show();
+      				}
+      			});
+
+
+    			new DB().getUserDB().child(sessionStorage.getItem('user')).child('wiesen').child(wiesenName).set(wiesenObjRights, function(err){
+      				if(err){
+      					alert("Fehler" + err);
+      				}else{
+      					//new Wiese(wiesenName).show();
+    					  new Login();
+      				}
+      			});
+
+        }); //close image_uploader_callback
+
+
 		});
 	}
 
 	$('#HauptFenster').load('./html/register/savewiese.html', init_register);
 
-	
+
 }
 
 
