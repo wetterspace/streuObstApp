@@ -1,5 +1,5 @@
 var User = function(username){
-	this.username = username;	
+	this.username = username;
 };
 
 User.prototype.getUserDataFromServer = function(callbac){
@@ -65,10 +65,11 @@ User.prototype.init = function(){
 	this.getUserDataFromServer(function(){
 		this.init_page();
 		new DB().getUserDB().child(this.username).child('wiesen').once("value", function(snapshot){
-		
+
 			snapshot.forEach(function(childSnapshot) {
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
+
 			var t1 = $("#wiesen_list");
 			var d = $('<a/>', {class: "list-group-item", href: "#", click: function(){
 				new Wiese(key).show();
@@ -77,23 +78,20 @@ User.prototype.init = function(){
 			t1.append(d);
 			d.append(hw);
 
-			new DB().getWiesenDB().child(key).once("value", function(snapshotW){
-				var himg = $('<img/>', {class: "img-responsive img-thumbnail"});
+			var himg = $('<img/>', {class: "img-responsive img-thumbnail"});
+			himg.attr('src', ImageHelper.get_url_for(childData.image_id) );
+			d.append(himg);
 
-				himg.attr('src', snapshotW.val().image);	
-				d.append(himg);
-			});
-    
 			});
 		});
 	}.bind(this));
-	
+
 }
 
 
 
 User.prototype.show = function() {
-	
+
 	$('#buttonNewWiese').click(function(){
 			//registers user
 			new Register();
