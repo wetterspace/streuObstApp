@@ -248,9 +248,9 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 
 	if(this.tree){
 
-		if(this.tree[TreeAttr.images.id]){
-			this.show_latest_tree_image();
-		}
+		//if(this.tree[TreeAttr.images.id]){
+		//	this.show_latest_tree_image();
+		//}
 
 		this.form_rows.forEach(function(row){
 			
