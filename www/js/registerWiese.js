@@ -111,7 +111,10 @@ var pointerMoveHandler = function(evt) {
   helpTooltipElement.innerHTML = helpMsg;
   helpTooltip.setPosition(evt.coordinate);
 };
-
+      var view = new ol.View({
+          center: ol.proj.fromLonLat([13.526973,52.457379]),
+          zoom: 19
+        });
 
       var map = new ol.Map({
         target: 'map',
@@ -121,11 +124,25 @@ var pointerMoveHandler = function(evt) {
           }),
           vector
         ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([13.526973,52.457379]),
-          zoom: 19
-        })
+        view: view
       });
+
+
+      function on_click_move_to_current_position(map_view){
+          $('#btnGoToCurrentLocation').click(function(){
+            var current_text = $(this).text();
+            $(this).text("Lädt Position");
+
+            Position.get_current_lon_lat(function(lon,lat){
+
+              map_view.setCenter(ol.proj.fromLonLat([lon,lat]))
+
+              $(this).text(current_text);
+            }.bind(this))
+          });
+      }
+
+      on_click_move_to_current_position(view);
 
 
 map.on('pointermove', pointerMoveHandler);
