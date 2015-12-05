@@ -182,14 +182,14 @@ TreeForm.prototype.save_form = function(){
 			//Wird dort auch gespeichert
 			this.tree.overwrite_attributes(tree_out_of_form);
 			//in case image was uploaded append it to tree images
-			this.image_uploader.add_uploaded_image(this.tree)
+			//this.image_uploader.add_uploaded_image(this.tree)
 			this.tree.save();
 		}else{
 			//neuer tree muss erstellt werden
 			var tree =  tree_out_of_form;
 				tree.wiese = this.wiese;
 				//in case image was uploaded append it to tree images
-				this.image_uploader.add_uploaded_image(tree)
+				//this.image_uploader.add_uploaded_image(tree)
 				tree.save();
 		}
 	}else{

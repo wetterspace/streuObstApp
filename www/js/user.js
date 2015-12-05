@@ -69,24 +69,19 @@ User.prototype.init = function(){
 			snapshot.forEach(function(childSnapshot) {
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
-			var t1 = document.getElementById("top");
-			var d = document.createElement("div");
-			var hw = document.createElement("h3");
-			hw.innerHTML = 'Wiesenname: ' + key;	
-			t1.appendChild(d);
-			d.appendChild(hw);
+			var t1 = $("#wiesen_list");
+			var d = $('<a/>', {class: "list-group-item", href: "#", click: function(){
+				new Wiese(key).show();
+			}});
+			var hw = $('<h4/>', {class: "list-group-item-heading", text: 'Wiesenname: ' + key});
+			t1.append(d);
+			d.append(hw);
 
 			new DB().getWiesenDB().child(key).once("value", function(snapshotW){
-				var hr = document.createElement("h3");
-				hr.innerHTML = 'Berechtigung: ' + childData.rights;
-				var himg = document.createElement("img");
-				himg.style="width:50%; height:50%; cursor: pointer;";
-				himg.onclick= function() {
-					new Wiese(key).show();
-				};
-			himg.src=snapshotW.val().image;	
-			d.appendChild(hr);
-			d.appendChild(himg);
+				var himg = $('<img/>', {class: "img-responsive img-thumbnail"});
+
+				himg.attr('src', snapshotW.val().image);	
+				d.append(himg);
 			});
     
 			});
