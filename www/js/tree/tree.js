@@ -5,12 +5,6 @@ var TreeAttr = {
 		//wird mit pflege_from angelegt
 	},
 
-	images: {
-		//wird  vom Image Uploader festgelegt
-		id: "images",
-		title: "Bilder"
-	},
-
 	obstart: 	{	id: "obstart",
 					title: "ObstArt"
 				},
