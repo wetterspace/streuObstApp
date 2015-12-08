@@ -104,7 +104,7 @@ Wiese.prototype.list_trees = function(){
 				var tree_obj = new Tree()
 					tree_obj.from_server_obj(this.data.trees, key);
 					tree_obj.wiese = this;
-					
+
 				new TreeForm(tree_obj).show_form();
 			}.bind(this));
 
@@ -123,11 +123,17 @@ Wiese.prototype.init_page = function() {
 
 	this.list_trees();
 
-	$('#buttonCreateTree').click(function(){
+	//show_all_buttons_of_navbar
+	NavbarHelper.show_all_btns();
+	NavbarHelper.click( NavbarHelper.btn.baum_anlegen, function(){
 		var tree_form = new TreeForm();
 			tree_form.set_wiese(this);
 			tree_form.show_form();
 	}.bind(this));
+
+	NavbarHelper.click( NavbarHelper.btn.user, function(){
+		new User( sessionStorage.getItem('user') ).show();
+	});
 };
 
 Wiese.prototype.init = function(){

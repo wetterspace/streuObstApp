@@ -53,13 +53,15 @@ User.prototype.init = function(){
 	$('#buttonNewWiese').click(function(){
 			//registers user
 			new RegisterWiese();
-		});
-		$('#buttonLogout').click(function(){
-			//registers user
-			sessionStorage.clear();
-			new Login();
-		});
+	});
 
+	//only show logout btn
+	NavbarHelper.hide_all_btns();
+
+	NavbarHelper.show(NavbarHelper.btn.logout);
+
+	//show active user btn
+	NavbarHelper.make_active(NavbarHelper.btn.user);
 
 
 	this.getUserDataFromServer(function(){
@@ -91,11 +93,11 @@ User.prototype.init = function(){
 
 
 User.prototype.show = function() {
-
-	$('#buttonNewWiese').click(function(){
-			//registers user
-			new Register();
-		});
+//TODO Ist schon in init oder?
+//	$('#buttonNewWiese').click(function(){
+//			//registers user
+//		new Register();
+//	});
 
 
 	$('#HauptFenster').load('./html/user/show.html', this.init.bind(this));

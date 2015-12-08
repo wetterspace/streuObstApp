@@ -225,7 +225,10 @@ TreeForm.prototype.show_form = function(){
 		this.init_save_or_cancel();
 
 		this.fill_forms_if_tree_already_exists();
-		
+
+		//make btn in navbar active
+		NavbarHelper.make_active( NavbarHelper.btn.baum_anlegen );
+
 	}.bind(this));
 
 }
