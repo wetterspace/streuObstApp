@@ -131,7 +131,7 @@ var pointerMoveHandler = function(evt) {
       function on_click_move_to_current_position(map_view){
           $('#btnGoToCurrentLocation').click(function(){
             var current_text = $(this).text();
-            $(this).text("Lädt Position");
+            $(this).text("Laedt Position");
 
             Position.get_current_lon_lat(function(lon,lat){
 
@@ -147,7 +147,6 @@ var pointerMoveHandler = function(evt) {
 
 map.on('pointermove', pointerMoveHandler);
 
-var typeSelect = document.getElementById('type');
 
 var draw; // global so we can remove it later
 function addInteraction() {
@@ -250,17 +249,6 @@ function createMeasureTooltip() {
   map.addOverlay(measureTooltip);
 }
 
-
-/**
- * Let user change the geometry type.
- * @param {Event} e Change event.
- */
-typeSelect.onchange = function(e) {
-  map.removeInteraction(draw);
-  addInteraction();
-};
-
-
 /**
  * format length output
  * @param {ol.geom.LineString} line
@@ -306,7 +294,7 @@ addInteraction();
 RegisterWiese.prototype.showCard = function(){
 
 
-	$('#HauptFenster').load('./html/register/showCard.html', init_car);
+	$('#HauptFenster').load('./html/register/showcard.html', init_car);
 }
 
 RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
