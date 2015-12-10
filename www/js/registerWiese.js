@@ -297,52 +297,63 @@ RegisterWiese.prototype.showCard = function(){
 	$('#HauptFenster').load('./html/register/showcard.html', init_car);
 }
 
+function setOrchardOnline(wiesenName, wiesenObj, wiesenObjRights) {
+	setOrchard(wiesenName, wiesenObj, function(err) {
+				if(err){
+      					alert("Fehler" + err);
+      				}
+				});
+				setOrchardForUser(wiesenName, wiesenObjRights, function(err) {
+					if(err){
+      					alert("Fehler" + err);
+      				}
+				});
+}
+
+
 RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
 
 	var init_register = function(){
 		$('#imagewiese').attr("src", wiese_img);
+		
 
 		$('#buttonSave').click(function(){
 
-			//first upload image
+		if(sessionStorage.getItem('user') == 'Offline') {
+		var wiesenName = $('#inputWiesenName').val();
+		var wiesenObj = {
+    			//	password: hashedPassword,
+          		coordinates: coordinates,
+				image_id: wiese_img
+    			};
+				
+			saveOffline(wiesenName, wiesenObj);
+			
+		}else {
+		var wiesenName = $('#inputWiesenName').val();
+	//first upload image
       var uploader = new ImageUploader();
       uploader.uploaded_data_and_make_callback(wiese_img, function(image_id){
 
-          var wiesenName = $('#inputWiesenName').val();
+          
 
-    			var wiesenObjRights = {
-          	name: wiesenName,
-    				rights: "write",
-            image_id: image_id
-    			};
+    	var wiesenObjRights = {
+        name: wiesenName,
+    	rights: "write",
+        image_id: image_id
+    	};
 
-    			var wiesenObj = {
-    			//	password: hashedPassword,
-          		coordinates: coordinates,
-    				  image_id: image_id
-    			};
-
-    			new DB().getWiesenDB().child(wiesenName).set(wiesenObj, function(err){
-      				if(err){
-      					alert("Fehler" + err);
-      				}else{
-      					new Wiese(wiesenName).show();
-      				}
-      			});
-
-
-    			new DB().getUserDB().child(sessionStorage.getItem('user')).child('wiesen').child(wiesenName).set(wiesenObjRights, function(err){
-      				if(err){
-      					alert("Fehler" + err);
-      				}else{
-      					//new Wiese(wiesenName).show();
-    					  new Login();
-      				}
-      			});
-
+    	var wiesenObj = {
+    	//	password: hashedPassword,
+        coordinates: coordinates,
+		image_id: image_id
+    	};
+				
+		setOrchardOnline(wiesenName, wiesenObj, wiesenObjRights);
+				
         }); //close image_uploader_callback
-
-
+		}
+	new Login();
 		});
 	}
 
