@@ -45,6 +45,12 @@ Login.prototype.showLogin = function(){
 			new Register();
 		});
 
+		$('#buttonOffline').click(function(){
+			//registers user
+			sessionStorage.setItem('user', 'Offline');
+			new User('Offline').show();
+		});
+
 		$('#buttonLogin').click(function(){
 			var userName = $('#inputWiesenName').val();
 			var userPassword = $('#inputWiesenPassword').val();
