@@ -11,6 +11,9 @@ var TreeAttr = {
 
 	sortname: 	{	id: "sortname",
 					title:"Sortenname"},
+					
+	wieseName: 	{	id: "wiesenName",
+					title:"wieseName"},
 
 	lon: {	id: "lon",
 			title: "Longitude",
@@ -94,10 +97,17 @@ Tree.prototype.save = function() {
 
 if(sessionStorage.getItem('user') == 'Offline') {
 console.log(this);
-this.wiese = this.wiese.name;
+//this.wiese = this.wiese.name;
+
+this.wiese = null;
+this.wieseName = this.wiese.name;
+
+
+
 saveOffline(this.lon + this.lat, this)
 }else {
-
+	this.wieseName = this.wiese.name;
+	
 	//Object already exists and was saved to DB then it has a unique firebase key
 	if(this.key){
         //overwetie existing object

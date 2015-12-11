@@ -23,7 +23,7 @@ function getTreesForOrchardOffline(orchardName) {
 		var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
 		console.log(obj);
 		//make sure it's no tree
-		if(obj.wiese == orchardName) {
+		if(obj.wieseName == orchardName) {
 		var wiesenName = localStorage.key(i);
 		TreeArray[l]=obj;	
 		l = l + 1;
@@ -31,6 +31,21 @@ function getTreesForOrchardOffline(orchardName) {
 	}
 	return TreeArray;
 }
+
+//save offline when button is clicked
+function makeAvailableOffline(orchardName, orchardObj) {
+	console.log(orchardName + "--->" + orchardObj);
+	var TreeArray=new Object();
+	var data = orchardObj.trees;
+		
+for (var key in data) {
+    console.log("Tree " + data[key] + " id #" + key); 
+	saveOffline(key, data[key]);	
+}
+	orchardObj.trees = null;
+	saveOffline(orchardName, orchardObj);
+}
+
 
 function findOrchardInLocalStorage(key) {
 	wiesenArray = getWiesenObjects();
@@ -41,8 +56,13 @@ function findOrchardInLocalStorage(key) {
 		}
 }
 
+function makeOffline(wiesenObjekt) {
+	getTreesForOrchardOffline(orchardName);
+}
+
+
+
 function saveOffline(key, wiesenObjekt) {
-console.log(wiesenObjekt);
 localStorage.setItem(key, JSON.stringify(wiesenObjekt));
 }
 
