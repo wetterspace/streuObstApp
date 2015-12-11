@@ -40,6 +40,11 @@ var NavbarHelper = {
 			id: "nav_btn_logout",
 			hide: true,
 			active: true
+		},
+		karte: {
+			id: "nav_btn_karte",
+			hide: true,
+			active: true
 		}
 	},
 
@@ -102,5 +107,30 @@ var NavbarHelper = {
 				$('.navbar-collapse').collapse('hide');
 				func()
 			});
+	},
+
+	make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable: function(wiese){
+
+		NavbarHelper.click( NavbarHelper.btn.baum_anlegen, function(){
+			var tree_form = new TreeForm();
+				tree_form.set_wiese(wiese);
+				tree_form.show_form();
+		});
+
+		NavbarHelper.click( NavbarHelper.btn.ubersicht, function(){
+			//pass tree object to ubersicht
+			var ubersicht = new Ubersicht();
+				ubersicht.set_wiese(wiese);
+				ubersicht.show();
+		});
+
+		NavbarHelper.click( NavbarHelper.btn.karte, function(){
+				//pass tree object to ubersicht
+				wiese.show();
+		});
+
+		NavbarHelper.click( NavbarHelper.btn.user, function(){
+			new User( sessionStorage.getItem('user') ).show();
+		});
 	}
 };

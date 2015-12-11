@@ -27,7 +27,7 @@ var PflegeForm = function(tree){
 			id: "pflege_row_1",
 			fields: [
 				{	id: PflegeAttr.krone_beschnitten.id, 
-					form: Form.Text,
+					form: Form.Date,
 					title: PflegeAttr.krone_beschnitten.title},
 
 				{	id: PflegeAttr.hohe_der_krone.id, 
@@ -39,11 +39,11 @@ var PflegeForm = function(tree){
 			id: "pflege_row_2",
 			fields:[
 				{	id: PflegeAttr.baumstamm_gereinigt.id, 
-					form: Form.Text,
+					form: Form.Date,
 					title: PflegeAttr.baumstamm_gereinigt.title},
 
 				{	id: PflegeAttr.baumstamm_gekalket.id, 
-					form: Form.Text,
+					form: Form.Date,
 					title: PflegeAttr.baumstamm_gekalket.title}
 			]		
 		},
