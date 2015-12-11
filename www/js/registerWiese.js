@@ -302,11 +302,13 @@ function setOrchardOnline(wiesenName, wiesenObj, wiesenObjRights) {
 				if(err){
       					alert("Fehler" + err);
       				}
+					new Login();
 				});
 				setOrchardForUser(wiesenName, wiesenObjRights, function(err) {
 					if(err){
       					alert("Fehler" + err);
       				}
+						
 				});
 }
 
@@ -326,9 +328,7 @@ RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
           		coordinates: coordinates,
 				image_id: wiese_img
     			};
-				
 			saveOffline(wiesenName, wiesenObj);
-			
 		}else {
 		var wiesenName = $('#inputWiesenName').val();
 	//first upload image
@@ -353,8 +353,9 @@ RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
 				
         }); //close image_uploader_callback
 		}
-	new Login();
+	
 		});
+		
 	}
 
 	$('#HauptFenster').load('./html/register/savewiese.html', init_register);

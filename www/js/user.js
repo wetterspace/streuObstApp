@@ -67,7 +67,7 @@ User.prototype.init = function(){
 	var wiesenArray = getWiesenObjects();
 	
 	$.each(wiesenArray, function(index, value) {
-		console.log(index + value);
+		console.log(value);
 		//check if really orchard object
 		if(value.coordinates != undefined) {setOverview(index, value, value.image_id);}
 		
