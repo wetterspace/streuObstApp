@@ -2,11 +2,11 @@ var User = function(username){
 	this.username = username;
 };
 
-User.prototype.getUserDataFromServer = function(callbac){
-	new DB().getUserDB().child(this.username).once("value", function(snapshot){
+User.prototype.getUserDataFromServer = function(callback){
+	getUser(this.username, function(snapshot) {
 		var userData = snapshot.val();
 		this.data = userData;
-		callbac();
+		callback(); 
 	}.bind(this));
 }
 
@@ -49,7 +49,7 @@ User.prototype.init_page = function() {
 };
 
 User.prototype.init = function(){
-
+	this.init_page();
 	$('#buttonNewWiese').click(function(){
 			//registers user
 			new RegisterWiese();
@@ -59,16 +59,47 @@ User.prototype.init = function(){
 			sessionStorage.clear();
 			new Login();
 		});
+	if(sessionStorage.getItem('user') == 'Offline') {
+	
+/*	getWiesenObjects.forEach(function(entry) {
+    setOverview();
+	}); */
+	var wiesenArray = getWiesenObjects();
+	
+	$.each(wiesenArray, function(index, value) {
+		console.log(index + value);
+		//check if really orchard object
+		if(value.coordinates != undefined) {setOverview(index, value, value.image_id);}
+		
+	}); 
+	
+	}else {
+	this.getUserDataOnline();
+	}
+	
 
 
-
-	this.getUserDataFromServer(function(){
-		this.init_page();
-		new DB().getUserDB().child(this.username).child('wiesen').once("value", function(snapshot){
-
-			snapshot.forEach(function(childSnapshot) {
+}
+User.prototype.getUserDataOnline = function() {
+this.getUserDataFromServer(function(){
+		
+	getOrchardForUser(this.username, function(snapshot) {
+		snapshot.forEach(function(childSnapshot) {
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
+			setOverview(key, childData, ImageHelper.get_url_for(childData.image_id));
+			
+		});
+	});
+		
+	}.bind(this));
+}
+
+function getDataOffline() {
+}
+
+function setOverview(key, data, imgSource) {
+			
 
 			var t1 = $("#wiesen_list");
 			var d = $('<a/>', {class: "list-group-item", href: "#", click: function(){
@@ -79,16 +110,9 @@ User.prototype.init = function(){
 			d.append(hw);
 
 			var himg = $('<img/>', {class: "img-responsive img-thumbnail"});
-			himg.attr('src', ImageHelper.get_url_for(childData.image_id) );
+			himg.attr('src', imgSource );
 			d.append(himg);
-
-			});
-		});
-	}.bind(this));
-
 }
-
-
 
 User.prototype.show = function() {
 

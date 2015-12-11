@@ -33,20 +33,44 @@ Login.prototype.checkLogin = function(userName, userPassword){
 //showLogin, Fenster wird angezeigt, wo man Wiese mit Name und Password wählen kann oder eine neue erstellt
 Login.prototype.showLogin = function(){
 
+
+
+
 	var initializeButtons = function(){
+		$('#buttonOffline').click(function(){
+		//registers user
+		sessionStorage.setItem('user', 'Offline');
+		new User('Offline').show();
+	});
+	
+	
 		$('#buttonRegister').click(function(){
 			//registers user
 			new Register();
 		});
 
 		$('#buttonLogin').click(function(){
-			var wiesenName = $('#inputWiesenName').val();
-			var wiesenPassword = $('#inputWiesenPassword').val();
-			var out = sjcl.hash.sha1.hash(wiesenPassword);
+			var userName = $('#inputWiesenName').val();
+			var userPassword = $('#inputWiesenPassword').val();
+			var out = sjcl.hash.sha1.hash(userPassword);
 			var hashedPassword = sjcl.codec.hex.fromBits(out)
 			
-			
-			this.checkLogin(wiesenName, hashedPassword);
+			checkUserLoginOnline(userName, hashedPassword, function(username) {
+			if(userValue == null){
+				//wiese exisitert nicht
+				alert("User does not exist");
+		}else{
+			if(userValue.password == hashedPassword){
+				//wiese existiert, password ist richtig
+				new User(userName, hashedPassword).show();
+				sessionStorage.setItem('user', userName);
+			}else{
+				//wiese existiert, password ist aber falsch
+				alert("Passwort falsch");
+			}
+		}
+			});
+		//	this.checkLogin(wiesenName, hashedPassword);
 		}.bind(this));
 	}.bind(this);
 

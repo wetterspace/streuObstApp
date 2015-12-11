@@ -91,6 +91,13 @@ Tree.prototype.overwrite_attributes = function(new_attributes_obj){
 }
 
 Tree.prototype.save = function() {
+
+if(sessionStorage.getItem('user') == 'Offline') {
+console.log(this);
+this.wiese = this.wiese.name;
+saveOffline(this.lon + this.lat, this)
+}else {
+
 	//Object already exists and was saved to DB then it has a unique firebase key
 	if(this.key){
         //overwetie existing object
@@ -112,5 +119,7 @@ Tree.prototype.save = function() {
 				this.wiese.show();
 	  		}
 	  	}.bind(this));
+	}
+	
 	}
 };

@@ -289,6 +289,9 @@ addInteraction();
 }
 
 
+
+
+
 Register.prototype.showUserSave = function(){
 
 $('#HauptFenster').load('./html/register/saveUser.html', init_register);
@@ -298,20 +301,19 @@ function init_register(){
 			var userName = $('#inputUserName').val();
 			var userPassword = $('#inputUserPassword').val();
 			var out = sjcl.hash.sha1.hash(userPassword);
-			var hashedPassword = sjcl.codec.hex.fromBits(out)
+			var hashedPassword = sjcl.codec.hex.fromBits(out);
 
 			var UserObj = {
 				password: hashedPassword,
-			}
-			
-			new DB().getUserDB().child(userName).set(UserObj, function(err){
-  				if(err){
-  					alert("Fehler" + err);
+			};
+			setUserOnline(userName, UserObj, function(error) {
+			if(error){
+  					alert("Fehler" + error);
   				}else{
 					sessionStorage.setItem('user', userName);
   					new User(userName, userPassword).show();
   				}
-  			});
+			});
 		});
 	}
 
