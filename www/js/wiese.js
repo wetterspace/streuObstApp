@@ -2,16 +2,50 @@ var Wiese = function(name){
 	this.name = name;
 };
 
-Wiese.prototype.getWiesenDataFromServer = function(callbac){
+Wiese.prototype.getWiesenDataFromServer = function(callback){
 
-	new DB().getWiesenDB().child(this.name).once("value", function(snapshot){
+if(sessionStorage.getItem('user') == 'Offline') {
+	var wiesenData = findOrchardInLocalStorage(this.name)
+
+	var treeArray = getTreesForOrchardOffline(this.name);
+	
+	var treeM = {
+			//	hulu: value
+			};
+	
+	$.each(treeArray, function(index, value) {
+		value.wiese = this;
+		
+		
+		var treeName = 'Lat: ' + value.lat + ', Long: ' + value.lon;
+		treeM[treeName] = value;
+		
+		wiesenData.trees = treeM;
+	}); 
+	this.data = wiesenData;
+	
+	console.log(this.data.trees);
+	console.log(this.data);
+	callback();
+}else {
+getOrchard(this.name, function(snapshot) {
 		var wiesenData = snapshot.val();
-
 		this.data = wiesenData;
-		callbac();
 
-	}.bind(this));
+		console.log(this.data);
+		callback();
+}.bind(this));
 }
+
+}
+
+function setDataOffline(key) {
+		var wiesenData = findOrchardInLocalStorage(key)
+		this.data = wiesenData;
+		console.log(this.data);
+		callback();
+}
+
 
 Wiese.prototype.getDB = function(){
 	return new DB().getWiesenDB().child(this.name);
