@@ -5,9 +5,12 @@ var Wiese = function(name){
 Wiese.prototype.getWiesenDataFromServer = function(callback){
 
 if(sessionStorage.getItem('user') == 'Offline') {
-	var wiesenData = findOrchardInLocalStorage(this.name)
+	var wiesenData = findOrchardInLocalStorage(this.name);
 
 	var treeArray = getTreesForOrchardOffline(this.name);
+	
+	
+	console.log(treeArray);
 	
 	var treeM = {
 			//	hulu: value
@@ -15,8 +18,6 @@ if(sessionStorage.getItem('user') == 'Offline') {
 	
 	$.each(treeArray, function(index, value) {
 		value.wiese = this;
-		
-		
 		var treeName = 'Lat: ' + value.lat + ', Long: ' + value.lon;
 		treeM[treeName] = value;
 		
@@ -135,10 +136,16 @@ Wiese.prototype.list_trees = function(){
 	$('#trees_list').html(ele)
 };
 
+function setUpOfflineButton() {
+
+}
+
+
 Wiese.prototype.init_page = function() {
 	$('#wiesenName').html(this.name);
 
 	this.list_trees();
+
 
 	//show_all_buttons_of_navbar
 	NavbarHelper.show_all_btns();
@@ -146,6 +153,21 @@ Wiese.prototype.init_page = function() {
 	NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this);
 	//show active karte btn
 	NavbarHelper.make_active(NavbarHelper.btn.karte);
+
+	$('#buttonCreateTree').click(function(){
+		var tree_form = new TreeForm();
+			tree_form.set_wiese(this);
+			tree_form.show_form();
+	}.bind(this));
+	
+	if(sessionStorage.getItem('user') == 'Offline') {
+	$('#buttonOrchardOffline').attr('disabled', 'disabled' );
+	}
+	
+	$('#buttonOrchardOffline').click(function(){
+		makeAvailableOffline(this.name, this.data);
+	}.bind(this));
+
 };
 
 Wiese.prototype.init = function(){
