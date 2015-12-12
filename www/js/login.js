@@ -19,7 +19,7 @@ Login.prototype.checkLogin = function(userName, userPassword){
 		}else{
 			if(userValue.password == userPassword){
 				//wiese existiert, password ist richtig
-				new User(userName, userPassword).show();
+				new User(userName).show();
 				sessionStorage.setItem('user', userName);
 			}else{
 				//wiese existiert, password ist aber falsch
@@ -37,16 +37,18 @@ Login.prototype.showLogin = function(){
 
 
 	var initializeButtons = function(){
-		$('#buttonOffline').click(function(){
-		//registers user
-		sessionStorage.setItem('user', 'Offline');
-		new User('Offline').show();
-	});
-	
-	
+
+		NavbarHelper.hide_all_btns();
+
 		$('#buttonRegister').click(function(){
 			//registers user
 			new Register();
+		});
+
+		$('#buttonOffline').click(function(){
+			//registers user
+			sessionStorage.setItem('user', 'Offline');
+			new User('Offline').show();
 		});
 
 		$('#buttonLogin').click(function(){

@@ -31,7 +31,7 @@ var TreeForm = function(tree){
 				{	id: TreeAttr.sortname.id,	
 					form: Form.Dropdown,
 					options: [],
-					title: TreeAttr.obstart.title},
+					title: TreeAttr.sortname.title},
 
 				{	id: TreeAttr.lon.id,  
 					form: Form.Text,
@@ -56,7 +56,7 @@ var TreeForm = function(tree){
 					title: TreeAttr.ploid.title},
 
 				{	id: TreeAttr.gepflanzt_date.id, 
-					form: Form.Text,
+					form: Form.Date,
 					title: TreeAttr.gepflanzt_date.title},
 				{
 					id: TreeAttr.anmerkungen.id,
@@ -76,41 +76,47 @@ var TreeForm = function(tree){
 
 		//row 3
 		//Blüte und Ertrag
-		{	
+		{
 			id: "tree_form_row_3_1",
 			fields: [
-				{	id: TreeAttr.bluete_beginn.id, 
-					form: Form.Text,
+				{	id: TreeAttr.bluete_beginn.id,
+					form: Form.Date,
 					title: TreeAttr.bluete_beginn.title},
 
-				{	id: TreeAttr.bluete_end.id, 
-					form: Form.Text,
+				{	id: TreeAttr.bluete_end.id,
+					form: Form.Date,
 					title: TreeAttr.bluete_beginn.title}
 			]
 		},
 
-		{	
+		{
 			id: "tree_form_row_3_2",
 			fields: [
-				{	id: TreeAttr.blueintensitaet.id, 
-					form: Form.Text, 
+				{	id: TreeAttr.blueintensitaet.id,
+					form: Form.Range,
+					min: 0,
+					max: 6,
+					range_name: "Blühintensität",
 					title: TreeAttr.blueintensitaet.title},
 
 				{	id: TreeAttr.ertragsintensitaet.id,
-					form: Form.Text,
+					form: Form.Range,
+					min: 0,
+					max: 6,
+					range_name: "Ertragsintensität",
 					title: TreeAttr.ertragsintensitaet.title}
 			]
 		},
 
-		{	
+		{
 			id: "tree_form_row_3_3",
 			fields: [
 				{	id: TreeAttr.temperatur_beginn.id, 
-					form: Form.Text,
+					form: Form.Date,
 					title: TreeAttr.temperatur_beginn.title},
 
 				{	id: TreeAttr.temperatur_ende.id, 
-					form: Form.Text,
+					form: Form.Date,
 					title: TreeAttr.temperatur_ende.title}
 			]
 		}
@@ -225,7 +231,12 @@ TreeForm.prototype.show_form = function(){
 		this.init_save_or_cancel();
 
 		this.fill_forms_if_tree_already_exists();
-		
+
+		//pass wiese
+		NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this.wiese);
+		//make btn in navbar active
+		NavbarHelper.make_active(NavbarHelper.btn.baum_anlegen);
+
 	}.bind(this));
 
 }
@@ -275,7 +286,7 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 				}.bind(this));
 			}
 		}.bind(this));
-		
+
 	}
 };
 
@@ -297,11 +308,13 @@ TreeForm.prototype.render_forms = function(){
 				var title = $('<label/>', {class: "control-label", text: field.title});
 
 							//calls function form form obj
-				var form = field.form(field);
+				var forms = field.form(field);
 
-				
-				container.append(title)
-						 .append(form);
+				container.append(title);
+
+				forms.forEach(function(form){
+					container.append(form);
+				});
 
 				form_row.append(container);
 

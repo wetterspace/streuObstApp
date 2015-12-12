@@ -32,6 +32,7 @@ if(sessionStorage.getItem('user') == 'Offline') {
 getOrchard(this.name, function(snapshot) {
 		var wiesenData = snapshot.val();
 		this.data = wiesenData;
+
 		console.log(this.data);
 		callback();
 }.bind(this));
@@ -55,21 +56,21 @@ Wiese.prototype.getDB = function(){
 Wiese.prototype.place_trees_on_map = function(vectorSource){
 	if(this.data.trees){
 		Object.keys(this.data.trees).forEach(function(treeKey){
-		
+
 			var tree = this.data.trees[treeKey];
 			//check that tree has real coordinates
 			if(!( isNaN(parseFloat(tree.lon)) ||  isNaN(parseFloat(tree.lat)) )){
 
 				var lon = parseFloat(tree.lon);
 				var lat = parseFloat(tree.lat);
-				
+
 				var treeDot = ol.proj.fromLonLat([lon,lat]);
 				var treePoint = new ol.geom.Point(treeDot);
-				
+
 				var polyFeature = new ol.Feature({
 					geometry: treePoint
 				});
-				
+
 				vectorSource.addFeature(polyFeature);
 			}
 
@@ -117,37 +118,21 @@ Wiese.prototype.init_map = function(){
 }
 
 Wiese.prototype.list_trees = function(){
+	var renderd_trees = RenderHelper.get_renderd_trees(this);
 	var ele;
 
-	if(this.data.trees){
+	if(renderd_trees.length > 0){
 		ele = $('<div/>', {class: "list-group"});
 
-		Object.keys(this.data.trees).forEach(function(key){
-
-			var tree = this.data.trees[key];
-			var sort = tree[TreeAttr.sortname.id];
-
-			var list_group_item = $('<a/>', {class: "list-group-item", href: "#"}).append(
-										$('<h4/>', {class: "list-group-item-heading", text:  key})
-									).append(
-										$('<p/>', {class: "list-group-item-text", text: sort})
-									);
-
-			$(list_group_item).click(function(){
-				var tree_obj = new Tree()
-					tree_obj.from_server_obj(this.data.trees, key);
-					tree_obj.wiese = this;
-					
-				new TreeForm(tree_obj).show_form();
-			}.bind(this));
-
-			ele.append(list_group_item);
-		}.bind(this));
+		renderd_trees.forEach(function(rend_tree){
+			ele.append(rend_tree);
+		});
 
 	}else{
+		//wiese besitzt keine baume
 		ele = $('<div/>', {class: "well", text: "Sie haben noch keine Bäume auf ihrer Wiese plaziert"});
 	}
-	
+
 	$('#trees_list').html(ele)
 };
 
@@ -160,6 +145,14 @@ Wiese.prototype.init_page = function() {
 	$('#wiesenName').html(this.name);
 
 	this.list_trees();
+
+
+	//show_all_buttons_of_navbar
+	NavbarHelper.show_all_btns();
+	//pass wiese
+	NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this);
+	//show active karte btn
+	NavbarHelper.make_active(NavbarHelper.btn.karte);
 
 	$('#buttonCreateTree').click(function(){
 		var tree_form = new TreeForm();
@@ -174,6 +167,7 @@ Wiese.prototype.init_page = function() {
 	$('#buttonOrchardOffline').click(function(){
 		makeAvailableOffline(this.name, this.data);
 	}.bind(this));
+
 };
 
 Wiese.prototype.init = function(){

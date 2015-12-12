@@ -13,15 +13,16 @@
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/ol.css" />
-        
-        
+
+
+
          <style>
       .map {
         height: 400px;
         width: 100%;
       }
     </style>
-        
+
     </head>
     <body>
 
@@ -75,6 +76,8 @@
         <script type="text/javascript" src="js/helper/connect.js"></script>
         <!--Enthält Code der dafür zuständig ist die Wiesen anzuzeigen-->
         <script type="text/javascript" src="js/wiese.js"></script>
+        <!--Enthält Code der dafür zuständig ist die Ubersicht der Baume der Wiese anzuzeigen-->
+        <script type="text/javascript" src="js/ubersicht.js"></script>
 		<!--Enthält Code der dafür zuständig ist die User anzuzeigen-->
         <script type="text/javascript" src="js/user.js"></script>
         <!--Enthält Code der für die Registiereung zuständig ist-->
@@ -137,15 +140,20 @@
         <script type="text/javascript" src="js/helper/form.js"></script>
         <!--Helps to validate data and show errors-->
         <script type="text/javascript" src="js/helper/validator.js"></script>
+        <!--Helps to interact with navbar -->
+        <script type="text/javascript" src="js/helper/navbar_helper.js"></script>
+        <!--Helps to render specific parts -->
+        <script type="text/javascript" src="js/helper/render_helper.js"></script>
 
         <!--Enthält Code für die Synchronisation-->
         <script type="text/javascript" src="js/sync.js"></script>
-       <!-- <script type="text/javascript">window.setInterval(attemptSync, 9000);</script> -->
+
+        <!-- <script type="text/javascript">window.setInterval(attemptSync, 9000);</script> -->
 
         <script type="text/javascript">
             //lädt /www/navbar.html in den navigation-container
-            $("#navbar_container").load("navbar.html");
-            
+            NavbarHelper.load_navbar();
+
             var IMAGE_SERVER = 'https://thawing-woodland-2366.herokuapp.com';
             var IMAGE_SERVER_PASSWORD =  "aepfel_schmecken_lecker";
 
