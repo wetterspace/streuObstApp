@@ -98,9 +98,9 @@ Tree.prototype.save = function() {
 if(sessionStorage.getItem('user') == 'Offline') {
 console.log(this);
 //this.wiese = this.wiese.name;
-
-this.wiese = null;
 this.wieseName = this.wiese.name;
+this.wiese = null;
+
 
 
 
