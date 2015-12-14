@@ -215,6 +215,18 @@ TreeForm.prototype.init_save_or_cancel = function(){
 }
 
 
+TreeForm.prototype.show_qr_code = function(){
+    //alles wird im qr code reader gemanegt auch ob der baum noch gar nicht exisitert
+    // und deshalb gar kein qr code angezeight werden kann
+	var qr_code_helper = new QrCodeHelper()
+							.set_obj_and_key_for_text(this.tree, "key")
+							.set_header_field($("#qr_code_header"))
+							.set_image_field($("#qr_code_image_field"))
+							.set_print_field($("#qr_code_print_box"))
+
+							.render();
+}
+
 
 TreeForm.prototype.show_form = function(){
 
@@ -231,6 +243,8 @@ TreeForm.prototype.show_form = function(){
 		this.init_save_or_cancel();
 
 		this.fill_forms_if_tree_already_exists();
+
+		this.show_qr_code();
 
 		//pass wiese
 		NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this.wiese);

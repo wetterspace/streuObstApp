@@ -154,11 +154,12 @@ Wiese.prototype.init_page = function() {
 	//show active karte btn
 	NavbarHelper.make_active(NavbarHelper.btn.karte);
 
-	$('#buttonCreateTree').click(function(){
-		var tree_form = new TreeForm();
-			tree_form.set_wiese(this);
-			tree_form.show_form();
-	}.bind(this));
+	//gibzts eig nicht mehr
+	//$('#buttonCreateTree').click(function(){
+	//	var tree_form = new TreeForm();
+	//		tree_form.set_wiese(this);
+	//		tree_form.show_form();
+	//}.bind(this));
 	
 	if(sessionStorage.getItem('user') == 'Offline') {
 	$('#buttonOrchardOffline').attr('disabled', 'disabled' );
@@ -176,7 +177,7 @@ Wiese.prototype.init = function(){
 		//callback
 		this.init_page();
 		this.init_map();
-		
+
 	}.bind(this));
 }
 

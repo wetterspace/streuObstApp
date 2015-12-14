@@ -112,9 +112,25 @@ var NavbarHelper = {
 	make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable: function(wiese){
 
 		NavbarHelper.click( NavbarHelper.btn.baum_anlegen, function(){
+
+
 			var tree_form = new TreeForm();
 				tree_form.set_wiese(wiese);
 				tree_form.show_form();
+
+			function onSuccess(imageData) {
+			    alert(imageData);
+			}
+
+			function onFail(message) {
+			    alert('Failed because: ' + message);
+			}
+
+			navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+			    destinationType: Camera.DestinationType.DATA_URL
+			});
+
+
 		});
 
 		NavbarHelper.click( NavbarHelper.btn.ubersicht, function(){
@@ -122,6 +138,21 @@ var NavbarHelper = {
 			var ubersicht = new Ubersicht();
 				ubersicht.set_wiese(wiese);
 				ubersicht.show();
+
+
+			cordova.plugins.barcodeScanner.scan(
+		      function (result) {
+		          alert("We got a barcode\n" +
+		                "Result: " + result.text + "\n" +
+		                "Format: " + result.format + "\n" +
+		                "Cancelled: " + result.cancelled);
+		      }, 
+		      function (error) {
+		          alert("Scanning failed: " + error);
+		      }
+		   );
+
+
 		});
 
 		NavbarHelper.click( NavbarHelper.btn.karte, function(){

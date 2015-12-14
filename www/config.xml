@@ -33,7 +33,7 @@
 
     <!-- Nur Geolocation wird derzeit benötigt
     <gap:plugin name="org.apache.cordova.battery-status" />
-    <gap:plugin name="org.apache.cordova.camera" />
+   
     <gap:plugin name="org.apache.cordova.media-capture" />
     <gap:plugin name="org.apache.cordova.contacts" />
     <gap:plugin name="org.apache.cordova.device" />
@@ -51,7 +51,8 @@
 
     -->
     <gap:plugin name="org.apache.cordova.geolocation" />
-
+    <gap:plugin name="org.apache.cordova.camera" />
+    <plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />
 
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/ldpi.jpeg" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/mdpi.jpeg" />
