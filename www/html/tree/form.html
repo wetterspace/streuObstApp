@@ -14,8 +14,8 @@
 	  <li data-tabselector="qr_code" class="visible-lg-inline tabselector">
 	  	<a href="#" >QR-Code</a>
 	  </li>
-	  <!-- Wird nur bei mobile gezeigt -->
-	  <li data-tabselector="camera" class="visible-xs-inline tabselector">
+	  <!-- Wird nur bei mobile / cordova gezeigt -->
+	  <li data-tabselector="camera" class="tabselector" style="display:none">
 	  	<a href="#" >Kamera</a>
 	  </li>
 	</ul>
@@ -60,12 +60,17 @@
 </div>
 
 
-<!--On mobile wit die upload_image_col  hier rein gleaden, ist also ein eigener Tab--> 
+<!--On mobile wit die upload_image_col  hier rein gleaden, ist also ein eigener Tab-->
 <div class="visible-xs">
 	<div class="col-lg-4">
 		<div style="display:none" class="form_tab" data-tab="camera">
-			<div id="tree_image_box">
-				<img src="./img/Baum.jpg" class="img-responsive img-thumbnail" id="tree_image">
+
+			<div class="col-lg-12" id="photo_box_camera">
+
+			</div>
+
+			<div class="col-lg-12 text-center" style="margin-bottom:15px; margin-top:15px">
+				<a href="#" class="btn btn-primary" id="take_picture_btn">Foto machen</a>
 			</div>
 		</div>
 	</div>
@@ -77,7 +82,7 @@
 
 
 <div class="form_tab" data-tab="blüte_und_ertrag" style="display:none">
-	
+
 	<div class="col-lg-12">
 		<h4> Blüte und Ertrag </h4>
 		<hr>

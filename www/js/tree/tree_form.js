@@ -228,6 +228,19 @@ TreeForm.prototype.show_qr_code = function(){
 }
 
 
+TreeForm.prototype.init_camera_on_cordova = function(){
+	if(new CordovaCamera().is_avaible_on_device()){
+		//show tab to navigate to camera menu
+		$('*[data-tabselector="camera"]').show();
+
+		var camera = new CordovaCamera();
+			camera.set_take_picture_btn($('#take_picture_btn'));
+			camera.set_photo_box($('#photo_box_camera'));
+			camera.init();
+	}
+}
+
+
 TreeForm.prototype.show_form = function(){
 
 	$('#HauptFenster').load("./html/tree/form.html",function(){
@@ -245,6 +258,9 @@ TreeForm.prototype.show_form = function(){
 		this.fill_forms_if_tree_already_exists();
 
 		this.show_qr_code();
+
+		//if app version show tab to take picture directly from app
+		this.init_camera_on_cordova();
 
 		//pass wiese
 		NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this.wiese);

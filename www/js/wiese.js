@@ -147,9 +147,8 @@ Wiese.prototype.init_page = function() {
 	this.list_trees();
 
 
-	//show_all_buttons_of_navbar
-	NavbarHelper.show_all_btns();
-	//pass wiese
+
+	//pass wiese //make visible
 	NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this);
 	//show active karte btn
 	NavbarHelper.make_active(NavbarHelper.btn.karte);

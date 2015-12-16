@@ -45,6 +45,11 @@ var NavbarHelper = {
 			id: "nav_btn_karte",
 			hide: true,
 			active: true
+		},
+		scannen: {
+			id: "nav_scan_qr_btn",
+			hide: true,
+			active: true
 		}
 	},
 
@@ -112,25 +117,9 @@ var NavbarHelper = {
 	make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable: function(wiese){
 
 		NavbarHelper.click( NavbarHelper.btn.baum_anlegen, function(){
-
-
 			var tree_form = new TreeForm();
 				tree_form.set_wiese(wiese);
 				tree_form.show_form();
-
-			function onSuccess(imageData) {
-			    alert(imageData);
-			}
-
-			function onFail(message) {
-			    alert('Failed because: ' + message);
-			}
-
-			navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-			    destinationType: Camera.DestinationType.DATA_URL
-			});
-
-
 		});
 
 		NavbarHelper.click( NavbarHelper.btn.ubersicht, function(){
@@ -138,21 +127,6 @@ var NavbarHelper = {
 			var ubersicht = new Ubersicht();
 				ubersicht.set_wiese(wiese);
 				ubersicht.show();
-
-
-			cordova.plugins.barcodeScanner.scan(
-		      function (result) {
-		          alert("We got a barcode\n" +
-		                "Result: " + result.text + "\n" +
-		                "Format: " + result.format + "\n" +
-		                "Cancelled: " + result.cancelled);
-		      }, 
-		      function (error) {
-		          alert("Scanning failed: " + error);
-		      }
-		   );
-
-
 		});
 
 		NavbarHelper.click( NavbarHelper.btn.karte, function(){
@@ -163,5 +137,14 @@ var NavbarHelper = {
 		NavbarHelper.click( NavbarHelper.btn.user, function(){
 			new User( sessionStorage.getItem('user') ).show();
 		});
+
+		//If on cordova check  then make scanner avaible
+		if(new Scanner().is_avaible_on_device()){
+			NavbarHelper.click(NavbarHelper.btn.scannen, function(){
+				var scanner = new Scanner();
+					scanner.set_wiese(wiese);
+					scanner.scan();
+			});
+		}
 	}
 };
