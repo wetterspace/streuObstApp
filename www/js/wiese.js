@@ -1,10 +1,5 @@
 var Wiese = function(name){
 	this.name = name;
-
-	//jedes mal wenn man eine Wiese neu anklickt wird gecheckt ob 
-	//der auschnitt schon vollständig heruntergeladen ist. Wenn nicht 
-	// wird fortgefahren zu downloaden
-	this.finished_downloading_map_tiles = false;
 };
 
 Wiese.prototype.getWiesenDataFromServer = function(callback){
@@ -112,17 +107,14 @@ Wiese.prototype.init_map = function(){
 	this.map = new ol.Map({
         target: 'map',
         layers: [
-          MapHelper.TileLayer(),
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
           wiesenlayer
         ]
     });
 
     this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
-
-    //make it avaible offline download if not already completed
-    if(this.finished_downloading_map_tiles == false){
-    	MapHelper.saveTileLayersFor(this, this.map.getView(), polyFeature.getGeometry().getExtent());
-    }
 }
 
 Wiese.prototype.list_trees = function(){
