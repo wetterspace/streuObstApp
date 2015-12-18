@@ -45,15 +45,36 @@ User.prototype.init_map = function(){
 
 User.prototype.init_page = function() {
 	$('#wiesenName').html(this.username);
+	
 
 };
 
+function startSyncing() {
+			$('#myModalUser').modal('hide');
+			$('.modal-backdrop').remove();
+			syncTrees();		
+}
+
 User.prototype.init = function(){
 	this.init_page();
+	
+	
+	
+	if(sessionStorage.getItem('user') == 'Offline') {
+	$('#buttonNewWiese').attr('disabled', 'disabled' );
+	} else {
+	
 	$('#buttonNewWiese').click(function(){
 			//registers user
 			new RegisterWiese();
 	});
+	
+	
+	
+	
+	
+	}
+	
 
 	//only show logout btn
 	NavbarHelper.hide_all_btns();
@@ -75,7 +96,12 @@ User.prototype.init = function(){
 	}); 
 	
 	}else {
+	compareStorageAndDB();
 	this.getUserDataOnline();
+	
+	//syncing
+	
+	
 	}
 	
 
@@ -93,7 +119,7 @@ this.getUserDataFromServer(function(){
 			setOverview(key, childData, childData.image_id);
 			
 		});
-	});
+	}.bind(this));
 		
 	}.bind(this));
 }
