@@ -13,113 +13,113 @@ var TreeForm = function(tree){
 
 
 	this.form_rows = [
-		//row 1
-		//Baum ID
+	//row 1
+	//Baum ID
 
-		//TreeAttr stands for Tree Attributes
-		{	
-			id: "tree_form_row_1",
-			fields: [
-				{	id: TreeAttr.obstart.id, 
-					form: Form.Dropdown,
-					options: Obst.getArten(),
-					//when another value gets selected
-					onchange: TreeFormHelper.change_sorten_dropdown,
-					title: TreeAttr.obstart.title
-				},
-
-				{	id: TreeAttr.sortname.id,	
-					form: Form.Dropdown,
-					options: [],
-					title: TreeAttr.sortname.title},
-
-				{	id: TreeAttr.lon.id,  
-					form: Form.Text,
-					title: TreeAttr.lon.title,
-					validation: TreeAttr.lon.validation
-				},
-
-				{	id: TreeAttr.lat.id,
-					form: Form.Text,
-					title: TreeAttr.lat.title,
-					validation: TreeAttr.lat.validation
-				}
-			]
+	//TreeAttr stands for Tree Attributes
+	{	
+id: "tree_form_row_1",
+fields: [
+		{	id: TreeAttr.obstart.id, 
+form: Form.Dropdown,
+options: Obst.getArten(),
+			//when another value gets selected
+onchange: TreeFormHelper.change_sorten_dropdown,
+title: TreeAttr.obstart.title
 		},
 
-		{
-			id: "tree_form_row_1_2",
-			fields: [
-				{	id: TreeAttr.ploid.id, 
-					form: Form.Dropdown,
-					options: ["Diploid", "Tripolid"], 
-					title: TreeAttr.ploid.title},
+		{	id: TreeAttr.sortname.id,	
+form: Form.Dropdown,
+options: [],
+title: TreeAttr.sortname.title},
 
-				{	id: TreeAttr.gepflanzt_date.id, 
-					form: Form.Date,
-					title: TreeAttr.gepflanzt_date.title},
-				{
-					id: TreeAttr.anmerkungen.id,
-					form: Form.Textarea,
-					rows: 4,
-					title: TreeAttr.anmerkungen.title
-				}
-			]
+		{	id: TreeAttr.lon.id,  
+form: Form.Text,
+title: TreeAttr.lon.title,
+validation: TreeAttr.lon.validation
 		},
 
-		{	//Pflegezustände hat eigene Form
-			id: "tree_form_row_2",
-			func: function(){
-				this.pflegeform.render($("#tree_form_row_2"));
-			}.bind(this)
-		},
-
-		//row 3
-		//Blüte und Ertrag
-		{
-			id: "tree_form_row_3_1",
-			fields: [
-				{	id: TreeAttr.bluete_beginn.id,
-					form: Form.Date,
-					title: TreeAttr.bluete_beginn.title},
-
-				{	id: TreeAttr.bluete_end.id,
-					form: Form.Date,
-					title: TreeAttr.bluete_beginn.title}
-			]
-		},
-
-		{
-			id: "tree_form_row_3_2",
-			fields: [
-				{	id: TreeAttr.blueintensitaet.id,
-					form: Form.Range,
-					min: 0,
-					max: 6,
-					range_name: "Blühintensität",
-					title: TreeAttr.blueintensitaet.title},
-
-				{	id: TreeAttr.ertragsintensitaet.id,
-					form: Form.Range,
-					min: 0,
-					max: 6,
-					range_name: "Ertragsintensität",
-					title: TreeAttr.ertragsintensitaet.title}
-			]
-		},
-
-		{
-			id: "tree_form_row_3_3",
-			fields: [
-				{	id: TreeAttr.temperatur_beginn.id, 
-					form: Form.Date,
-					title: TreeAttr.temperatur_beginn.title},
-
-				{	id: TreeAttr.temperatur_ende.id, 
-					form: Form.Date,
-					title: TreeAttr.temperatur_ende.title}
-			]
+		{	id: TreeAttr.lat.id,
+form: Form.Text,
+title: TreeAttr.lat.title,
+validation: TreeAttr.lat.validation
 		}
+		]
+	},
+
+	{
+id: "tree_form_row_1_2",
+fields: [
+		{	id: TreeAttr.ploid.id, 
+form: Form.Dropdown,
+options: ["Diploid", "Tripolid"], 
+title: TreeAttr.ploid.title},
+
+		{	id: TreeAttr.gepflanzt_date.id, 
+form: Form.Date,
+title: TreeAttr.gepflanzt_date.title},
+		{
+id: TreeAttr.anmerkungen.id,
+form: Form.Textarea,
+rows: 4,
+title: TreeAttr.anmerkungen.title
+		}
+		]
+	},
+
+	{	//Pflegezustände hat eigene Form
+id: "tree_form_row_2",
+func: function(){
+			this.pflegeform.render($("#tree_form_row_2"));
+		}.bind(this)
+	},
+
+	//row 3
+	//Blüte und Ertrag
+	{
+id: "tree_form_row_3_1",
+fields: [
+		{	id: TreeAttr.bluete_beginn.id,
+form: Form.Date,
+title: TreeAttr.bluete_beginn.title},
+
+		{	id: TreeAttr.bluete_end.id,
+form: Form.Date,
+title: TreeAttr.bluete_beginn.title}
+		]
+	},
+
+	{
+id: "tree_form_row_3_2",
+fields: [
+		{	id: TreeAttr.blueintensitaet.id,
+form: Form.Range,
+min: 0,
+max: 6,
+			range_name: "Blühintensität",
+title: TreeAttr.blueintensitaet.title},
+
+		{	id: TreeAttr.ertragsintensitaet.id,
+form: Form.Range,
+min: 0,
+max: 6,
+			range_name: "Ertragsintensität",
+title: TreeAttr.ertragsintensitaet.title}
+		]
+	},
+
+	{
+id: "tree_form_row_3_3",
+fields: [
+		{	id: TreeAttr.temperatur_beginn.id, 
+form: Form.Date,
+title: TreeAttr.temperatur_beginn.title},
+
+		{	id: TreeAttr.temperatur_ende.id, 
+form: Form.Date,
+title: TreeAttr.temperatur_ende.title}
+		]
+	}
 
 	]
 }
@@ -127,7 +127,7 @@ var TreeForm = function(tree){
 TreeForm.prototype.init_take_picture_button = function(){
 
 	var imageLoader_btn = document.getElementById('image_upload_btn');
-    imageLoader_btn.addEventListener('change', this.image_uploader.handleImage.bind(this.image_uploader), false);
+	imageLoader_btn.addEventListener('change', this.image_uploader.handleImage.bind(this.image_uploader), false);
 
 }
 
@@ -176,7 +176,7 @@ TreeForm.prototype.save_form = function(){
 	
 	//Das Baum object das aus der MAske erstellt werden kann
 	var tree_out_of_form = TreeFormHelper.create_tree_object_from_fields(this.form_rows);
-		tree_out_of_form.pflegezustaende = this.pflegeform.get_pflegezustaende_to_save();
+	tree_out_of_form.pflegezustaende = this.pflegeform.get_pflegezustaende_to_save();
 
 	//check if tree is valid object anhand von erstelltem objekt und der Form
 	var validator = new Validator();
@@ -187,16 +187,57 @@ TreeForm.prototype.save_form = function(){
 			//Tree wird überarbeitet
 			//Wird dort auch gespeichert
 			this.tree.overwrite_attributes(tree_out_of_form);
+			console.log(this.tree.wiese.data.coordinates);
+			
+			checkTreeForOrchard(this.tree);
+			
+			/*		if(!treeOnOrchard(this.tree.wiese.data.coordinates, this.tree.lon, this.tree.lat)) {
+	$('#myModal').modal('show');
+	
+	$("#save_anyway").click(function(){
+		$('#myModal').modal('hide');
+		$('.modal-backdrop').remove();
+		
+	
+		this.tree.save();
+	}.bind(this));
+	
+	}else {
+		this.tree.save();
+	} */
+			
+			
 			//in case image was uploaded append it to tree images
 			//this.image_uploader.add_uploaded_image(this.tree)
-			this.tree.save();
+			//	this.tree.save();
 		}else{
 			//neuer tree muss erstellt werden
 			var tree =  tree_out_of_form;
-				tree.wiese = this.wiese;
-				//in case image was uploaded append it to tree images
-				//this.image_uploader.add_uploaded_image(tree)
-				tree.save();
+			tree.wiese = this.wiese;
+			//in case image was uploaded append it to tree images
+			//this.image_uploader.add_uploaded_image(tree)
+			
+			
+			checkTreeForOrchard(tree);
+			
+			/*				if(!treeOnOrchard(tree.wiese.data.coordinates, tree.lon, tree.lat)) {
+	$('#myModal').modal('show');
+	
+	$("#save_anyway").click(function(){
+		$('#myModal').modal('hide');
+		$('.modal-backdrop').remove();
+		
+	
+		tree.save();
+	}.bind(this));
+	
+	}else {
+		tree.save();
+	} */
+			
+			
+			
+			//	tree.save();
 		}
 	}else{
 		//not valid show warnings
@@ -209,12 +250,42 @@ TreeForm.prototype.init_save_or_cancel = function(){
 		this.wiese.show();
 	}.bind(this));
 
+	
+	
 	$("#save_tree_form").click(function(){
+		
+		
+		
+		
+		
+		
+		//	$('#myModal').modal('hide');
+		//	$('.modal-backdrop').remove();
+		
+		
 		this.save_form();
+		
+		
 	}.bind(this));
 }
 
+function checkTreeForOrchard(tree) {
+	if(!treeOnOrchard(tree.wiese.data.coordinates, tree.lon, tree.lat)) {
+		$('#myModal').modal('show');
+		
+		$("#save_anyway").click(function(){
+			$('#myModal').modal('hide');
+			$('.modal-backdrop').remove();
+			
+			
+			tree.save();
+		}.bind(this));
+		
+	}else {
+		tree.save();
+	}
 
+}
 
 TreeForm.prototype.show_form = function(){
 
@@ -307,7 +378,7 @@ TreeForm.prototype.render_forms = function(){
 
 				var title = $('<label/>', {class: "control-label", text: field.title});
 
-							//calls function form form obj
+				//calls function form form obj
 				var forms = field.form(field);
 
 				container.append(title);
