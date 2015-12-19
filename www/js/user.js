@@ -91,7 +91,7 @@ this.getUserDataFromServer(function(){
 		snapshot.forEach(function(childSnapshot) {
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
-			setOverview(key, childData, ImageHelper.get_url_for(childData.image_id));
+			setOverview(key, childData, childData.image_id);
 			
 		});
 	});
@@ -102,7 +102,7 @@ this.getUserDataFromServer(function(){
 function getDataOffline() {
 }
 
-function setOverview(key, data, imgSource) {
+function setOverview(key, data, image_id) {
 			
 
 			var t1 = $("#wiesen_list");
@@ -114,7 +114,7 @@ function setOverview(key, data, imgSource) {
 			d.append(hw);
 
 			var himg = $('<img/>', {class: "img-responsive img-thumbnail"});
-			himg.attr('src', imgSource );
+			ImageHelper.get_image_data_for(image_id, himg);
 			d.append(himg);
 }
 
