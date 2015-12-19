@@ -18,7 +18,8 @@ if(sessionStorage.getItem('user') == 'Offline') {
 	
 	$.each(treeArray, function(index, value) {
 		value.wiese = this;
-		var treeName = 'Lat: ' + value.lat + ', Long: ' + value.lon;
+	//	var treeName = 'Lat: ' + value.lat + ', Long: ' + value.lon;
+		var treeName = index;
 		treeM[treeName] = value;
 		
 		wiesenData.trees = treeM;
@@ -166,6 +167,8 @@ Wiese.prototype.init_page = function() {
 	
 	$('#buttonOrchardOffline').click(function(){
 		makeAvailableOffline(this.name, this.data);
+		$('#myModalOrchard').modal('show');
+	
 	}.bind(this));
 
 };
