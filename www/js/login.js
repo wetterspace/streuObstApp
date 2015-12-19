@@ -1,5 +1,4 @@
 var Login = function(){
-	
 	if(sessionStorage.getItem('user')== null) {
 	this.showLogin();
 	} else {
@@ -51,8 +50,6 @@ Login.prototype.showLogin = function(){
 			sessionStorage.setItem('user', 'Offline');
 			new User('Offline').show();
 		});
-		
-		
 
 		$('#buttonLogin').click(function(){
 			var userName = $('#inputWiesenName').val();
