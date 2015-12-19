@@ -60,7 +60,6 @@ User.prototype.init = function(){
 
 	NavbarHelper.show(NavbarHelper.btn.logout);
 
-
 	if(sessionStorage.getItem('user') == 'Offline') {
 	
 /*	getWiesenObjects.forEach(function(entry) {

@@ -45,6 +45,11 @@ var NavbarHelper = {
 			id: "nav_btn_karte",
 			hide: true,
 			active: true
+		},
+		scannen: {
+			id: "nav_scan_qr_btn",
+			hide: true,
+			active: true
 		}
 	},
 
@@ -132,5 +137,14 @@ var NavbarHelper = {
 		NavbarHelper.click( NavbarHelper.btn.user, function(){
 			new User( sessionStorage.getItem('user') ).show();
 		});
+
+		//If on cordova check  then make scanner avaible
+		if(new Scanner().is_avaible_on_device()){
+			NavbarHelper.click(NavbarHelper.btn.scannen, function(){
+				var scanner = new Scanner();
+					scanner.set_wiese(wiese);
+					scanner.scan();
+			});
+		}
 	}
 };

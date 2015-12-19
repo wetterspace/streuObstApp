@@ -5,7 +5,7 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-  
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
 
 
@@ -70,6 +70,8 @@
 		<!--Crypto Library-->
 		<script type="text/javascript" src="lib/sjcl/sjcl.js"></script>
 		<script type="text/javascript" src="lib/sjcl/core/sha1.js"></script>
+        <!--Libary um QR-Codes zu erstellen-->
+        <script type="text/javascript" src="lib/qrcode.js"></script>
         <!--Wrapper für FireBase-->
         <script type="text/javascript" src="js/helper/db.js"></script>
 		<!--Enthält Code für Firebase Abfragen/Offline Version-->
@@ -144,6 +146,15 @@
         <script type="text/javascript" src="js/helper/navbar_helper.js"></script>
         <!--Helps to render specific parts -->
         <script type="text/javascript" src="js/helper/render_helper.js"></script>
+
+
+        <!--Helps to render qrCodes -->
+        <script type="text/javascript" src="js/helper/qrcode_helper.js"></script>
+        <!--Lets scan qr codes -->
+        <script type="text/javascript" src="js/helper/scanner.js"></script>
+        <!--Lets take picture on the mobile app -->
+        <script type="text/javascript" src="js/helper/cordova_camera.js"></script>
+
 
         <!--Enthält Code für die Synchronisation-->
         <script type="text/javascript" src="js/sync.js"></script>

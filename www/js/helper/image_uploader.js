@@ -1,5 +1,5 @@
 var ImageUploader = function(){
-	//this.image_id = null;
+	this.image_id = null;
 };
 
 
@@ -22,54 +22,43 @@ ImageUploader.prototype.uploaded_data_and_make_callback = function(data,call){
 }
 
 ImageUploader.prototype.handleImage = function(e){
-  //  var reader = new FileReader();
-  //  reader.onload = function(event){
-//
-  //      var img = new Image();
-   //     img.onload = function(){
-     
-     //      $(img).css({'width' : '100%' , 'height' : 'auto'});
-       //    $("#tree_image").attr('src', img.src);
-  			
-         //  this.let_upload_image(img.src);
+    var reader = new FileReader();
+    reader.onload = function(event){
 
-    //    }.bind(this);
+        var img = new Image();
+        img.onload = function(){
 
-      //  img.src = event.target.result;
-    //}.bind(this);
+           $(img).css({'width' : '100%' , 'height' : 'auto'});
+           $("#tree_image").attr('src', img.src);
 
-    //reader.readAsDataURL(e.target.files[0]);     
-};
+           var caption = $('#tree_image_caption');
+           caption.addClass("text-warning");
+           caption.text("Bild wird hochgeladen. Bitte warten!")
 
-ImageUploader.prototype.let_upload_image = function(src) {
-	//$.ajax({ 
-	  //  url: 'https://api.imgur.com/3/image',
-	    //headers: {
-	 //       Authorization: "Client-ID 8458d4c0f7610df",
-	   //     Accept: 'application/json'
-	 //   },
-	 //   type: 'POST',
-	 //   data: {
-	 //       image: src.split(',')[1]
-	 //   },
-	 //   success: function(result) {  
-	 //   	this.image_url = result.data.link;
-	//		this.image_id = result.data.id;
-	//		this.image_deletehash = result.data.deletehash;
-	//    }.bind(this)
-	//});
+           this.uploaded_data_and_make_callback(img.src, function(image_id){
+           		caption.removeClass("text-warning");
+           		caption.addClass("text-success");
+           		caption.text("Bild wurde erfolgreich hochgeladen");
+           		this.image_id = image_id;
+           }.bind(this));
+
+        }.bind(this);
+
+        img.src = event.target.result;
+    }.bind(this);
+
+    reader.readAsDataURL(e.target.files[0]);
 };
 
 
 ImageUploader.prototype.add_uploaded_image = function(tree_obj){
+	//if no images exist yet, create empty
+	if(! tree_obj[TreeAttr.images.id]){
+		tree_obj[TreeAttr.images.id] = {};
+	}
 	//check if image was uploaded
-	//if(this.image_id){
-		//if no images exist yet, create empty
-	//	if(! tree_obj[TreeAttr.images.id]){
-	//		tree_obj[TreeAttr.images.id] = {};
-	//	}
-		
+	if(this.image_id){
 		//image id is current time
-	//	tree_obj[TreeAttr.images.id][Date.now()] = {url: this.image_url, id: this.image_id, deletehash: this.image_deletehash};
-	//}
+		tree_obj[TreeAttr.images.id][Date.now()] = {id: this.image_id};
+	}
 }

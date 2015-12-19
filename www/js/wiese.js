@@ -33,7 +33,7 @@ getOrchard(this.name, function(snapshot) {
 		var wiesenData = snapshot.val();
 		this.data = wiesenData;
 
-		console.log(this.data);
+		//console.log(this.data);
 		callback();
 }.bind(this));
 }
@@ -147,18 +147,18 @@ Wiese.prototype.init_page = function() {
 	this.list_trees();
 
 
-	//show_all_buttons_of_navbar
-	NavbarHelper.show_all_btns();
-	//pass wiese
+
+	//pass wiese //make visible
 	NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this);
 	//show active karte btn
 	NavbarHelper.make_active(NavbarHelper.btn.karte);
 
-	$('#buttonCreateTree').click(function(){
-		var tree_form = new TreeForm();
-			tree_form.set_wiese(this);
-			tree_form.show_form();
-	}.bind(this));
+	//gibzts eig nicht mehr
+	//$('#buttonCreateTree').click(function(){
+	//	var tree_form = new TreeForm();
+	//		tree_form.set_wiese(this);
+	//		tree_form.show_form();
+	//}.bind(this));
 	
 	if(sessionStorage.getItem('user') == 'Offline') {
 	$('#buttonOrchardOffline').attr('disabled', 'disabled' );
@@ -176,7 +176,7 @@ Wiese.prototype.init = function(){
 		//callback
 		this.init_page();
 		this.init_map();
-		
+
 	}.bind(this));
 }
 

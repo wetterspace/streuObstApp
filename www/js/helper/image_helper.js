@@ -1,9 +1,14 @@
 ImageHelper = {};
 
-ImageHelper.get_image_data_for = function(image_id, element){
+ImageHelper.get_url = function(image_id){
 	var url = IMAGE_SERVER + "/image/" + image_id + "/" + IMAGE_SERVER_PASSWORD;
+	return url;
+}
 
-	if(typeof(Storage) !== "undefined") {
+ImageHelper.get_image_data_for = function(image_id, element, opt){
+	var url = ImageHelper.get_url(image_id);
+
+	if(typeof(Storage) !== "undefined" || opt && opt.save == false) {
 		if (ImageHelper.get_image_data_from_storage(image_id) === null) {
 			//does not yet exist locally
 			this.load_from_url(url,  function(image_data){

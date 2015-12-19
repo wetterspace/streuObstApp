@@ -188,14 +188,14 @@ TreeForm.prototype.save_form = function(){
 			//Wird dort auch gespeichert
 			this.tree.overwrite_attributes(tree_out_of_form);
 			//in case image was uploaded append it to tree images
-			//this.image_uploader.add_uploaded_image(this.tree)
+			this.image_uploader.add_uploaded_image(this.tree)
 			this.tree.save();
 		}else{
 			//neuer tree muss erstellt werden
 			var tree =  tree_out_of_form;
 				tree.wiese = this.wiese;
 				//in case image was uploaded append it to tree images
-				//this.image_uploader.add_uploaded_image(tree)
+				this.image_uploader.add_uploaded_image(tree)
 				tree.save();
 		}
 	}else{
@@ -215,6 +215,31 @@ TreeForm.prototype.init_save_or_cancel = function(){
 }
 
 
+TreeForm.prototype.show_qr_code = function(){
+    //alles wird im qr code reader gemanegt auch ob der baum noch gar nicht exisitert
+    // und deshalb gar kein qr code angezeight werden kann
+	var qr_code_helper = new QrCodeHelper()
+							.set_obj_and_key_for_text(this.tree, "key")
+							.set_header_field($("#qr_code_header"))
+							.set_image_field($("#qr_code_image_field"))
+							.set_print_field($("#qr_code_print_box"))
+
+							.render();
+}
+
+
+TreeForm.prototype.init_camera_on_cordova = function(){
+	if(new CordovaCamera().is_avaible_on_device()){
+		//show tab to navigate to camera menu
+		$('*[data-tabselector="camera"]').show();
+
+		var camera = new CordovaCamera();
+			camera.set_take_picture_btn($('#take_picture_btn'));
+			camera.set_photo_box($('#photo_box_camera'));
+			camera.init();
+	}
+}
+
 
 TreeForm.prototype.show_form = function(){
 
@@ -232,6 +257,11 @@ TreeForm.prototype.show_form = function(){
 
 		this.fill_forms_if_tree_already_exists();
 
+		this.show_qr_code();
+
+		//if app version show tab to take picture directly from app
+		this.init_camera_on_cordova();
+
 		//pass wiese
 		NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this.wiese);
 		//make btn in navbar active
@@ -243,14 +273,19 @@ TreeForm.prototype.show_form = function(){
 
 
 TreeForm.prototype.show_latest_tree_image = function(){
-	var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
-	function sortNumber(a,b) {return b - a;}
-	//sotiere die keys nach dem erstellungsdatum
-	image_keys.sort(sortNumber);
+	if(this.tree[TreeAttr.images.id]){
+		var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
 
-	if(image_keys.length > 0){
-		var latest_image_url = this.tree[TreeAttr.images.id][image_keys[0]].url;
-		$('#tree_image').attr('src', latest_image_url);
+		if(image_keys.length > 0){
+			function sortNumber(a,b) {return b - a;}
+			//sotiere die keys nach dem erstellungsdatum
+			image_keys.sort(sortNumber);
+
+			if(image_keys.length > 0){
+				var latest_image_id = this.tree[TreeAttr.images.id][image_keys[0]].id;
+				ImageHelper.get_image_data_for(latest_image_id, $('#tree_image'), {save: false});
+			}
+		}
 	}
 }
 
@@ -259,9 +294,7 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 
 	if(this.tree){
 
-		//if(this.tree[TreeAttr.images.id]){
-		//	this.show_latest_tree_image();
-		//}
+		this.show_latest_tree_image();
 
 		this.form_rows.forEach(function(row){
 			
