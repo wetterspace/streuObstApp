@@ -61,7 +61,11 @@ var TreeAttr = {
 	temperatur_beginn: {	id: "temperatur_beginn",
 							title: "Temperatur bei Beginn"},
 	temperatur_ende: {		id: "temperatur_ende",
-							title: "Temperatur bei Ende"}
+							title: "Temperatur bei Ende"},
+
+	images: {
+		id: "images"
+	}
 }
 
 

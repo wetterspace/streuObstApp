@@ -188,14 +188,14 @@ TreeForm.prototype.save_form = function(){
 			//Wird dort auch gespeichert
 			this.tree.overwrite_attributes(tree_out_of_form);
 			//in case image was uploaded append it to tree images
-			//this.image_uploader.add_uploaded_image(this.tree)
+			this.image_uploader.add_uploaded_image(this.tree)
 			this.tree.save();
 		}else{
 			//neuer tree muss erstellt werden
 			var tree =  tree_out_of_form;
 				tree.wiese = this.wiese;
 				//in case image was uploaded append it to tree images
-				//this.image_uploader.add_uploaded_image(tree)
+				this.image_uploader.add_uploaded_image(tree)
 				tree.save();
 		}
 	}else{
@@ -273,14 +273,19 @@ TreeForm.prototype.show_form = function(){
 
 
 TreeForm.prototype.show_latest_tree_image = function(){
-	var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
-	function sortNumber(a,b) {return b - a;}
-	//sotiere die keys nach dem erstellungsdatum
-	image_keys.sort(sortNumber);
+	if(this.tree[TreeAttr.images.id]){
+		var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
 
-	if(image_keys.length > 0){
-		var latest_image_url = this.tree[TreeAttr.images.id][image_keys[0]].url;
-		$('#tree_image').attr('src', latest_image_url);
+		if(image_keys.length > 0){
+			function sortNumber(a,b) {return b - a;}
+			//sotiere die keys nach dem erstellungsdatum
+			image_keys.sort(sortNumber);
+
+			if(image_keys.length > 0){
+				var latest_image_id = this.tree[TreeAttr.images.id][image_keys[0]].id;
+				ImageHelper.get_image_data_for(latest_image_id, $('#tree_image'), {save: false});
+			}
+		}
 	}
 }
 
@@ -289,9 +294,7 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 
 	if(this.tree){
 
-		//if(this.tree[TreeAttr.images.id]){
-		//	this.show_latest_tree_image();
-		//}
+		this.show_latest_tree_image();
 
 		this.form_rows.forEach(function(row){
 			

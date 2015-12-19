@@ -33,7 +33,7 @@ getOrchard(this.name, function(snapshot) {
 		var wiesenData = snapshot.val();
 		this.data = wiesenData;
 
-		console.log(this.data);
+		//console.log(this.data);
 		callback();
 }.bind(this));
 }
