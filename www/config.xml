@@ -51,7 +51,8 @@
 
 
     <gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.camera" />
+
+    <gap:plugin name="org.apache.cordova.core.camera" />
     <plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />
 
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/ldpi.jpeg" />
@@ -96,5 +97,5 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <engine name="android" spec="~4.1.1" />
+    <engine name="android"/>
 </widget>

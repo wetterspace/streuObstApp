@@ -15,25 +15,32 @@ CordovaCamera.prototype.set_photo_box = function(box){
 	this.photo_box = box;
 }
 
-CordovaCamera.prototype.render_photo = function(imageURI){
+CordovaCamera.prototype.render_photo = function(url){
 	$(this.photo_box).html('');
 
-	var img = $('<img/>', {src: "data:image/jpeg;base64," + imageURI, class: "img-responsive img-thumbnail"});
+	var img = $('<img/>', {src: url, class: "img-responsive img-thumbnail"});
 
 	$(this.photo_box).append(img);
 }
 
 CordovaCamera.prototype.init = function(){
+	$(this.photo_box).append('<p>Weedddiiie</p>');
 	$(this.btn).click(function(){
 
-		function onSuccess(imageURI) {
-			this.render_photo(imageURI);
-		};
+		$(this.photo_box).append('<p>Wssseedddiiie</p>');
 
-		function onFail(message) {
-		    alert('Failed because: ' + message);
-		};
+	 navigator.camera.getPicture( function( imageURI ) {
+        this.render_photo(url);
+      }.bind(this),
+      function( message ) {
+        alert( message );
+      }.bind(this),
+      {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL
+      });
 
-		navigator.camera.getPicture(onSuccess.bind(this), onFail.bind(this), {destinationType: Camera.DestinationType.DATA_URL});
+	 $(this.photo_box).append('<p>Wee4u85u8udddiiie</p>');
+
 	}.bind(this));
 }
