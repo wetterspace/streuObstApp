@@ -69,7 +69,7 @@ RegisterWieseInteractive.prototype.init_buttons = function(){
 
 	$('#buttonCreateEckpunkt').click(function(){
 		var current_text = $(this).text();
-		$(this).text("Warten! Lädt Position");
+		$(this).html("Warten! L&auml;dt Position");
 
 		Position.get_current_lon_lat(function(lon,lat){
 			that.add_eckpunkt(lon, lat);
