@@ -52,6 +52,18 @@ RegisterWieseInteractive.prototype.add_eckpunkt = function(lon, lat){
 	this.render_coords_in_list();
 };
 
+RegisterWieseInteractive.prototype.translate_coords_to_polygon = function(){
+	var polygon = [];
+
+	this.coords.forEach(function(coord){
+		polygon.push(ol.proj.fromLonLat([coord.lon,coord.lat]));
+	});
+
+	polygon.push(polygon[0]);
+
+	return polygon;
+}
+
 RegisterWieseInteractive.prototype.init_buttons = function(){
 	var that = this;
 
@@ -67,9 +79,11 @@ RegisterWieseInteractive.prototype.init_buttons = function(){
 	});
 
 	$('#buttonWieseSave').click(function(){
-		//muss mindestens zwei punkte sein
+		//muss mindestens drei punkte sein
 		if(this.coords.length > 2){
-			console.log(this.coords);
+			var map_coords = this.translate_coords_to_polygon();
+
+			this.callback(image_data_url, coord);
 		}else{
 			ErrorHelper.show_error("Sie müssen mindestens drei Eckpunkte anlegen");
 		}
