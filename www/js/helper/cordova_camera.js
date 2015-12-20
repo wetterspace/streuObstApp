@@ -30,11 +30,11 @@ CordovaCamera.prototype.init = function(){
 		$(this.photo_box).append('<p>Wssseedddiiie</p>');
 
 	 navigator.camera.getPicture( function( imageURI ) {
-        alert( imageURI );
-      },
+        this.render_photo(url);
+      }.bind(this),
       function( message ) {
         alert( message );
-      },
+      }.bind(this),
       {
         quality: 50,
         destinationType: Camera.DestinationType.DATA_URL
