@@ -291,10 +291,27 @@ addInteraction();
 
 }
 
+
 RegisterWiese.prototype.showCard = function(){
+  var container = $('#HauptFenster');
+  var show_map_to_select_area = function(){container.load('./html/register/showcard.html', init_car)};
 
+  if(DeviceDetector.is_viewed_on_handy()){
+    container.load('./html/register/show_options_to_create_wiese.html', function(){
+      $('#buttonWieseAblaufen').click(function(){
+        new RegisterWieseInteractive().set_callback(
+          function(image_data_url , coordinates){
+            new RegisterWiese().saveWieseCoords( image_data_url, coordinates);
+          }).init();
+      }.bind(this));
 
-	$('#HauptFenster').load('./html/register/showcard.html', init_car);
+      $('#buttonWieseKarte').click(function(){
+        show_map_to_select_area();
+      }.bind(this));
+    });
+  }else{
+    show_map_to_select_area();
+  }
 }
 
 function setOrchardOnline(wiesenName, wiesenObj, wiesenObjRights) {
