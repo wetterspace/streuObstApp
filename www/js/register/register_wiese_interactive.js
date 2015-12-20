@@ -61,7 +61,7 @@ RegisterWieseInteractive.prototype.translate_coords_to_polygon = function(){
 
 	polygon.push(polygon[0]);
 
-	return polygon;
+	return [polygon];
 }
 
 RegisterWieseInteractive.prototype.init_buttons = function(){
@@ -81,9 +81,7 @@ RegisterWieseInteractive.prototype.init_buttons = function(){
 	$('#buttonWieseSave').click(function(){
 		//muss mindestens drei punkte sein
 		if(this.coords.length > 2){
-			var map_coords = this.translate_coords_to_polygon();
-
-			this.callback(image_data_url, coord);
+			this.perform_callback();
 		}else{
 			ErrorHelper.show_error("Sie müssen mindestens drei Eckpunkte anlegen");
 		}
@@ -99,4 +97,47 @@ RegisterWieseInteractive.prototype.adjust_list_height = function(){
  	var h = height_of_view - top_off - bottom - 40;
 
  	$('#eckpunkte_liste').height(h);
+}
+
+RegisterWieseInteractive.prototype.perform_callback = function(){
+	var map_coords = this.translate_coords_to_polygon();
+
+	var container = $('#HauptFenster').html('<div id="map"></div>');
+
+	var vectorSource = new ol.source.Vector({});
+
+	var polyFeature = new ol.Feature({
+        geometry: new ol.geom.Polygon(
+            map_coords
+        )
+    });
+
+	vectorSource.addFeature( polyFeature );
+
+    var wiesenlayer = new ol.layer.Vector({
+        source: vectorSource
+    });
+
+    //make map fullsize
+    var window_height = $(window).height();
+    var map_offset = $('#map').offset().top;
+
+    $('#map').height(window_height - map_offset - 10);
+
+	var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+          wiesenlayer
+        ]
+    });
+
+    map.getView().fit(polyFeature.getGeometry().getExtent(), map.getSize());
+
+    map.once('postcompose', function(event) {
+      var canvas = event.context.canvas;
+	  this.callback( canvas.toDataURL('image/png'), map_coords);
+    }.bind(this));
 }
