@@ -4,13 +4,21 @@
 function getWiesenObjects() {
 	var wiesenArray=new Object();
 	for (var i = 0; i < localStorage.length; i++){
+		var obj;
+		try {
 		var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+		} catch(err) {
+		}
 		console.log(obj);
 		//make sure it's no tree
-		if(obj.wiese == undefined) {
+	/*	if(obj.wiese == undefined) {
 			var wiesenName = localStorage.key(i);
 			wiesenArray[wiesenName]=obj;	
-		}		
+		}		*/
+		if(obj.coordinates != undefined) {
+			var wiesenName = localStorage.key(i);
+			wiesenArray[wiesenName]=obj;	
+		}
 	}
 
 	return wiesenArray;
@@ -36,6 +44,7 @@ function getTreeObjects() {
 function getTreesForOrchardOffline(orchardName) {
 	var TreeArray=new Object();
 	for (var i = 0; i < localStorage.length; i++){
+		try {
 		var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
 		console.log(obj);
 		//make sure it's no tree
@@ -43,6 +52,8 @@ function getTreesForOrchardOffline(orchardName) {
 			var wiesenName = localStorage.key(i);
 			TreeArray[localStorage.key(i)]=obj;	
 		}		
+		} catch(err) {
+		}
 	}
 	return TreeArray;
 }

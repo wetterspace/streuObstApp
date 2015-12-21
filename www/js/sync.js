@@ -14,13 +14,19 @@ function attemptSync() {
 function getWiesenObjects() {
 	var wiesenArray=new Object();
 	for (var i = 0; i < localStorage.length; i++){
+		try {
 		var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
 		console.log(obj);
-		//make sure it's no tree
-		if(obj.wiese == undefined) {
+		//make sure it's an orchard
+		if(obj.coordinates) {
 			var wiesenName = localStorage.key(i);
 			wiesenArray[wiesenName]=obj;	
-		}		
+		}
+		}
+		catch(err) {
+		}
+		
+				
 	}
 
 	return wiesenArray;
@@ -28,6 +34,7 @@ function getWiesenObjects() {
 
 function compareStorageAndDB() {
 	for (var i = 0; i < localStorage.length; i++){
+		try {
 		var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
 		//make sure it's a tree
 		if(obj.id != undefined) {
@@ -43,15 +50,23 @@ function compareStorageAndDB() {
 					$('#myModalUser').modal('show');
 				}
 			}.bind(this));		
-		}	
+		}
+		} catch(err) {
+		}
+			
 	}
 }
 
 function syncTrees() {
+	console.log("asdasdasasddddddddddddddddddddddddddddddddddddddddddd");
 	for (var i = 0; i < localStorage.length; i++){
-		var obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+		var obj;
+		try {
+		obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
+		} catch(err){
+		}
 		//make sure it's a tree
-		if(obj.id != undefined) {
+		if(obj && obj.id != undefined) {
 			getTree(obj, localStorage.key(i), function(obj, snapshot) {
 				//treee already exists in DB
 				if(snapshot.val()) {
