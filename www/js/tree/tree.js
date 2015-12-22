@@ -82,7 +82,8 @@ var Tree = function(){
 }
 
 Tree.prototype.from_server_obj = function(trees, key){
-	//this.key = key; 
+	//im qr_code helper wird mithilfe des keys der baum identifiziert
+	this.key = key;
 
 	Object.keys(trees[key]).forEach(function(attr){
 		this[attr] =  trees[key][attr];
