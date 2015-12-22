@@ -194,6 +194,7 @@ window.map2 = map;
 
         geometry = sketch.getGeometry();
         coordinates = geometry.getCoordinates();
+		
 
     	window.map2.getView().fit(geometry.getExtent(), window.map2.getSize());
 
@@ -338,15 +339,6 @@ RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
 
 		$('#buttonSave').click(function(){
 
-		if(sessionStorage.getItem('user') == 'Offline') {
-		var wiesenName = $('#inputWiesenName').val();
-		var wiesenObj = {
-    			//	password: hashedPassword,
-          		coordinates: coordinates,
-				image_id: wiese_img
-    			};
-			saveOffline(wiesenName, wiesenObj);
-		}else {
 		var wiesenName = $('#inputWiesenName').val();
 	//first upload image
       var uploader = new ImageUploader();
@@ -363,13 +355,14 @@ RegisterWiese.prototype.saveWieseCoords = function(wiese_img, coordinates){
     	var wiesenObj = {
     	//	password: hashedPassword,
         coordinates: coordinates,
-		image_id: image_id
+		image_id: image_id,
+		timestamp: Date.now()
     	};
 				
 		setOrchardOnline(wiesenName, wiesenObj, wiesenObjRights);
 				
         }); //close image_uploader_callback
-		}
+		
 	
 		});
 		
