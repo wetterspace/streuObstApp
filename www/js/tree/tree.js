@@ -8,8 +8,11 @@ pflegezustaende: {
 id: 	{		id: "id",
 title: "ID"
 	},
-	
-	
+
+name: { id: "name",
+		title: "Optionale Bezeichnung"
+	},
+
 obstart: 	{	id: "obstart",
 title: "ObstArt"
 	},

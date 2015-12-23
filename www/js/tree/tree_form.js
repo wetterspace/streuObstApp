@@ -20,6 +20,10 @@ var TreeForm = function(tree){
 	{	
 id: "tree_form_row_1",
 fields: [
+		{	id: TreeAttr.name.id,  
+form: Form.Text,
+title: TreeAttr.name.title
+		},
 		{	id: TreeAttr.obstart.id, 
 form: Form.Dropdown,
 options: Obst.getArten(),
@@ -61,7 +65,7 @@ title: TreeAttr.gepflanzt_date.title},
 		{
 id: TreeAttr.anmerkungen.id,
 form: Form.Textarea,
-rows: 4,
+rows: 5,
 title: TreeAttr.anmerkungen.title
 		}
 		]

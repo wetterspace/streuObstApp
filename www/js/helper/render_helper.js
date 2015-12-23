@@ -10,11 +10,25 @@ var RenderHelper = {
 				var tree = wiese.data.trees[key];
 				var sort = tree[TreeAttr.sortname.id];
 
+				var bezeichnung = key;
+
+				//falls bez/name hat dann diesen anzeigen
+				if(tree[TreeAttr.name.id]){
+					bezeichnung = tree[TreeAttr.name.id];
+				//falls kein name dann sortnamen, existiert dieser nicht
+				//wird immer noch firebase-id angezeigt
+				}else if(tree[TreeAttr.sortname.id]){
+					bezeichnung = tree[TreeAttr.sortname.id];
+				}
+
 				var list_group_item = $('<a/>', {class: "list-group-item", href: "#"}).append(
-											$('<h4/>', {class: "list-group-item-heading", text:  key})
-										).append(
-											$('<p/>', {class: "list-group-item-text", text: sort})
+											$('<h4/>', {class: "list-group-item-heading", text:  bezeichnung})
 										);
+				if(bezeichnung != key){
+					list_group_item.append(
+							$('<p/>', {style: "font-size: 12px", class: "list-group-item-text",  text: key})
+						);
+				}
 
 				$(list_group_item).click(function(){
 					var tree_obj = new Tree()

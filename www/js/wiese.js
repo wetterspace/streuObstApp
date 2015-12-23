@@ -1,6 +1,20 @@
 var Wiese = function(name){
 	this.name = name;
+	//handles menu at right side
+	this.submenu = null;
 };
+
+Wiese.prototype.getArea = function(){
+	//in quadradtmeter
+	if(this.data.coordinates){
+		var polygon = new ol.geom.Polygon(this.data.coordinates);
+		var area = polygon.getArea();
+
+		return  (Math.round(area * 100) / 100);
+	}else{
+		return null;
+	}
+}
 
 Wiese.prototype.getWiesenDataFromServer = function(callback){
 
@@ -118,59 +132,23 @@ Wiese.prototype.init_map = function(){
     this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
 }
 
-Wiese.prototype.list_trees = function(){
-	var renderd_trees = RenderHelper.get_renderd_trees(this);
-	var ele;
-
-	if(renderd_trees.length > 0){
-		ele = $('<div/>', {class: "list-group"});
-
-		renderd_trees.forEach(function(rend_tree){
-			ele.append(rend_tree);
-		});
-
-	}else{
-		//wiese besitzt keine baume
-		ele = $('<div/>', {class: "well", text: "Sie haben noch keine Bäume auf ihrer Wiese plaziert"});
-	}
-
-	$('#trees_list').html(ele)
-};
-
 function setUpOfflineButton() {
 
 }
 
-
 Wiese.prototype.init_page = function() {
-	$('#wiesenName').html(this.name);
-
-	this.list_trees();
-
-
-
 	//pass wiese //make visible
 	NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this);
 	//show active karte btn
 	NavbarHelper.make_active(NavbarHelper.btn.karte);
 
-	//gibzts eig nicht mehr
-	//$('#buttonCreateTree').click(function(){
-	//	var tree_form = new TreeForm();
-	//		tree_form.set_wiese(this);
-	//		tree_form.show_form();
-	//}.bind(this));
-	
-	if(sessionStorage.getItem('user') == 'Offline') {
-	$('#buttonOrchardOffline').attr('disabled', 'disabled' );
-	}
-	
-	$('#buttonOrchardOffline').click(function(){
-		makeAvailableOffline(this.name, this.data);
-		$('#myModalOrchard').modal('show');
-	
-	}.bind(this));
-
+	this.submenu = new WieseSubmenuHelper();
+	this.submenu.set_wiese(this);
+	this.submenu.set_trees(this.data.trees);
+	//fill submenus like info baume etc
+	this.submenu.fill();
+	//soll info menu zeigen
+	this.submenu.show_info();
 };
 
 Wiese.prototype.init = function(){
