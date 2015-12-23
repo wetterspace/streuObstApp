@@ -2,6 +2,16 @@ var Wiese = function(name){
 	this.name = name;
 	//handles menu at right side
 	this.submenu = null;
+
+	this.map_is_avaible_offline = false;
+
+	this.check_if_map_is_avaible_offline = function(){
+		this.map_is_avaible_offline = localStorage.getItem("map_img_extent" + this.name) && localStorage.getItem("map_img_url" + this.name);
+	};
+	//execute that only the first time the wiese is initialized
+	//and after is made offfline
+	//saves memory
+	this.check_if_map_is_avaible_offline();
 };
 
 Wiese.prototype.getArea = function(){
@@ -121,19 +131,57 @@ Wiese.prototype.init_map = function(){
 
 	this.map = new ol.Map({
         target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          }),
-          wiesenlayer
-        ]
+        //layers get filled later
+        layers: []
     });
+	//layer für offline img if vorhanden
+    if(this.map_is_avaible_offline){
+    	var img_layer =  new ol.layer.Image({
+	      source: new ol.source.ImageStatic({
+	        url: localStorage.getItem("map_img_url" + this.name),
+	        imageExtent: JSON.parse(localStorage.getItem("map_img_extent" + this.name))
+	      })
+	    });
 
+    	this.map.addLayer(img_layer);
+    };
+    //layer für openstreetmap
+    this.tile_layer = new ol.layer.Tile({
+            				source: new ol.source.OSM()
+    					});
+    this.map.addLayer(this.tile_layer);
+    //layer wo baume drauf platziert sind
+    this.map.addLayer(wiesenlayer);
+    //center map view to wiese
     this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
 }
 
-function setUpOfflineButton() {
-
+Wiese.prototype.save_map_for_offline_use = function(){
+	//get extent of wiese
+	var wiese_extent = ol.extent.boundingExtent(this.data.coordinates[0]);
+	//move view to geometry so that its visible
+	this.map.getView().fit(wiese_extent, this.map.getSize());
+	//get current extent of view
+	var extent = this.map.getView().calculateExtent(this.map.getSize());
+	//only save tile-layer, make all other invisible
+	this.map.getLayers().forEach(function(layer){
+		layer.setVisible(false);
+	});
+	//only show layer with images from openstreetmap
+	this.tile_layer.setVisible(true);
+	this.map.once('postcompose', function(event) {
+      var canvas = event.context.canvas;
+      //speicher extent und bild offline
+      localStorage.setItem("map_img_url" + this.name, canvas.toDataURL('image/png'));
+      localStorage.setItem("map_img_extent" + this.name, JSON.stringify(extent));
+      //zeige wieder alle Layer
+      this.map.getLayers().forEach(function(layer){
+		layer.setVisible(true);
+	  });
+	  //update offline_status of map see init
+	  this.check_if_map_is_avaible_offline();
+    }.bind(this));
+    this.map.renderSync();
 }
 
 Wiese.prototype.init_page = function() {

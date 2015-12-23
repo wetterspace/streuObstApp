@@ -59,6 +59,7 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 	}
 
 	$('#buttonOrchardOffline').click(function(){
+		this.wiese.save_map_for_offline_use();
 		makeAvailableOffline(this.wiese.name, this.wiese.data);
 		$('#myModalOrchard').modal('show');
 	}.bind(this));
