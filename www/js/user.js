@@ -128,8 +128,6 @@ function getDataOffline() {
 }
 
 function setOverview(key, data, image_id) {
-			
-
 			var t1 = $("#wiesen_list");
 			var d = $('<a/>', {class: "list-group-item", href: "#", click: function(){
 				new Wiese(key).show();

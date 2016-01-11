@@ -135,4 +135,25 @@ WieseSubmenuHelper.prototype.show_info = function() {
 	this.make_active(this.menus.info);
 };
 
+WieseSubmenuHelper.prototype.show_single_tree = function(tree_key){
+	var old_html = $('#right_menu_map').html();
+
+
+	$('#right_menu_map').load("html/tree/tree_menu.html", function(){
+		//wenn schliesen geklickt wird dann zuruck zum menu
+		$('#cancel_tree_view').click(function(){
+			$('#right_menu_map').html(old_html);
+		});
+		//bei bearbeiten zum Baum leiten
+		$('#edit_tree').click(function(){
+			var tree_obj = new Tree()
+				tree_obj.from_server_obj(this.trees, tree_key);
+				tree_obj.wiese = wiese;
+
+			new TreeForm(tree_obj).show_form();
+		}.bind(this));
+
+	}.bind(this));
+}
+
 
