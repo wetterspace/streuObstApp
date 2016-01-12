@@ -10,6 +10,8 @@ var NavbarHelper = {
 				sessionStorage.clear();
 				new Login();
 			});
+
+			$('#logo_streu_img').height($('#navbar_streu').height());
 		}
 
 		$("#navbar_container").load("navbar.html", init_buttons);

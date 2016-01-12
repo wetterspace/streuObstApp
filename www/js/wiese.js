@@ -78,38 +78,10 @@ Wiese.prototype.getDB = function(){
 };
 
 
-Wiese.prototype.place_trees_on_map = function(vectorSource){
-	if(this.data.trees){
-		Object.keys(this.data.trees).forEach(function(treeKey){
 
-			var tree = this.data.trees[treeKey];
-			//check that tree has real coordinates
-			if(!( isNaN(parseFloat(tree.lon)) ||  isNaN(parseFloat(tree.lat)) )){
-
-				var lon = parseFloat(tree.lon);
-				var lat = parseFloat(tree.lat);
-
-				var treeDot = ol.proj.fromLonLat([lon,lat]);
-				var treePoint = new ol.geom.Point(treeDot);
-
-				var polyFeature = new ol.Feature({
-					geometry: treePoint
-				});
-
-				vectorSource.addFeature(polyFeature);
-			}
-
-		}.bind(this));
-	};
-}
 
 Wiese.prototype.init_map = function(){
-
 	var vectorSource = new ol.source.Vector({});
-
-	this.place_trees_on_map(vectorSource);
-
-
     //create polygon from Wiesen coordinates
     var polyFeature = new ol.Feature({
         geometry: new ol.geom.Polygon(
@@ -134,6 +106,9 @@ Wiese.prototype.init_map = function(){
         //layers get filled later
         layers: []
     });
+
+
+
 	//layer für offline img if vorhanden
     if(this.map_is_avaible_offline){
     	var img_layer =  new ol.layer.Image({
@@ -152,6 +127,10 @@ Wiese.prototype.init_map = function(){
     this.map.addLayer(this.tile_layer);
     //layer wo baume drauf platziert sind
     this.map.addLayer(wiesenlayer);
+
+    //Helper method can be found in wiese/wiese_place_trees.js
+	this.place_trees_on_map();
+
     //center map view to wiese
     this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
 }
