@@ -58,7 +58,7 @@ getOrchard(this.name, function(snapshot) {
 		var wiesenData = snapshot.val();
 		this.data = wiesenData;
 
-		//console.log(this.data);
+		console.log(this.data);
 		callback();
 }.bind(this));
 }
@@ -195,8 +195,11 @@ Wiese.prototype.init_page = function() {
 	this.submenu.set_trees(this.data.trees);
 	//fill submenus like info baume etc
 	this.submenu.fill();
+	
 	//soll info menu zeigen
 	this.submenu.show_info();
+	
+	
 };
 
 Wiese.prototype.init = function(){
@@ -212,4 +215,5 @@ Wiese.prototype.init = function(){
 
 Wiese.prototype.show = function() {
 	$('#HauptFenster').load('./html/wiese/show.html', this.init.bind(this));
+	
 };

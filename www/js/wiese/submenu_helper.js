@@ -49,9 +49,21 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 		var len = Object.keys(this.trees).length;
 		info_box.append($('<p/>', {html: "Anzahl B&auml;ume: " + len}))
 	}
-
-	info_box.append($('<p>', {text: "Zuletzt betrachtet war cool"}));
-	info_box.append($('<p/>', {text: "Erstellt am"}));
+	
+	var newestTimestamp = 0;
+	for (var key in this.trees) {
+   var obj = this.trees[key];
+   if (obj.timestamp > newestTimestamp) {
+	newestTimestamp = obj.timestamp;
+   }
+}
+	var dateUpdated = new Date( newestTimestamp);
+	
+	
+	var dateCreated = new Date( this.wiese.data.timestamp);
+	
+	info_box.append($('<p>', {text: "Zuletzt betrachtet: " + dateUpdated.toGMTString()}));
+	info_box.append($('<p/>', {text: "Erstellt am " +  dateCreated.toGMTString()}));
 	info_box.append($('<p/>', {text: "Wetter??"}));
 
 	if(sessionStorage.getItem('user') == 'Offline') {
@@ -135,4 +147,8 @@ WieseSubmenuHelper.prototype.show_info = function() {
 	this.make_active(this.menus.info);
 };
 
+
+function getNewestTreeTimestamp() {
+
+}
 
