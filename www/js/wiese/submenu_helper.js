@@ -1,3 +1,4 @@
+
 var WieseSubmenuHelper = function(){
 	this.wiese = null;
 	this.trees = null;
@@ -34,6 +35,17 @@ WieseSubmenuHelper.prototype.fill = function(){
 	this.fill_info_box();
 	this.fill_baume_box();
 	this.fill_filter_box();
+	
+	$('#checkboxAll').click();
+		$('input[type="checkbox"]').change(function () {
+	    if ($('input[type="checkbox"]').is(':checked')) {
+		this.wiese.place_trees_on_map(goOverCheckboxes(this.wiese));
+	    } else {
+		this.wiese.place_trees_on_map(goOverCheckboxes(this.wiese));
+	    }
+		}.bind(this));
+	
+	
 }
 
 WieseSubmenuHelper.prototype.fill_info_box = function(){
@@ -97,6 +109,24 @@ WieseSubmenuHelper.prototype.fill_baume_box = function(){
 }
 
 WieseSubmenuHelper.prototype.fill_filter_box = function(){
+
+var allSorts = getAllSortNames(this.trees)
+
+	for (var i = 0; i < allSorts.length; i++) {
+	var checkboxDiv = document.createElement('div');
+	checkboxDiv.className = "checkbox";
+
+	var checkbox = document.createElement('input');
+	checkbox.type = "checkbox";
+	checkbox.name = "filterSort";
+	checkbox.value = allSorts[i];
+	var label = document.createElement('label')
+	var container = $('#sub_menu_filter');
+	container.append(checkboxDiv);
+	checkboxDiv.appendChild(label);
+	label.appendChild(checkbox);
+	label.appendChild(document.createTextNode(allSorts[i]));
+	}
 
 }
 
