@@ -96,20 +96,6 @@ Wiese.prototype.place_trees_on_map = function(treeList){
 		  source: vectorSource,
 		  opacity: 0
 		});
-		this.map.addLayer(vector);
-		
-		
-		
+		this.map.addLayer(vector);	
 	};
-	
-	
-	
-	
-	
-
 	}
-
-
-
-
-
