@@ -136,24 +136,78 @@ WieseSubmenuHelper.prototype.show_info = function() {
 };
 
 WieseSubmenuHelper.prototype.show_single_tree = function(tree_key){
-	var old_html = $('#right_menu_map').html();
+	var general_menu = $('#right_menu_map #general_right_submenu');
+	var tree_submenu_box = $('#right_menu_map #tree_right_submenu');
 
+	var tree_obj = new Tree()
+		tree_obj.from_server_obj(this.trees, tree_key);
+		tree_obj.wiese = this.wiese;
 
-	$('#right_menu_map').load("html/tree/tree_menu.html", function(){
+	tree_submenu_box.load("html/tree/tree_menu.html", function(){
+
+		this.display_tree_information(tree_key, tree_obj);
+
 		//wenn schliesen geklickt wird dann zuruck zum menu
 		$('#cancel_tree_view').click(function(){
-			$('#right_menu_map').html(old_html);
+			general_menu.show();
+			tree_submenu_box.hide();
 		});
 		//bei bearbeiten zum Baum leiten
 		$('#edit_tree').click(function(){
-			var tree_obj = new Tree()
-				tree_obj.from_server_obj(this.trees, tree_key);
-				tree_obj.wiese = wiese;
-
 			new TreeForm(tree_obj).show_form();
 		}.bind(this));
 
+		general_menu.hide();
+		tree_submenu_box.show();
 	}.bind(this));
+}
+
+WieseSubmenuHelper.prototype.display_tree_information = function(tree_key, tree){
+	//gets invoked by show_single_tree
+	//die die dargestellt werden sollen
+	var form_rows = [{
+		id: "tree_submenu_row",
+		fields: [
+		{	id: TreeAttr.name.id,
+			form: Form.Text,
+			title: TreeAttr.name.title,
+			disabled: true
+		},
+		{	id: TreeAttr.obstart.id,
+			form: Form.Dropdown,
+			options: Obst.getArten(),
+						//when another value gets selected
+			onchange: TreeFormHelper.change_sorten_dropdown,
+			title: TreeAttr.obstart.title,
+			disabled: true
+		},
+
+		{	id: TreeAttr.sortname.id,
+			form: Form.Dropdown,
+			options: [],
+			title: TreeAttr.sortname.title,
+			disabled: true},
+		{
+			id: TreeAttr.anmerkungen.id,
+			form: Form.Textarea,
+			rows: 3,
+			title: TreeAttr.anmerkungen.title,
+			disabled: true
+		}
+		]
+	}];
+
+	//helps us to display the forms
+	var treeform = new TreeForm(tree);
+		treeform.render_forms(form_rows);
+		treeform.fill_forms_if_tree_already_exists(form_rows);
+
+	var tree_bezeichnung = RenderHelper.get_tree_bezeichnung(this.trees, tree_key);
+
+
+	$('#tree_submenu_bezeichnung').text(tree_bezeichnung);
+	$('#tree_submenu_key').text(tree_key);
+	$('#tree_submenu_image').attr('src', "img/treeicons/Birne1.png");
 }
 
 

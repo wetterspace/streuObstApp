@@ -8,7 +8,7 @@ var TreeForm = function(tree){
 	}else{
 		this.pflegeform = new PflegeForm();
 	}
-	
+
 	this.image_uploader = new ImageUploader();
 
 
@@ -17,14 +17,14 @@ var TreeForm = function(tree){
 	//Baum ID
 
 	//TreeAttr stands for Tree Attributes
-	{	
+	{
 id: "tree_form_row_1",
 fields: [
-		{	id: TreeAttr.name.id,  
+		{	id: TreeAttr.name.id,
 form: Form.Text,
 title: TreeAttr.name.title
 		},
-		{	id: TreeAttr.obstart.id, 
+		{	id: TreeAttr.obstart.id,
 form: Form.Dropdown,
 options: Obst.getArten(),
 			//when another value gets selected
@@ -32,12 +32,12 @@ onchange: TreeFormHelper.change_sorten_dropdown,
 title: TreeAttr.obstart.title
 		},
 
-		{	id: TreeAttr.sortname.id,	
+		{	id: TreeAttr.sortname.id,
 form: Form.Dropdown,
 options: [],
 title: TreeAttr.sortname.title},
 
-		{	id: TreeAttr.lon.id,  
+		{	id: TreeAttr.lon.id,
 form: Form.Text,
 title: TreeAttr.lon.title,
 validation: TreeAttr.lon.validation
@@ -54,12 +54,12 @@ validation: TreeAttr.lat.validation
 	{
 id: "tree_form_row_1_2",
 fields: [
-		{	id: TreeAttr.ploid.id, 
+		{	id: TreeAttr.ploid.id,
 form: Form.Dropdown,
-options: ["Diploid", "Tripolid"], 
+options: ["Diploid", "Tripolid"],
 title: TreeAttr.ploid.title},
 
-		{	id: TreeAttr.gepflanzt_date.id, 
+		{	id: TreeAttr.gepflanzt_date.id,
 form: Form.Date,
 title: TreeAttr.gepflanzt_date.title},
 		{
@@ -115,11 +115,11 @@ title: TreeAttr.ertragsintensitaet.title}
 	{
 id: "tree_form_row_3_3",
 fields: [
-		{	id: TreeAttr.temperatur_beginn.id, 
+		{	id: TreeAttr.temperatur_beginn.id,
 form: Form.Date,
 title: TreeAttr.temperatur_beginn.title},
 
-		{	id: TreeAttr.temperatur_ende.id, 
+		{	id: TreeAttr.temperatur_ende.id,
 form: Form.Date,
 title: TreeAttr.temperatur_ende.title}
 		]
@@ -138,7 +138,7 @@ TreeForm.prototype.init_take_picture_button = function(){
 TreeForm.prototype.init_tabs = function(){
 	$('#tree_form_selector li').click(function(){
 		var active_tabselector =  $(this).data('tabselector');
-		
+
 		$('.tabselector').removeClass('active');
 		$(this).addClass('active');
 
@@ -148,7 +148,7 @@ TreeForm.prototype.init_tabs = function(){
 			if($(this).hasClass('active')){
 				$(this).html(text);
 			}else{
-				
+
 				$(this).html($('<a/>', {href: "#", text: text}));
 			}
 		});
@@ -177,7 +177,7 @@ TreeForm.prototype.set_wiese = function(wiese){
 }
 
 TreeForm.prototype.save_form = function(){
-	
+
 	//Das Baum object das aus der MAske erstellt werden kann
 	var tree_out_of_form = TreeFormHelper.create_tree_object_from_fields(this.form_rows);
 	tree_out_of_form.pflegezustaende = this.pflegeform.get_pflegezustaende_to_save();
@@ -192,25 +192,25 @@ TreeForm.prototype.save_form = function(){
 			//Wird dort auch gespeichert
 			this.tree.overwrite_attributes(tree_out_of_form);
 			this.image_uploader.add_uploaded_image(this.tree);
-			
+
 			checkTreeForOrchard(this.tree);
-			
+
 			/*		if(!treeOnOrchard(this.tree.wiese.data.coordinates, this.tree.lon, this.tree.lat)) {
 	$('#myModal').modal('show');
-	
+
 	$("#save_anyway").click(function(){
 		$('#myModal').modal('hide');
 		$('.modal-backdrop').remove();
-		
-	
+
+
 		this.tree.save();
 	}.bind(this));
-	
+
 	}else {
 		this.tree.save();
 	} */
-			
-			
+
+
 
 			//	this.tree.save();
 		}else{
@@ -221,24 +221,24 @@ TreeForm.prototype.save_form = function(){
 			this.image_uploader.add_uploaded_image(tree)
 
 			checkTreeForOrchard(tree);
-			
+
 			/*				if(!treeOnOrchard(tree.wiese.data.coordinates, tree.lon, tree.lat)) {
 	$('#myModal').modal('show');
-	
+
 	$("#save_anyway").click(function(){
 		$('#myModal').modal('hide');
 		$('.modal-backdrop').remove();
-		
-	
+
+
 		tree.save();
 	}.bind(this));
-	
+
 	}else {
 		tree.save();
 	} */
-			
-			
-			
+
+
+
 			//	tree.save();
 		}
 	}else{
@@ -252,37 +252,37 @@ TreeForm.prototype.init_save_or_cancel = function(){
 		this.wiese.show();
 	}.bind(this));
 
-	
-	
+
+
 	$("#save_tree_form").click(function(){
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
 		//	$('#myModal').modal('hide');
 		//	$('.modal-backdrop').remove();
-		
-		
+
+
 		this.save_form();
-		
-		
+
+
 	}.bind(this));
 }
 
 function checkTreeForOrchard(tree) {
 	if(!treeOnOrchard(tree.wiese.data.coordinates, tree.lon, tree.lat)) {
 		$('#myModal').modal('show');
-		
+
 		$("#save_anyway").click(function(){
 			$('#myModal').modal('hide');
 			$('.modal-backdrop').remove();
-			
-			
+
+
 			tree.save();
 		}.bind(this));
-		
+
 	}else {
 		tree.save();
 	}
@@ -363,14 +363,23 @@ TreeForm.prototype.show_latest_tree_image = function(){
 }
 
 
-TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
+TreeForm.prototype.fill_forms_if_tree_already_exists = function(form_rows){
 
 	if(this.tree){
 
 		this.show_latest_tree_image();
 
-		this.form_rows.forEach(function(row){
-			
+		//DAMIT AUCH ANDERE ROWS ANGEZEIGT WERDEN KONNEN
+		var rows = null;
+
+		if(form_rows){
+			rows = form_rows;
+		}else{
+			rows = this.form_rows;
+		}
+
+		rows.forEach(function(row){
+
 			//if(row.func){ MUSS EIG AUCH BAUMSTATUS UPDATEN
 			//	row.func(this.tree);
 			//}
@@ -396,9 +405,18 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(){
 	}
 };
 
-TreeForm.prototype.render_forms = function(){
+TreeForm.prototype.render_forms = function(form_rows){
+	//you can pass your own form_rows then its a helper method
+	//see wiese/submenu_helper.js
+	var rows = null;
 
-	this.form_rows.forEach(function(row){
+	if(form_rows){
+		rows = form_rows;
+	}else{
+		rows = this.form_rows;
+	}
+
+	rows.forEach(function(row){
 		var form_row = $('#' + row.id);
 
 		if(row.func){
