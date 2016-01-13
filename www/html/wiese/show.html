@@ -1,72 +1,90 @@
 
 
-<div class="col-lg-9">
-	<div id="map" class="map"></div>
-</div>
-
-<!--not visible on phone -->
-<div class="col-lg-3 hidden-xs" id="right_menu_map">
-
-<!-- Modal -->
-<div class="modal fade" tabindex="-1" role="dialog" id="myModalOrchard">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-      	  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Wiese</h4>
-      </div>
-      <div class="modal-body">
-        <p>Wiese kann nun offline genutzt werden.</p>
-      </div>
-      <div class="modal-footer">
-	   <div class="col-lg-12 text-center">
-        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
-		</div>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-	<div id="header_submenu">
-		<!-- wenn man hier clicked werden unten die submenus angezeigt oder ausgeblendet !-->
-		<ul id="sub_menu_breadcrumb" class="breadcrumb" style="text-align:center">
-		  <li data-submenu="info">Info</li>
-		  <li data-submenu="baume">B&auml;ume</li>
-		  <li data-submenu="filter">Filter</li>
-		</ul>
-
-		<hr>
+	<div class="col-lg-9">
+		<div id="map" class="map"></div>
 	</div>
 
-	<!--diese menus werden uber die breadcrumbs gesteuert !-->
-	<!--wird an die größe des viewports angepasst -->
-	<div id="sub_box_menu" style="overflow-y:scroll">
+	<!--not visible on phone -->
+	<div class="col-lg-3 hidden-xs" id="right_menu_map">
 
-		<div id="sub_menu_info" style="display:none">
-				<h3 id="wiesenName"></h3>
-
-				<hr>
-					<div id="wiesen_info_box">
-
-					</div>
-				<hr>
-
-				<p>Hier k&ouml;nnen Informationen zu der Wiese dargestellt werden</p>
-				<a href="#" id="buttonOrchardOffline" class="btn btn-success  btn-block" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
-		</div>
-
-
-		<div id="sub_menu_baume" style="display:none">
-			<div id="trees_list">
-
+	<!-- Modal -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModalOrchard">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Wiese</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Wiese kann nun offline genutzt werden.</p>
+	      </div>
+	      <div class="modal-footer">
+		   <div class="col-lg-12 text-center">
+	        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
 			</div>
-		<div>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
-		<div id="sub_menu_filter" style="display:none">
+		<div id="header_submenu">
+			<!-- wenn man hier clicked werden unten die submenus angezeigt oder ausgeblendet !-->
+			<ul id="sub_menu_breadcrumb" class="breadcrumb" style="text-align:center">
+			  <li data-submenu="info">Info</li>
+			  <li data-submenu="baume">B&auml;ume</li>
+			  <li data-submenu="filter">Filter</li>
+			</ul>
+
+			<hr>
+		</div>
+
+		<!--diese menus werden uber die breadcrumbs gesteuert !-->
+		<!--wird an die größe des viewports angepasst -->
+		<div id="sub_box_menu" style="overflow-y:scroll">
+
+			<div id="sub_menu_info" style="display:none">
+					<h3 id="wiesenName"></h3>
+
+					<hr>
+						<div id="wiesen_info_box">
+
+						</div>
+					<hr>
+
+					<p>Hier k&ouml;nnen Informationen zu der Wiese dargestellt werden</p>
+					<a href="#" id="buttonOrchardOffline" class="btn btn-success  btn-block" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
+			</div>
+
+
+			<div id="sub_menu_baume" style="display:none">
+				<div id="trees_list">
+
+				</div>
+			</div>
+
+			<div id="sub_menu_filter" style="display:none">
+			<div class="checkbox">
+	  <label><input type="checkbox" value="alle"  onClick="toggle(this)" id="checkboxAll">alle</label>
+	</div>
+	<script type="text/javascript">
+		function toggle(source) {
+	  checkboxes = document.getElementsByName('filterSort');
+	  for(var i=0, n=checkboxes.length;i<n;i++) {
+		if(source.checked) {
+		 checkboxes[i].checked = source.checked;
+		 checkboxes[i].disabled = true;
+		}
+		else {
+		checkboxes[i].disabled = false;
+		}
+	   
+		
+	  }
+	}
+	</script>
+			</div>
 
 		</div>
 
 	</div>
-
-</div>
 
