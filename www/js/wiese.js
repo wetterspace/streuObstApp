@@ -31,47 +31,47 @@
 
 	Wiese.prototype.getWiesenDataFromServer = function(callback){
 
-	if(sessionStorage.getItem('user') == 'Offline') {
-		var wiesenData = findOrchardInLocalStorage(this.name);
+		if(sessionStorage.getItem('user') == 'Offline') {
+			var wiesenData = findOrchardInLocalStorage(this.name);
 
-		var treeArray = getTreesForOrchardOffline(this.name);
-		
-		
-		console.log(treeArray);
-		
-		var treeM = {
-				//	hulu: value
-				};
-		
-		$.each(treeArray, function(index, value) {
-			value.wiese = this;
-		//	var treeName = 'Lat: ' + value.lat + ', Long: ' + value.lon;
-			var treeName = index;
-			treeM[treeName] = value;
+			var treeArray = getTreesForOrchardOffline(this.name);
 			
-			wiesenData.trees = treeM;
-		}); 
-		this.data = wiesenData;
-		
-		console.log(this.data.trees);
-		console.log(this.data);
-		callback();
-	}else {
-		getOrchard(this.name, function(snapshot) {
-		var wiesenData = snapshot.val();
-		this.data = wiesenData;
-		console.log(this.data);
-		callback();
-	}.bind(this));
-	}
+			
+			console.log(treeArray);
+			
+			var treeM = {
+				//	hulu: value
+			};
+			
+			$.each(treeArray, function(index, value) {
+				value.wiese = this;
+				//	var treeName = 'Lat: ' + value.lat + ', Long: ' + value.lon;
+				var treeName = index;
+				treeM[treeName] = value;
+				
+				wiesenData.trees = treeM;
+			}); 
+			this.data = wiesenData;
+			
+			console.log(this.data.trees);
+			console.log(this.data);
+			callback();
+		}else {
+			getOrchard(this.name, function(snapshot) {
+				var wiesenData = snapshot.val();
+				this.data = wiesenData;
+				console.log(this.data);
+				callback();
+			}.bind(this));
+		}
 
 	}
 
 	function setDataOffline(key) {
-			var wiesenData = findOrchardInLocalStorage(key)
-			this.data = wiesenData;
-			console.log(this.data);
-			callback();
+		var wiesenData = findOrchardInLocalStorage(key)
+		this.data = wiesenData;
+		console.log(this.data);
+		callback();
 	}
 
 
@@ -84,61 +84,61 @@
 
 	Wiese.prototype.init_map = function(){
 		var vectorSource = new ol.source.Vector({});
-	    //create polygon from Wiesen coordinates
-	    var polyFeature = new ol.Feature({
-	        geometry: new ol.geom.Polygon(
-	            this.data.coordinates
-	        )
-	    });
+		//create polygon from Wiesen coordinates
+		var polyFeature = new ol.Feature({
+geometry: new ol.geom.Polygon(
+			this.data.coordinates
+			)
+		});
 
 		vectorSource.addFeature( polyFeature );
 
-	    var wiesenlayer = new ol.layer.Vector({
-	        source: vectorSource
-	    });
+		var wiesenlayer = new ol.layer.Vector({
+source: vectorSource
+		});
 
-	    //make map fullsize
-	    var window_height = $(window).height();
-	    var map_offset = $('#map').offset().top;
+		//make map fullsize
+		var window_height = $(window).height();
+		var map_offset = $('#map').offset().top;
 
-	    $('#map').height(window_height - map_offset - 10);
+		$('#map').height(window_height - map_offset - 10);
 
 		this.map = new ol.Map({
-	        target: 'map',
-	        //layers get filled later
-			controls: ol.control.defaults().extend([
-	          new ol.control.OverviewMap()
-			 
-	        ]),
-	        layers: []
-	    });
+target: 'map',
+			//layers get filled later
+controls: ol.control.defaults().extend([
+			new ol.control.OverviewMap()
+			
+			]),
+layers: []
+		});
 
 
 
 		//layer für offline img if vorhanden
-	    if(this.map_is_avaible_offline){
-	    	var img_layer =  new ol.layer.Image({
-		      source: new ol.source.ImageStatic({
-		        url: localStorage.getItem("map_img_url" + this.name),
-		        imageExtent: JSON.parse(localStorage.getItem("map_img_extent" + this.name))
-		      })
-		    });
+		if(this.map_is_avaible_offline){
+			var img_layer =  new ol.layer.Image({
+source: new ol.source.ImageStatic({
+url: localStorage.getItem("map_img_url" + this.name),
+imageExtent: JSON.parse(localStorage.getItem("map_img_extent" + this.name))
+				})
+			});
 
-	    	this.map.addLayer(img_layer);
-	    };
-	    //layer für openstreetmap
-	    this.tile_layer = new ol.layer.Tile({
-	            				source: new ol.source.OSM()
-	    					});
-	    this.map.addLayer(this.tile_layer);
-	    //layer wo baume drauf platziert sind
-	    this.map.addLayer(wiesenlayer);
+			this.map.addLayer(img_layer);
+		};
+		//layer für openstreetmap
+		this.tile_layer = new ol.layer.Tile({
+source: new ol.source.OSM()
+		});
+		this.map.addLayer(this.tile_layer);
+		//layer wo baume drauf platziert sind
+		this.map.addLayer(wiesenlayer);
 
-	    //Helper method can be found in wiese/wiese_place_trees.js
+		//Helper method can be found in wiese/wiese_place_trees.js
 		
 
-	    //center map view to wiese
-	    this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
+		//center map view to wiese
+		this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
 	}
 
 	Wiese.prototype.save_map_for_offline_use = function(){
@@ -155,18 +155,18 @@
 		//only show layer with images from openstreetmap
 		this.tile_layer.setVisible(true);
 		this.map.once('postcompose', function(event) {
-	      var canvas = event.context.canvas;
-	      //speicher extent und bild offline
-	      localStorage.setItem("map_img_url" + this.name, canvas.toDataURL('image/png'));
-	      localStorage.setItem("map_img_extent" + this.name, JSON.stringify(extent));
-	      //zeige wieder alle Layer
-	      this.map.getLayers().forEach(function(layer){
-			layer.setVisible(true);
-		  });
-		  //update offline_status of map see init
-		  this.check_if_map_is_avaible_offline();
-	    }.bind(this));
-	    this.map.renderSync();
+			var canvas = event.context.canvas;
+			//speicher extent und bild offline
+			localStorage.setItem("map_img_url" + this.name, canvas.toDataURL('image/png'));
+			localStorage.setItem("map_img_extent" + this.name, JSON.stringify(extent));
+			//zeige wieder alle Layer
+			this.map.getLayers().forEach(function(layer){
+				layer.setVisible(true);
+			});
+			//update offline_status of map see init
+			this.check_if_map_is_avaible_offline();
+		}.bind(this));
+		this.map.renderSync();
 	}
 
 	Wiese.prototype.init_page = function() {
@@ -207,4 +207,3 @@
 		$('#HauptFenster').load('./html/wiese/show.html', this.init.bind(this));
 		
 	}};
-	
