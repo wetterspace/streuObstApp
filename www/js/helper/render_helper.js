@@ -1,5 +1,21 @@
 var RenderHelper = {
 
+	get_tree_bezeichnung: function(trees, key){
+		var tree = trees[key];
+		var bezeichnung = key;
+
+		//falls bez/name hat dann diesen anzeigen
+		if(tree[TreeAttr.name.id]){
+			bezeichnung = tree[TreeAttr.name.id];
+		//falls kein name dann sortnamen, existiert dieser nicht
+		//wird immer noch firebase-id angezeigt
+		}else if(tree[TreeAttr.sortname.id]){
+			bezeichnung = tree[TreeAttr.sortname.id];
+		}
+
+		return bezeichnung;
+	},
+
 	//returns array with tree list items
 	get_renderd_trees: function(wiese){
 		var elements = []
@@ -10,16 +26,7 @@ var RenderHelper = {
 				var tree = wiese.data.trees[key];
 				var sort = tree[TreeAttr.sortname.id];
 
-				var bezeichnung = key;
-
-				//falls bez/name hat dann diesen anzeigen
-				if(tree[TreeAttr.name.id]){
-					bezeichnung = tree[TreeAttr.name.id];
-				//falls kein name dann sortnamen, existiert dieser nicht
-				//wird immer noch firebase-id angezeigt
-				}else if(tree[TreeAttr.sortname.id]){
-					bezeichnung = tree[TreeAttr.sortname.id];
-				}
+				var bezeichnung = RenderHelper.get_tree_bezeichnung(wiese.data.trees, key);
 
 				var list_group_item = $('<a/>', {class: "list-group-item", href: "#"}).append(
 											$('<h4/>', {class: "list-group-item-heading", text:  bezeichnung})
