@@ -206,4 +206,4 @@
 	Wiese.prototype.show = function() {
 		$('#HauptFenster').load('./html/wiese/show.html', this.init.bind(this));
 		
-	}}
+	}};
