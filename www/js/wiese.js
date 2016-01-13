@@ -1,4 +1,4 @@
-{
+
     var Wiese = function(name) {
         this.name = name;
         //handles menu at right side
@@ -207,4 +207,4 @@
         $('#HauptFenster').load('./html/wiese/show.html', this.init.bind(this));
 
     }
-};
+
