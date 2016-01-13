@@ -100,3 +100,4 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
         this.map.addLayer(vector);
     };
 }
+
