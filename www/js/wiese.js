@@ -1,4 +1,3 @@
-
     var Wiese = function(name) {
         this.name = name;
         //handles menu at right side
@@ -197,8 +196,6 @@
             this.place_trees_on_map(goOverCheckboxes(this));
         }.bind(this));
 
-
-
     }
 
 
@@ -207,4 +204,3 @@
         $('#HauptFenster').load('./html/wiese/show.html', this.init.bind(this));
 
     }
-
