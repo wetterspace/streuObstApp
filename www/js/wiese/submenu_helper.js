@@ -35,7 +35,8 @@ WieseSubmenuHelper.prototype.fill = function(){
 	this.fill_info_box();
 	this.fill_baume_box();
 	this.fill_filter_box();
-	
+	this.init_print_btn();
+
 	$('#checkboxAll').click();
 		$('input[type="checkbox"]').change(function () {
 	    if ($('input[type="checkbox"]').is(':checked')) {
@@ -44,8 +45,42 @@ WieseSubmenuHelper.prototype.fill = function(){
 		this.wiese.place_trees_on_map(goOverCheckboxes(this.wiese));
 	    }
 		}.bind(this));
-	
-	
+
+
+}
+
+WieseSubmenuHelper.prototype.init_print_btn = function(){
+ 	var print_options = $('#print_options li');
+
+ 	var that = this;
+
+ 	var print_helper = new PrintHelper();
+
+ 	print_options.click(function(){
+ 		var selected_option = $(this).data('option');
+
+        var content = $('<div/>', {});
+
+ 		if(selected_option == "complete_map"){
+ 			//Zentriere auf aktuellen Auschnitt
+			that.wiese.focus_map_on_extent();
+
+ 			content.append($('<h1>', {text: "Kartenübersicht"}));
+ 			content.append($('<img/>', {id: "xyz"}));
+
+ 			print_helper.set_map(that.wiese.map, "xyz");
+ 			print_helper.set_content(content);
+ 		}else if(selected_option == "map_sector"){
+ 			content.append($('<h1>', {text: "Kartenauschnitt"}));
+ 			content.append($('<img/>', {id: "xyz"}));
+
+ 			print_helper.set_map(that.wiese.map, "xyz");
+ 			print_helper.set_content(content);
+ 		}
+
+ 		print_helper.print();
+
+ 	});
 }
 
 WieseSubmenuHelper.prototype.fill_info_box = function(){
@@ -61,7 +96,7 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 		var len = Object.keys(this.trees).length;
 		info_box.append($('<p/>', {html: "Anzahl B&auml;ume: " + len}))
 	}
-	
+
 	var newestTimestamp = 0;
 	for (var key in this.trees) {
    var obj = this.trees[key];
@@ -70,10 +105,10 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
    }
 }
 	var dateUpdated = new Date( newestTimestamp);
-	
-	
+
+
 	var dateCreated = new Date( this.wiese.data.timestamp);
-	
+
 	info_box.append($('<p>', {text: "Zuletzt betrachtet: " + dateUpdated.toGMTString()}));
 	info_box.append($('<p/>', {text: "Erstellt am " +  dateCreated.toGMTString()}));
 	info_box.append($('<p/>', {text: "Wetter??"}));
