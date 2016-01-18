@@ -62,8 +62,8 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 				else {
 				imgName = 'Baumprofil.png';
 				}
-				
-				
+
+
                 var layer = new ol.layer.Image({
                     source: new ol.source.ImageStatic({
                         //   url: "img/treeicons/" + images[Math.floor(Math.random() * 8)],
@@ -76,14 +76,13 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
                 layers[layers.length] = layer;
 
                 this["layers"] = layers;
-                console.log(this);
+
 
 
 
 
                 this.map.addLayer(layer);
                 layer.set("name", "TreeLayer");
-                console.log(layer.getProperties().name);
 
                 //Dient dazu damit es einen auschnitt gibt wo der User später draufklciken kann
                 var feature = new ol.Feature({

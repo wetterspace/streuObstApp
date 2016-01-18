@@ -52,7 +52,16 @@
 						<hr>
 
 						<p>Hier k&ouml;nnen Informationen zu der Wiese dargestellt werden</p>
-						<a href="#" id="buttonOrchardOffline" class="btn btn-success  btn-block" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
+						<div class="btn-group inline">
+							<a href="#" id="buttonOrchardOffline" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
+
+						  <a class="btn btn-info" id="print_map_btn" data-toggle="dropdown">Drucken</a>
+						  <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+						  <ul class="dropdown-menu pull-right" id="print_options">
+						    <li data-option="complete_map"><a href="#">Komplette Kartenansicht</a></li>
+						    <li data-option="map_sector"><a href="#">Nur aktueller Auschnitt</a></li>
+						  </ul>
+						</div>
 				</div>
 
 
@@ -63,8 +72,8 @@
 				</div>
 
 				<div id="sub_menu_filter" style="display:none">
-				
-				
+
+
 				<div class="checkbox">
             <label><input type="checkbox" value="alle"  onClick="toggle(this)" id="checkboxAll">alle</label>
          </div>
@@ -79,14 +88,14 @@
             else {
             checkboxes[i].disabled = false;
             }
-              
-            
+
+
              }
             }
          </script>
-				
-				
-				
+
+
+
 				</div>
 
 			</div>

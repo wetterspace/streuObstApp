@@ -135,9 +135,12 @@
 
         //Helper method can be found in wiese/wiese_place_trees.js
 
+        this.focus_map_on_extent = function(){
+            //center map view to wiese
+            this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
+        }
 
-        //center map view to wiese
-        this.map.getView().fit(polyFeature.getGeometry().getExtent(), this.map.getSize());
+        this.focus_map_on_extent();
     }
 
     Wiese.prototype.save_map_for_offline_use = function() {
