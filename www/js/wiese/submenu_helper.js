@@ -104,13 +104,15 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 	newestTimestamp = obj.timestamp;
    }
 }
-	var dateUpdated = new Date( newestTimestamp);
+	var dateUpdated = new GermanTime( newestTimestamp).getDate();
 
 
-	var dateCreated = new Date( this.wiese.data.timestamp);
+	var dateCreated = new GermanTime( this.wiese.data.timestamp).getDate();
 
-	info_box.append($('<p>', {text: "Zuletzt betrachtet: " + dateUpdated.toGMTString()}));
-	info_box.append($('<p/>', {text: "Erstellt am " +  dateCreated.toGMTString()}));
+
+	
+	info_box.append($('<p>', {text: "Zuletzt bearbeitet: " + dateUpdated}));
+	info_box.append($('<p/>', {text: "Erstellt: " +  dateCreated}));
 	info_box.append($('<p/>', {text: "Wetter??"}));
 
 	if(sessionStorage.getItem('user') == 'Offline') {
