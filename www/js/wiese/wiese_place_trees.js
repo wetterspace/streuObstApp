@@ -55,19 +55,13 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
                     'Pflaume2.png'
                 ];
 
-				var imgName = '';
-				if(tree.sortname == 'Apfel' || tree.sortname == 'Birnen' || tree.sortname == 'Kirschen' || tree.sortname == 'Pflaumen') {
-				imgName = tree.sortname + "1.png";
-				}
-				else {
-				imgName = 'Baumprofil.png';
-				}
-
+				var imgName = new URL(tree.sortname);
+				
 
                 var layer = new ol.layer.Image({
                     source: new ol.source.ImageStatic({
                         //   url: "img/treeicons/" + images[Math.floor(Math.random() * 8)],
-                        url: "img/treeicons/" + imgName,
+                        url: "img/treeicons/" + imgName.getUrl(),
                         imageExtent: extent
                     })
                 });
