@@ -330,6 +330,8 @@ TreeForm.prototype.show_form = function(){
 
 		this.fill_forms_if_tree_already_exists();
 
+		this.show_delete_button_if_tree_already_exists();
+
 		this.show_qr_code();
 
 		//if app version show tab to take picture directly from app
@@ -362,6 +364,16 @@ TreeForm.prototype.show_latest_tree_image = function(){
 	}
 }
 
+TreeForm.prototype.show_delete_button_if_tree_already_exists = function(){
+	if(this.tree){
+		var tree = this.tree;
+		$('#tree_form_btn_group').append(
+			$('<a/>', {class: "btn btn-warning", text: "Löschen",
+				click: function(){ tree.remove();}
+			})
+		);
+	}
+};
 
 TreeForm.prototype.fill_forms_if_tree_already_exists = function(form_rows){
 

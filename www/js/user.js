@@ -6,7 +6,7 @@ User.prototype.getUserDataFromServer = function(callback){
 	getUser(this.username, function(snapshot) {
 		var userData = snapshot.val();
 		this.data = userData;
-		callback(); 
+		callback();
 	}.bind(this));
 }
 
@@ -45,36 +45,36 @@ User.prototype.init_map = function(){
 
 User.prototype.init_page = function() {
 	$('#wiesenName').html(this.username);
-	
+
 
 };
 
 function startSyncing() {
 			$('#myModalUser').modal('hide');
 			$('.modal-backdrop').remove();
-			syncTrees();		
+			syncTrees();
 }
 
 User.prototype.init = function(){
 	this.init_page();
-	
-	
-	
+
+
+
 	if(sessionStorage.getItem('user') == 'Offline') {
 	$('#buttonNewWiese').attr('disabled', 'disabled' );
 	} else {
-	
+
 	$('#buttonNewWiese').click(function(){
 			//registers user
 			new RegisterWiese();
 	});
-	
-	
-	
-	
-	
+
+
+
+
+
 	}
-	
+
 
 	//only show logout btn
 	NavbarHelper.hide_all_btns();
@@ -82,28 +82,28 @@ User.prototype.init = function(){
 	NavbarHelper.show(NavbarHelper.btn.logout);
 
 	if(sessionStorage.getItem('user') == 'Offline') {
-	
+
 /*	getWiesenObjects.forEach(function(entry) {
     setOverview();
 	}); */
 	var wiesenArray = getWiesenObjects();
-	
+
 	$.each(wiesenArray, function(index, value) {
 		console.log(value);
 		//check if really orchard object
 		if(value.coordinates != undefined) {setOverview(index, value, value.image_id);}
-		
-	}); 
-	
+
+	});
+
 	}else {
 	compareStorageAndDB();
 	this.getUserDataOnline();
-	
+
 	//syncing
-	
-	
+
+
 	}
-	
+
 
 	//show active user btn
 	NavbarHelper.make_active(NavbarHelper.btn.user);
@@ -111,16 +111,16 @@ User.prototype.init = function(){
 }
 User.prototype.getUserDataOnline = function() {
 this.getUserDataFromServer(function(){
-		
+
 	getOrchardForUser(this.username, function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
 			setOverview(key, childData, childData.image_id);
-			
+
 		});
 	}.bind(this));
-		
+
 	}.bind(this));
 }
 
@@ -129,16 +129,37 @@ function getDataOffline() {
 
 function setOverview(key, data, image_id) {
 			var t1 = $("#wiesen_list");
-			var d = $('<a/>', {class: "list-group-item", href: "#", click: function(){
-				new Wiese(key).show();
-			}});
+			var d = $('<a/>', {class: "list-group-item text-center", href: "#"});
 			var hw = $('<h4/>', {class: "list-group-item-heading", text: 'Wiesenname: ' + key});
 			t1.append(d);
 			d.append(hw);
 
-			var himg = $('<img/>', {class: "img-responsive img-thumbnail"});
+			var himg = $('<img/>', {class: "img-responsive img-thumbnail",  click: function(){
+				new Wiese(key).show();
+			}});
 			ImageHelper.get_image_data_for(image_id, himg);
 			d.append(himg);
+
+			var btn_group = $('<div/>', {class: "btn-group btn-group-justified inline", style: "margin-top:8px"});
+				btn_group.append($('<a/>', {class: "btn btn-info btn-sm", text: "Bearbeiten", click: function(){
+					var wiese = new Wiese(key);
+					//only able to edit coords of wiese
+					new RegisterWiese(wiese);
+				}}));
+				btn_group.append($('<a/>', {class: "btn btn-success btn-sm", text: "Öffnen", click: function(){
+					new Wiese(key).show();
+				}}));
+				btn_group.append($('<a/>', {class: "btn btn-warning btn-sm", 'data-toggle': "modal", 'data-target': "#deleteWieseModal", text: "Löschen", click: function(){
+					var delete_btn = $('#really_wiese_delete_btn');
+						//enferne voerhergegane events sodass nicht mehree Wisen geslöscht werdeb
+						delete_btn.unbind();
+						delete_btn.click(function(){
+							var wiese = new Wiese(key);
+								wiese.remove();
+						});
+				}}));
+
+			d.append(btn_group);
 }
 
 User.prototype.show = function() {

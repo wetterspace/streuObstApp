@@ -19,10 +19,10 @@ title: "ObstArt"
 
 sortname: 	{	id: "sortname",
 title:"Sortenname"},
-	
+
 wieseName: 	{	id: "wiesenName",
 title:"wieseName"},
-	
+
 timestamp: 	{	id: "timestamp",
 title:"timestamp"},
 
@@ -135,16 +135,24 @@ Tree.prototype.save = function() {
 			if(err){
 				alert("Fehler" + err);
 			}else{
-				
+
 				this.wiese.show();
 			}
 		}.bind(this));
-		
-		this.wiese.getDB().child("trees").child(this.id).once("value", function(snapshot){
-			console.log(snapshot.val());
-		});
 
 	}
+};
+
+Tree.prototype.remove = function(){
+	//basically repition of save function // offline modus missing
+	//simply set null
+	this.wiese.getDB().child("trees").child(this.id).set(null, function(err){
+		if(err){
+			alert("Fehler" + err);
+		}else{
+			this.wiese.show();
+		}
+	}.bind(this));
 };
 
 function treeOnOrchard(arr, lon, lat) {
@@ -156,9 +164,9 @@ function treeOnOrchard(arr, lon, lat) {
 		console.log(coordsLocal);
 		coordArray[i] = coordsLocal;
 		i = i +1;
-		
+
 	}
-	return inside([parseFloat(lon), parseFloat(lat)], coordArray); 
+	return inside([parseFloat(lon), parseFloat(lat)], coordArray);
 
 }
 
