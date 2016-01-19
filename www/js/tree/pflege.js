@@ -9,27 +9,27 @@ var PflegeAttr = {
 	},
 
 	krone_beschnitten: {
-			id: "krone_beschnitten", 		
+			id: "krone_beschnitten",
 			title: "Krone Beschnitten"
 	},
 
 	hohe_der_krone: {
-			id: "höhe_der_krone", 	
+			id: "höhe_der_krone",
 			title: "Höhe der Krone"
 	},
 
 	baumstamm_gereinigt: {
-			id: "baumstamm_gereinigt", 		
+			id: "baumstamm_gereinigt",
 			title: "Baumstamm gereinigt"
 	},
 
 	baumstamm_gekalket: {
-			id: "baumstamm_gekalket", 
+			id: "baumstamm_gekalket",
 			title: "Baumstamm gekalkt"
 	},
 
 	schaedline: {
-			id: "schädlinge", 
+			id: "schädlinge",
 			title: "Schädlinge"
 	},
 

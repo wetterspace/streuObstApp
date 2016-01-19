@@ -46,9 +46,25 @@ var Form = {
 		return [$('<input/>', {id: field.id, class: "form-control", type: "date", disabled: field.disabled})]
 	},
 
+	Checkbox: function(field){
+		var div = $('<div/>', {class: "checkbox"});
+		var label = $('<label/>', {});
+			label.append($('<input/>', {id: field.id, type: "checkbox", disabled: field.disabled }));
+			label.append($('<b/>', {text: field.title}));
+
+			div.append(label);
+
+		return [div];
+	},
+
 	get_value_for: function(field){
+		var form = $("#" + field.id);
+		var input =  form.val();
 
-		return $("#" + field.id).val();
+		if(field.form && field.form == Form.Checkbox){
+			input = form.prop('checked');
+		}
 
+		return input;
 	},
 };

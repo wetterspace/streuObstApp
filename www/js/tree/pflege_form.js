@@ -12,7 +12,7 @@ var PflegeForm = function(tree){
 		//for a tree that does not exist or that has no pflege leave blank
 		this.tmp_pflegezustaende = {};
 	}
-	
+
 
 	this.form_rows = [
 		{	//Is there to keep track which zustand is edited right now
@@ -23,39 +23,50 @@ var PflegeForm = function(tree){
 				}
 			]
 		},
-		{	
-			id: "pflege_row_1",
-			fields: [
-				{	id: PflegeAttr.krone_beschnitten.id, 
-					form: Form.Date,
-					title: PflegeAttr.krone_beschnitten.title},
-
-				{	id: PflegeAttr.hohe_der_krone.id, 
-					form: Form.Text,
-					title: PflegeAttr.hohe_der_krone.title}
-			]
-		}, 
 		{
-			id: "pflege_row_2",
-			fields:[
-				{	id: PflegeAttr.baumstamm_gereinigt.id, 
-					form: Form.Date,
-					title: PflegeAttr.baumstamm_gereinigt.title},
-
-				{	id: PflegeAttr.baumstamm_gekalket.id, 
-					form: Form.Date,
-					title: PflegeAttr.baumstamm_gekalket.title}
-			]		
+			id: "pflege_row_1_1",
+			fields: [
+				{	id: PflegeAttr.krone_beschnitten.id,
+					form: Form.Checkbox,
+					title: PflegeAttr.krone_beschnitten.title
+				}
+			]
 		},
-
+		{
+			id: "pflege_row_1_2",
+			fields: [
+				{	id: PflegeAttr.hohe_der_krone.id,
+					form: Form.Text,
+					title: PflegeAttr.hohe_der_krone.title
+				}
+			]
+		},
+		{
+			id: "pflege_row_2_1",
+			fields:[
+				{	id: PflegeAttr.baumstamm_gereinigt.id,
+					form: Form.Checkbox,
+					title: PflegeAttr.baumstamm_gereinigt.title
+				}
+			]
+		},
+		{
+			id: "pflege_row_2_2",
+			fields: [
+				{	id: PflegeAttr.baumstamm_gekalket.id,
+					form: Form.Checkbox,
+					title: PflegeAttr.baumstamm_gekalket.title
+				}
+			]
+		},
 		{
 			id: "pflege_row_3",
 			fields:[
-				{	id: PflegeAttr.schaedline.id, 
+				{	id: PflegeAttr.schaedline.id,
 					form: Form.Textarea,
 					rows: 2,
 					title: PflegeAttr.schaedline.title}
-			]		
+			]
 		},
 
 		{
@@ -65,7 +76,7 @@ var PflegeForm = function(tree){
 					form: Form.Textarea,
 					rows: 2,
 					title: PflegeAttr.verbiss_spuren.title}
-			]		
+			]
 		}
 
 	]
@@ -98,7 +109,7 @@ PflegeForm.prototype.init_pflegezustände = function(){
 			$(list_group_item).click(function(){
 				//on click edit zusand
 				this.edit_pflegezustand(key);
-				
+
 			}.bind(this));
 
 			ele.append(list_group_item);
@@ -158,7 +169,7 @@ PflegeForm.prototype.edit_pflegezustand = function(key){
 		}.bind(this));
 
 		//active
-		//make element in list active 
+		//make element in list active
 		pflegezustände_box.find("[data-id=" + key + "]").addClass("active");
 
 		//if user wants to continue creating new zustand
@@ -166,9 +177,9 @@ PflegeForm.prototype.edit_pflegezustand = function(key){
 								            $('<h4/>', {class: "list-group-item-heading", text: "Neuen Pflegezustand anlegen"})
 										 );
 
-		
 
-		//wenn new button is clicked, 
+
+		//wenn new button is clicked,
 		create_new_zustand_button.click(function(){
 			//call same method but without key, means new pflege
 			this.edit_pflegezustand(null);
@@ -209,7 +220,13 @@ PflegeForm.prototype.fill_forms_with_pflegezustand = function(pflegezustand){
 
 				//sets value for each field
 				if(pflegezustand && pflegezustand[field.id]){
-					$("#" + field.id).val(  pflegezustand[field.id] );
+					var form = $("#" + field.id);
+
+					if(field.form == Form.Checkbox){
+						form.prop('checked', pflegezustand[field.id]);
+					}else{
+						form.val(pflegezustand[field.id] );
+					}
 				}else{
 					$("#" + field.id).val("");
 				}
@@ -234,14 +251,16 @@ PflegeForm.prototype.render_forms = function(){
 			row.fields.forEach(function(field){
 				var container = $('<div/>', {class: "form-group"});
 
-				var title = $('<label/>', {class: "control-label", text: field.title});
 
 							//calls function form form obj
 				var form = field.form(field);
 
-				
-				container.append(title)
-						 .append(form);
+				if(field.form != Form.Checkbox){
+					var title = $('<label/>', {class: "control-label", text: field.title});
+					container.append(title)
+				}
+
+				container.append(form);
 
 				form_row.append(container);
 
@@ -260,7 +279,7 @@ PflegeForm.prototype.save_current_changes_to_tmp_pflegezustaende = function(){
 				//get the value of the field
 				var val = Form.get_value_for(field);
 				//add it to the tree object
-				zustand_obj[field.id] = val;	
+				zustand_obj[field.id] = val;
 			});
 		}
 	});
