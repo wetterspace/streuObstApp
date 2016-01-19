@@ -78,8 +78,48 @@
         return new DB().getWiesenDB().child(this.name);
     };
 
+    Wiese.prototype.save_coordinates = function(coordinates, callback){
+        this.getDB().child("coordinates").set(coordinates, function(){
+            callback();
+        });
+    };
 
+    Wiese.prototype.save_image_id = function(image_id, callback){
+        this.getDB().child("image_id").set(image_id, function(err){
+            //entferne es auch beim user
+            if(err){
+                alert("Fehler" + err);
+            }else{
+                new DB().getUserDB().child(sessionStorage.getItem('user')).child("wiesen").child(this.name).child("image_id").set(image_id, function(err){
+                     if(err){
+                        alert("Fehler" + err);
+                    }else{
+                        callback();
+                    }
+                }.bind(this));
+            }
+        }.bind(this));
+    };
 
+    Wiese.prototype.remove = function(){
+        //basically repition of save function // offline modus missing
+        //simply set null
+        this.getDB().set(null, function(err){
+            if(err){
+                alert("Fehler" + err);
+            }else{
+                //enterne Wiese auch vom User
+                new DB().getUserDB().child(sessionStorage.getItem('user')).child("wiesen").child(this.name).set(null, function(){
+                    if(err){
+                        alert("Fehler" + err);
+                    }else{
+                        //dann wird er umgeleitet wiesen ubersicht wird wieder gezeigt
+                        new Login();
+                    }
+                }.bind(this));
+            }
+        }.bind(this));
+    };
 
     Wiese.prototype.init_map = function() {
         var vectorSource = new ol.source.Vector({});
