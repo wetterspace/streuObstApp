@@ -117,7 +117,6 @@ this.getUserDataFromServer(function(){
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
 			setOverview(key, childData, childData.image_id);
-
 		});
 	}.bind(this));
 
