@@ -45,13 +45,20 @@
 				<div id="sub_menu_info" style="display:none">
 						<h3 id="wiesenName"></h3>
 
-						<hr>
-							<div id="wiesen_info_box">
 
-							</div>
-						<hr>
+						<ul class="nav nav-tabs">
+						  <li class="active"><a href="#wiesen_info_tab" data-toggle="tab">Wiesen-Info</a></li>
+						  <li><a href="#wetter_info_tab" data-toggle="tab">Wetter-Info</a></li>
+						</ul>
+						<div class="tab-content">
+						  <div class="tab-pane fade active in" id="wiesen_info_tab">
+						  </div>
+						  <div class="tab-pane fade" id="wetter_info_tab">
+						  </div>
+						</div>
 
-						<p>Hier k&ouml;nnen Informationen zu der Wiese dargestellt werden</p>
+
+
 						<div class="btn-group inline">
 							<a href="#" id="buttonOrchardOffline" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
 

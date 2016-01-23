@@ -86,7 +86,7 @@ WieseSubmenuHelper.prototype.init_print_btn = function(){
 WieseSubmenuHelper.prototype.fill_info_box = function(){
 	$('#wiesenName').html(this.wiese.name);
 
-	var info_box = $('#wiesen_info_box');
+	var info_box = $('#wiesen_info_tab');
 
 	if(this.wiese.getArea()){
 		info_box.append($('<p/>',{html: "Flächeninhalt: " + this.wiese.getArea() + " m" + "<sup>2</sup>"}));
@@ -114,9 +114,7 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 	info_box.append($('<p/>', {text: "Zuletzt bearbeitet: " + dateUpdated}));
 	info_box.append($('<p/>', {text: "Erstellt: " +  dateCreated}));
 
-	var weather_box = $('<div/>', {});
-	info_box.append(weather_box);
-
+	var weather_box = $('#wetter_info_tab');
 	var weather_helper = new Weather();
 		weather_helper.set_render_box(weather_box);
 		weather_helper.render();
