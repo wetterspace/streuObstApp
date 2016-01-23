@@ -110,10 +110,17 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 	var dateCreated = new GermanTime( this.wiese.data.timestamp).getDate();
 
 
-	
-	info_box.append($('<p>', {text: "Zuletzt bearbeitet: " + dateUpdated}));
+
+	info_box.append($('<p/>', {text: "Zuletzt bearbeitet: " + dateUpdated}));
 	info_box.append($('<p/>', {text: "Erstellt: " +  dateCreated}));
-	info_box.append($('<p/>', {text: "Wetter??"}));
+
+	var weather_box = $('<div/>', {});
+	info_box.append(weather_box);
+
+	var weather_helper = new Weather();
+		weather_helper.set_render_box(weather_box);
+		weather_helper.render();
+
 
 	if(sessionStorage.getItem('user') == 'Offline') {
 		$('#buttonOrchardOffline').attr('disabled', 'disabled' );

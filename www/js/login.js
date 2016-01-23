@@ -1,5 +1,8 @@
 var Login = function(){
-	
+	//WETTER VORLADEN DAMITS SPATER SCHNELL GEHT
+	var weather_helper  = new Weather();
+		weather_helper.preload_information();
+
 	if(sessionStorage.getItem('user')== null) {
 	this.showLogin();
 	} else {
@@ -51,15 +54,15 @@ Login.prototype.showLogin = function(){
 			sessionStorage.setItem('user', 'Offline');
 			new User('Offline').show();
 		});
-		
-		
+
+
 
 		$('#buttonLogin').click(function(){
 			var userName = $('#inputWiesenName').val();
 			var userPassword = $('#inputWiesenPassword').val();
 			var out = sjcl.hash.sha1.hash(userPassword);
 			var hashedPassword = sjcl.codec.hex.fromBits(out)
-			
+
 			checkUserLoginOnline(userName, hashedPassword, function(username) {
 			if(userValue == null){
 				//wiese exisitert nicht
@@ -80,7 +83,7 @@ Login.prototype.showLogin = function(){
 	}.bind(this);
 
 	$('#HauptFenster').load('./html/login.html', initializeButtons);
-	
-	
+
+
 
 };
