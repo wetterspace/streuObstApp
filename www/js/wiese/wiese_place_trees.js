@@ -44,24 +44,21 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 
                 var extent = [l1 - 5, l2 - 5, l1 + 5, l2 + 5];
 
-                //Bilder welche random als Baum eingesetzt werden
-                var images = ['Apfel1.png',
-                    'Apfel2.png',
-                    'Birne1.png',
-                    'Birne2.png',
-                    'Kirsche1.png',
-                    'Kirsche2.png',
-                    'Pflaume1.png',
-                    'Pflaume2.png'
-                ];
+                var url = "";
 
-				var imgName = new URL(tree.sortname);
-				
+                if((typeof tree.extra === 'undefined') || !tree.extra){
+                    //normaler baum
+                    var imgName = new URL(tree.sortname);
+                    url = "img/treeicons/" + imgName.getUrl();
+                }else{
+                    //ist ein extra
+                    url = ImageHelper.get_normal_image_from_id(tree.icon);
+                }
+
 
                 var layer = new ol.layer.Image({
                     source: new ol.source.ImageStatic({
-                        //   url: "img/treeicons/" + images[Math.floor(Math.random() * 8)],
-                        url: "img/treeicons/" + imgName.getUrl(),
+                        url: url,
                         imageExtent: extent
                     })
                 });

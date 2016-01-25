@@ -28,6 +28,11 @@ var NavbarHelper = {
 			hide: true,
 			active: true
 		},
+		extra_anlegen: {
+			id: "nav_btn_extra_anlegen",
+			hide: true,
+			active: true
+		},
 		user: {
 			id: "nav_btn_user",
 			hide: true,
@@ -121,6 +126,13 @@ var NavbarHelper = {
 		NavbarHelper.click( NavbarHelper.btn.baum_anlegen, function(){
 			var tree_form = new TreeForm();
 				tree_form.set_wiese(wiese);
+				tree_form.show_form();
+		});
+
+		NavbarHelper.click( NavbarHelper.btn.extra_anlegen, function(){
+			var tree_form = new TreeForm();
+				tree_form.set_wiese(wiese);
+				tree_form.set_extra_anlegen(true);
 				tree_form.show_form();
 		});
 

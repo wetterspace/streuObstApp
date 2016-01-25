@@ -40,6 +40,10 @@ ImageHelper.assign_image_data = function(image_data, element){
 	element.attr('src', image_data );
 }
 
+ImageHelper.get_normal_image_from_id = function(image_id){
+	return IMAGE_SERVER + "/image/" + image_id + "/" + IMAGE_SERVER_PASSWORD + "?image=true";
+}
+
 ImageHelper.load_from_url = function(url, callback){
 	$.get( url, function( data ) {
 	  	callback(data);
