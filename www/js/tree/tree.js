@@ -76,12 +76,23 @@ title: "Temperatur bei Beginn"},
 
 	images: {
 		id: "images"
+	},
+	extra: {
+		//wenn ein extra angelegt wird
+	},
+	icon: {
+		//icon wenn ein extra angelegt wird
 	}
 }
 
 
 var Tree = function(){
 
+}
+
+Tree.prototype.is_extra = function(){
+	//um zu checken ob es nen extra is
+	return typeof (this.extra) != 'undefined' && this.extra == true;
 }
 
 Tree.prototype.from_server_obj = function(trees, key){
@@ -97,7 +108,11 @@ Tree.prototype.to_server_obj = function(){
 	var server_obj = {}
 
 	Object.keys(TreeAttr).forEach(function(attr){
-		server_obj[attr] = this[attr];
+		var attribute = this[attr];
+ 		if(typeof attribute === 'undefined'){
+			attribute = null;
+		};
+		server_obj[attr] = attribute;
 	}.bind(this));
 
 	return server_obj;

@@ -26,26 +26,31 @@ var RenderHelper = {
 				var tree = wiese.data.trees[key];
 				var sort = tree[TreeAttr.sortname.id];
 
-				var bezeichnung = RenderHelper.get_tree_bezeichnung(wiese.data.trees, key);
+				//TODO Könnte man weg tun Emmanuel  //wie man will
+				//do not render extras
+				if((typeof tree.extra === 'undefined') || !tree.extra){
 
-				var list_group_item = $('<a/>', {class: "list-group-item", href: "#"}).append(
-											$('<h4/>', {class: "list-group-item-heading", text:  bezeichnung})
-										);
-				if(bezeichnung != key){
-					list_group_item.append(
-							$('<p/>', {style: "font-size: 12px", class: "list-group-item-text",  text: key})
-						);
-				}
+					var bezeichnung = RenderHelper.get_tree_bezeichnung(wiese.data.trees, key);
 
-				$(list_group_item).click(function(){
-					var tree_obj = new Tree()
-						tree_obj.from_server_obj(wiese.data.trees, key);
-						tree_obj.wiese = wiese;
+					var list_group_item = $('<a/>', {class: "list-group-item", href: "#"}).append(
+												$('<h4/>', {class: "list-group-item-heading", text:  bezeichnung})
+											);
+					if(bezeichnung != key){
+						list_group_item.append(
+								$('<p/>', {style: "font-size: 12px", class: "list-group-item-text",  text: key})
+							);
+					}
 
-					new TreeForm(tree_obj).show_form();
-				}.bind(this));
+					$(list_group_item).click(function(){
+						var tree_obj = new Tree()
+							tree_obj.from_server_obj(wiese.data.trees, key);
+							tree_obj.wiese = wiese;
 
-				elements.push(list_group_item);
+						new TreeForm(tree_obj).show_form();
+					}.bind(this));
+
+					elements.push(list_group_item);
+				};
 			}.bind(this));
 		}else{
 			//Wiese hat noch keine Bäume
