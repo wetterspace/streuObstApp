@@ -119,6 +119,13 @@ WieseSubmenuHelper.prototype.fill_info_box = function(){
 		weather_helper.set_render_box(weather_box);
 		weather_helper.render();
 
+	//Make random selection between weather and Info if Possible
+		if(weather_helper.is_already_loaded()){
+			//dann kann man random auswahl machen
+			var random_factor = Math.floor(Math.random() * 2) + 1;
+			$('#sub_menu_info .nav li a').get(random_factor - 1).click();
+		};
+
 
 	if(sessionStorage.getItem('user') == 'Offline') {
 		$('#buttonOrchardOffline').attr('disabled', 'disabled' );
