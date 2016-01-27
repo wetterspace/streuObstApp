@@ -35,6 +35,10 @@ Weather.prototype.get_wheater_information = function(lon, lat) {
         });
 };
 
+Weather.prototype.is_already_loaded = function(){
+    return window.weather_information;
+};
+
 Weather.prototype.render = function(){
 	//wenn schon geladen
 	if(window.weather_information){
