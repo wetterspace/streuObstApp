@@ -57,6 +57,22 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 
 				var imgName = new URL(tree.sortname);
 				
+				
+				
+				if(tree.pflegezustaende) {
+				Object.keys(tree.pflegezustaende).forEach(function(pflegeKey) {
+					var zustand = tree.pflegezustaende[pflegeKey];
+					
+					if(zustand.schädlinge != "" || zustand.verbiss_spure != "") {
+						imgName = new URL(tree.sortname, true);
+					}
+					
+					
+				})
+				} 
+				
+				
+				
 
                 var layer = new ol.layer.Image({
                     source: new ol.source.ImageStatic({
@@ -65,6 +81,8 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
                         imageExtent: extent
                     })
                 });
+				
+				
 
                 var layers = this.layers;
                 layers[layers.length] = layer;

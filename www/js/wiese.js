@@ -237,6 +237,27 @@
             this.init_map();
 
             this.place_trees_on_map(goOverCheckboxes(this));
+			
+			
+		var target = this.map.getTarget();
+        var jTarget = typeof target === "string" ? $("#" + target) : $(target);
+        // change mouse cursor when over marker
+        $(this.map.getViewport()).on('mousemove', function (e) {
+            var pixel = this.map.getEventPixel(e.originalEvent);
+            var hit = this.map.forEachFeatureAtPixel(pixel, function (feature, layer) {
+				if(layer.getOpacity() == 0 ) {
+				return true;
+				}
+                
+            });
+            if (hit) {
+                jTarget.css("cursor", "pointer");
+            } else {
+                jTarget.css("cursor", "");
+            }
+        }.bind(this));
+			
+			
         }.bind(this));
 
     }
