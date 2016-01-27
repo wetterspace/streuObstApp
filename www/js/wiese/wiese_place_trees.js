@@ -44,6 +44,37 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 
                 var extent = [l1 - 5, l2 - 5, l1 + 5, l2 + 5];
 
+
+                //Bilder welche random als Baum eingesetzt werden
+                var images = ['Apfel1.png',
+                    'Apfel2.png',
+                    'Birne1.png',
+                    'Birne2.png',
+                    'Kirsche1.png',
+                    'Kirsche2.png',
+                    'Pflaume1.png',
+                    'Pflaume2.png'
+                ];
+
+				var imgName = new URL(tree.sortname);
+				
+				
+				
+				if(tree.pflegezustaende) {
+				Object.keys(tree.pflegezustaende).forEach(function(pflegeKey) {
+					var zustand = tree.pflegezustaende[pflegeKey];
+					
+					if(zustand.schädlinge != "" || zustand.verbiss_spure != "") {
+						imgName = new URL(tree.sortname, true);
+					}
+					
+					
+				})
+				} 
+				
+				
+				
+
                 var url = "";
 
                 if((typeof tree.extra === 'undefined') || !tree.extra){
@@ -62,6 +93,8 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
                         imageExtent: extent
                     })
                 });
+				
+				
 
                 var layers = this.layers;
                 layers[layers.length] = layer;
