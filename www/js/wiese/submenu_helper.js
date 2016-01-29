@@ -340,7 +340,8 @@ WieseSubmenuHelper.prototype.display_tree_information = function(tree_key, tree)
 			form: Form.Textarea,
 			rows: 3,
 			title: TreeAttr.anmerkungen.title,
-			disabled: true
+			disabled: true,
+			extra: true
 		}
 		]
 	}];
@@ -355,7 +356,19 @@ WieseSubmenuHelper.prototype.display_tree_information = function(tree_key, tree)
 
 	$('#tree_submenu_bezeichnung').text(tree_bezeichnung);
 	$('#tree_submenu_key').text(tree_key);
-	$('#tree_submenu_image').attr('src', "img/treeicons/Birne1.png");
+
+	var url = "";
+
+    if((typeof tree.extra === 'undefined') || !tree.extra){
+        //normaler baum
+        var imgName = new URL(tree.sortname);
+            url = "img/treeicons/" + imgName.getUrl();
+    }else{
+        //ist ein extra
+        url = ImageHelper.get_normal_image_from_id(tree.icon);
+    }
+
+	$('#tree_submenu_image').attr('src', url);
 }
 
 
