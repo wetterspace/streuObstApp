@@ -17,7 +17,62 @@ var WieseSubmenuHelper = function(){
 	}
 };
 
-WieseSubmenuHelper.prototype.set_wiese = function(wiese){this.wiese = wiese };
+WieseSubmenuHelper.prototype.start_drag_action = function(){
+
+	var handleDragStart = function(e, is_extra) {
+  		e.dataTransfer.setData('is_extra', is_extra);
+	}
+
+	var handleDrop = function(e) {
+		if (e.stopPropagation) {
+			e.stopPropagation(); // Stops some browsers from redirecting.
+		}
+
+	  	var is_extra = e.dataTransfer.getData('is_extra');
+
+	  	var x = e.clientX;
+	  	var y = e.clientY;
+		e.preventDefault();
+	  	var rect =  $('#map')[0].getBoundingClientRect();
+
+	    x = x - rect.left;
+	    y = y - rect.top;
+
+	    var pos = this.wiese.map.getCoordinateFromPixel([x, y]);
+	    var lonlat = ol.proj.transform(pos, 'EPSG:3857', 'EPSG:4326');
+
+	    var tree_form = new TreeForm();
+			tree_form.set_wiese(this.wiese);
+			tree_form.set_lon_lat(lonlat[0], lonlat[1]);
+
+	    if(is_extra == "true"){
+	    	tree_form.set_extra_anlegen(true);
+	    };
+
+	    tree_form.show_form();
+
+	  	return false;
+	}.bind(this);
+
+	var handleDragOver = function(e) {
+	  if (e.preventDefault) {
+	    e.preventDefault(); // Necessary. Allows us to drop.
+	  }
+
+
+	  return false;
+	}
+
+
+	$('*[data-dragname="tree_icon_drag"]').get(0).addEventListener('dragstart', function(e){handleDragStart(e, false)}, false);
+	$('*[data-dragname="extra_icon_drag"]').get(0).addEventListener('dragstart', function(e){handleDragStart(e, true)}, false);
+
+	$('#map').get(0).addEventListener('drop', handleDrop, false);
+	$('#map').get(0).addEventListener('dragover', handleDragOver, false);
+
+};
+
+WieseSubmenuHelper.prototype.set_wiese = function(wiese){this.wiese = wiese; };
 
 WieseSubmenuHelper.prototype.set_trees = function(trees){this.trees = trees };
 
@@ -36,6 +91,8 @@ WieseSubmenuHelper.prototype.fill = function(){
 	this.fill_baume_box();
 	this.fill_filter_box();
 	this.init_print_btn();
+	//make icons draggable
+	this.start_drag_action();
 
 	$('#checkboxAll').click();
 		$('input[type="checkbox"]').change(function () {
