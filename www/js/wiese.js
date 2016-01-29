@@ -152,8 +152,6 @@
             layers: []
         });
 
-
-
         //layer für offline img if vorhanden
         if (this.map_is_avaible_offline) {
             var img_layer = new ol.layer.Image({
@@ -237,8 +235,8 @@
             this.init_map();
 
             this.place_trees_on_map(goOverCheckboxes(this));
-			
-			
+
+
 		var target = this.map.getTarget();
         var jTarget = typeof target === "string" ? $("#" + target) : $(target);
         // change mouse cursor when over marker
@@ -248,7 +246,7 @@
 				if(layer.getOpacity() == 0 ) {
 				return true;
 				}
-                
+
             });
             if (hit) {
                 jTarget.css("cursor", "pointer");
@@ -256,8 +254,8 @@
                 jTarget.css("cursor", "");
             }
         }.bind(this));
-			
-			
+
+
         }.bind(this));
 
     }

@@ -1,6 +1,11 @@
 var TreeForm = function(tree){
 	//wenn man kein baum sondern ne extra sache anlegt;
+
 	this.create_edit_extra = false;
+
+	//wenn lon lat bereits von karte übergeben wird;
+	this.lon = null;
+	this.lat = null;
 
 	this.icon_list = [
 		1453756986284,
@@ -158,6 +163,12 @@ TreeForm.prototype.get_extra_icon_image_id = function(){
 	return $('.icon_selected_img').first().data('image_id');
 }
 
+TreeForm.prototype.set_lon_lat = function(lon, lat){
+	//lon lat wird von drag übergeben
+	//in wiese show.html
+	this.lon = lon;
+	this.lat = lat;
+}
 
 TreeForm.prototype.add_icon_id = function(image_id){
 	//falls noch nicht in icon array
@@ -429,8 +440,11 @@ TreeForm.prototype.show_form = function(){
 
 		this.show_delete_button_if_tree_already_exists();
 
-
-
+		//wurde villeicht von drag gesetzt;
+		if(	this.lon  && this.lat ){
+			$('#' + TreeAttr.lon.id).val(this.lon);
+			$('#' + TreeAttr.lat.id).val(this.lat);
+		};
 
 		if(this.create_edit_extra){
 
