@@ -4,7 +4,7 @@ function goOverCheckboxes(wiese) {
     var checkboxes = $('input[type="checkbox"]');
     for (i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
-            var treeList = jQuery.extend(true, {}, wiese.data.trees);
+            var treeList = jQuery.extend(false, {}, wiese.data.trees);
             if (checkboxes[i].value == "alle") {
                 return treeList;
             }

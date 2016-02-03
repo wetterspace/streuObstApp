@@ -46,10 +46,12 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 
 				var imgName = new URL(tree.sortname);
 
+                var url = "";
 
-
+                if((typeof tree.extra === 'undefined') || !tree.extra){
+                    //normaler baum
 				if(tree.pflegezustaende) {
-				Object.keys(tree.pflegezustaende).forEach(function(pflegeKey) {
+					Object.keys(tree.pflegezustaende).forEach(function(pflegeKey) {
 					var zustand = tree.pflegezustaende[pflegeKey];
 
 					if(zustand.schädlinge != "" || zustand.verbiss_spure != "") {
@@ -58,16 +60,12 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 
 
 				})
+				} else {
+					imgName = new URL(tree.sortname);
 				}
-
-
-
-
-                var url = "";
-
-                if((typeof tree.extra === 'undefined') || !tree.extra){
-                    //normaler baum
-                    var imgName = new URL(tree.sortname);
+					
+					
+                    
                     url = "img/treeicons/" + imgName.getUrl();
                 }else{
                     //ist ein extra
