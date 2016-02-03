@@ -10,15 +10,15 @@ title: "ID"
 	},
 
 name: { id: "name",
-		title: "Optionale Bezeichnung"
+		title: "Name"
 	},
 
 obstart: 	{	id: "obstart",
-title: "ObstArt"
+title: "Obstart"
 	},
 
 sortname: 	{	id: "sortname",
-title:"Sortenname"},
+title:"Sorte"},
 
 wieseName: 	{	id: "wiesenName",
 title:"wieseName"},
@@ -58,7 +58,7 @@ anmerkungen: {	id: "anmerkungen",
 title: "Anmerkungen"},
 
 	bluete_beginn: {	id: "bluete_beginn",
-title: "Blüte Ende"},
+title: "Blüte Begin"},
 
 	bluete_end: {	id: "bluete_end",
 title: "Blüte Ende"},

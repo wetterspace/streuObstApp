@@ -11,7 +11,8 @@ var NavbarHelper = {
 				new Login();
 			});
 
-			$('#logo_streu_img').height($('#navbar_streu').height());
+			$('#logo_streu_img').height($('#navbar_streu').height() * 0.8);
+			$('#logo_streu_img').css('margin-top', $('#navbar_streu').height() * 0.1);
 		}
 
 		$("#navbar_container").load("navbar.html", init_buttons);
