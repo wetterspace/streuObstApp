@@ -112,6 +112,10 @@
          <script type="text/javascript">
             function toggle(source) {
              checkboxes = document.getElementsByName('filterSort');
+			 keine = document.getElementByID('checkboxNone');
+			 keine.checked = false;
+			
+			 
              for(var i=0, n=checkboxes.length;i<n;i++) {
             if(source.checked) {
              checkboxes[i].checked = source.checked;
@@ -120,8 +124,6 @@
             else {
             checkboxes[i].disabled = false;
             }
-
-
              }
             }
          </script>
