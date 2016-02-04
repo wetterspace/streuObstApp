@@ -8,10 +8,13 @@ function goOverCheckboxes(wiese) {
             if (checkboxes[i].value == "alle") {
                 return treeList;
             }
+			if (checkboxes[i].value == "keine") {
+                return filteredTreeList;
+            }
+			
             filteredTreeList = adjustTreeList(wiese.data.trees, filteredTreeList, checkboxes[i].value);
         }
     }
-    console.log(filteredTreeList);
     return filteredTreeList;
 }
 
@@ -19,8 +22,13 @@ function goOverCheckboxes(wiese) {
 function adjustTreeList(allTreesList, treeList, filterParameter) {
     for (var key in allTreesList) {
         var obj = allTreesList[key];
+		if(filterParameter == "extra") {
+			if(typeof obj.sortname === "undefined") {
+			treeList[key] = obj;
+			}
+		}
         if (obj.sortname == filterParameter) {
-            treeList[key] = obj
+            treeList[key] = obj;
         }
     }
     return treeList;
@@ -32,6 +40,7 @@ function getAllSortNames(allTreesList) {
 
         var obj = allTreesList[key];
         if ($.inArray(obj.sortname, sortName) === -1) {
+
             sortName[sortName.length] = obj.sortname;
         }
     }

@@ -63,8 +63,7 @@ Wiese.prototype.place_trees_on_map = function(treeList) {
 				} else {
 					imgName = new URL(tree.sortname);
 				}
-					
-					
+				
                     
                     url = "img/treeicons/" + imgName.getUrl();
                 }else{

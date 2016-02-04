@@ -225,13 +225,18 @@ var allSorts = getAllSortNames(this.trees)
 	var checkbox = document.createElement('input');
 	checkbox.type = "checkbox";
 	checkbox.name = "filterSort";
-	checkbox.value = allSorts[i];
+	
 	var label = document.createElement('label')
 	var container = $('#sub_menu_filter');
 	container.append(checkboxDiv);
 	checkboxDiv.appendChild(label);
 	label.appendChild(checkbox);
-	label.appendChild(document.createTextNode(allSorts[i]));
+	var labelText = allSorts[i];
+	if (typeof labelText === 'undefined') {
+		labelText = "extra";
+	}
+	checkbox.value = labelText;
+	label.appendChild(document.createTextNode(labelText));
 	}
 
 }
