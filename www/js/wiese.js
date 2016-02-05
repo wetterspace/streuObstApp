@@ -136,11 +136,28 @@
             source: vectorSource
         });
 
+        //oben abstand enfternen;
+        $('#map').css('margin-top', -10);
+
         //make map fullsize
         var window_height = $(window).height();
-        var map_offset = $('#map').offset().top;
+        var map_offset = $('#map').offset();
 
-        $('#map').height(window_height - map_offset - 10);
+        //wenn man unten noch rand haben will: .height(window_height - map_offset - 10)
+        $('#map').height(window_height - map_offset.top)
+                 //links kein rand
+                 .css('margin-left', - map_offset.left)
+                 //goße demenstrpchend andern
+                 .css('width', $('#map').width() + map_offset.left);
+
+        if(!$('#right_menu_map').is(':visible')){
+            //wird also aufm handy angeschaut dann mach entferne auch rechten rand
+            var right_offset = parseInt($('#map').parent().css('padding-right'),10);
+             $('#map').css('margin-right', - right_offset)
+             .css('width', $('#map').width() + right_offset);
+        }
+
+
 
         this.map = new ol.Map({
             target: 'map',
