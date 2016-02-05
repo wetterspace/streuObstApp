@@ -22,7 +22,9 @@ var NavbarHelper = {
 	//logo darf zum beispiel nicht versteckt werden sondern soll immer angezeigt werden
 	btn: {
 		logo: {
-			id: "nav_btn_logo"
+			id: "nav_btn_logo",
+			active: true,
+			hide: false
 		},
 		baum_anlegen: {
 			id: "nav_btn_baum_anlegen",
@@ -120,6 +122,17 @@ var NavbarHelper = {
 				$('.navbar-collapse').collapse('hide');
 				func()
 			});
+
+		//wenn man auf logo button clickt
+		$('#' + this.btn.logo.id).unbind().click(function(){
+			//user ist bereits eingelogt dann zu wiesenubersichtt
+			if(sessionStorage.getItem('user')){
+				new User( sessionStorage.getItem('user') ).show();
+			}else{
+				//wieder auf login zuruckweisen
+				new Login();
+			}
+		});
 	},
 
 	make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable: function(wiese){
