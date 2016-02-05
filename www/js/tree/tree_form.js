@@ -60,6 +60,9 @@ title: TreeAttr.obstart.title
 		{	id: TreeAttr.sortname.id,
 form: Form.Dropdown,
 options: [],
+on_append: function(){
+	TreeFormHelper.change_sorten_dropdown($('#' + TreeAttr.obstart.id).val());
+},
 title: TreeAttr.sortname.title},
 
 		{	id: TreeAttr.lon.id,
@@ -605,10 +608,16 @@ TreeForm.prototype.render_forms = function(form_rows){
 					});
 
 					form_row.append(container);
+
+					//function die beim hinzufügen ausgefurt werden soll
+					if(field.on_append){
+						field.on_append();
+					}
 				}
 			}.bind(this));
 		}
 	}.bind(this));
+
 }
 
 
