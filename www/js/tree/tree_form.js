@@ -427,12 +427,15 @@ TreeForm.prototype.show_qr_code = function(){
 
 TreeForm.prototype.init_camera_on_cordova = function(){
 	if(new CordovaCamera().is_avaible_on_device()){
+
+		this.show_latest_tree_image($('#photo_box_camera'));
 		//show tab to navigate to camera menu
 		$('*[data-tabselector="camera"]').show();
 
 		var camera = new CordovaCamera();
 			camera.set_take_picture_btn($('#take_picture_btn'));
 			camera.set_photo_box($('#photo_box_camera'));
+			camera.set_image_uploader(this.image_uploader);
 			camera.init();
 	}
 }
@@ -486,8 +489,8 @@ TreeForm.prototype.show_form = function(){
 }
 
 
-TreeForm.prototype.show_latest_tree_image = function(){
-	if(this.tree[TreeAttr.images.id]){
+TreeForm.prototype.show_latest_tree_image = function(opt_element){
+	if(this.tree && this.tree[TreeAttr.images.id]){
 		var image_keys = Object.keys(this.tree[TreeAttr.images.id]);
 
 		if(image_keys.length > 0){
@@ -496,8 +499,14 @@ TreeForm.prototype.show_latest_tree_image = function(){
 			image_keys.sort(sortNumber);
 
 			if(image_keys.length > 0){
+				var image_field =  $('#tree_image');
+				//falls element vorgegeben ist
+				if(opt_element){
+					opt_element.append('<img src="./img/Baum.jpg" class="img-responsive img-thumbnail" id="tree_image_2">');
+					image_field = $('#tree_image_2');
+				}
 				var latest_image_id = this.tree[TreeAttr.images.id][image_keys[0]].id;
-				ImageHelper.get_image_data_for(latest_image_id, $('#tree_image'), {save: false});
+				ImageHelper.get_image_data_for(latest_image_id, image_field, {save: false});
 			}
 		}
 	}
