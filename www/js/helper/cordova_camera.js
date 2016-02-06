@@ -24,12 +24,9 @@ CordovaCamera.prototype.render_photo = function(url){
 }
 
 CordovaCamera.prototype.init = function(){
-	$(this.photo_box).append('<p>Weedddiiie</p>');
 	$(this.btn).click(function(){
 
-		$(this.photo_box).append('<p>Wssseedddiiie</p>');
-
-	 navigator.camera.getPicture( function( imageURI ) {
+	 window.navigator.camera.getPicture( function( url ) {
         this.render_photo(url);
       }.bind(this),
       function( message ) {
@@ -37,10 +34,8 @@ CordovaCamera.prototype.init = function(){
       }.bind(this),
       {
         quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL
+        destinationType: navigator.camera.DestinationType.FILE_URI
       });
-
-	 $(this.photo_box).append('<p>Wee4u85u8udddiiie</p>');
 
 	}.bind(this));
 }

@@ -32,7 +32,7 @@
 		</div>
 
 		<div>
-			<a href="#" class="btn btn-default" id="btnGetCurrentLocation">Aktuelle Position eintragen</a>
+			<a class="btn btn-default" id="btnGetCurrentLocation">Aktuelle Position eintragen</a>
 
 		</div>
 
@@ -43,33 +43,35 @@
 		</div>
 	</div>
 
-	<!--not visible on phone, gets own tab -->
-	<div class="col-lg-4 hidden-xs" id="upload_image_col">
-		<div id="tree_image_box">
-			<img src="./img/Baum.jpg" class="img-responsive img-thumbnail" id="tree_image">
+	<div class="col-lg-4">
+		<!--not visible on phone, gets own tab -->
+		<div class="hidden-xs" id="upload_image_col">
+			<div id="tree_image_box">
+				<img src="./img/Baum.jpg" class="img-responsive img-thumbnail" id="tree_image">
+			</div>
+
+			<div>
+
+				<p id="tree_image_caption">Bild des Baums hochladen<p/>
+				<input type="file" id="image_upload_btn" name="imageLoader" class="form-control">
+
+			</div>
 		</div>
 
-		<div>
+		<div id="icon_selector_part" style="display:none; margin-bottom:10px">
+			<b>Icon-Auswahl</b>
+			<div id="canvas_creation_box" style="display:none">
+				<!-- Here canvas is created to resize image-->
+			</div>
+			<div class="row" id="icon_list" style="height:300px; overflow-y:scroll; border-radius: 6px;background-color: rgb(236, 240, 241)">
 
-			<p id="tree_image_caption">Bild des Baums hochladen<p/>
-			<input type="file" id="image_upload_btn" name="imageLoader" class="form-control">
+			</div>
 
-		</div>
-	</div>
+			<div>
+				<p id="icon_image_caption">Eigenes Icon hochladen<p/>
+				<input type="file" id="icon_upload_btn" name="imageLoader" class="form-control">
 
-	<div class="col-lg-4 hidden-xs" id="icon_selector_part" style="display:none">
-		<b>Icon-Auswahl</b>
-		<div id="canvas_creation_box" style="display:none">
-			<!-- Here canvas is created to resize image-->
-		</div>
-		<div class="row" id="icon_list" style="height:300px; overflow-y:scroll; border-radius: 6px;background-color: rgb(236, 240, 241)">
-
-		</div>
-
-		<div>
-			<p id="icon_image_caption">Eigenes Icon hochladen<p/>
-			<input type="file" id="icon_upload_btn" name="imageLoader" class="form-control">
-
+			</div>
 		</div>
 	</div>
 
@@ -157,14 +159,14 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div class="row">
+
 	<div class="col-lg-12 text-center">
 		<div class="btn-group inline" id="tree_form_btn_group">
 			<a href="#" class="btn btn-info" id="cancel_tree_form">Abbrechen</a>
 			<a href="#" class="btn btn-success" id="save_tree_form">Speichern</a>
 		</div>
 	</div>
-</div>
+
 
 
 

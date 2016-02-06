@@ -200,7 +200,7 @@ TreeForm.prototype.render_icon_list = function(opt_image_id){
 						 				style: "width:100%;height:auto; margin-top:5px; margin-bottom: 5px",
 						 				class: "img-thumbnail icon_auswahl_img"});
 
-		icon_box.append($('<div/>', {class: "col-sm-4"}).append(img_element));
+		icon_box.append($('<div/>', {class: "col-xs-4"}).append(img_element));
 
 		ImageHelper.get_image_data_for(icon_id, img_element, {save: false});
 	}.bind(this));
