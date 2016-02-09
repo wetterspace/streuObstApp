@@ -57,7 +57,7 @@ function startSyncing() {
 
 User.prototype.init = function(){
 	this.init_page();
-
+	syncObstarten(this.username);
 
 
 	if(sessionStorage.getItem('user') == 'Offline') {
@@ -93,7 +93,7 @@ User.prototype.init = function(){
 		//check if really orchard object
 
 		//da gehören eig die offline obstarten rein
-		var obstarten = null;
+		var obstarten = JSON.parse(localStorage.getItem("Arten"));
 
 		if(value.coordinates != undefined) {setOverview(index, value, value.image_id, obstarten);}
 

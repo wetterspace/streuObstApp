@@ -145,6 +145,14 @@ function getOrchard(orchardName, funcGetOrchard) {
 	});
 }
 
+//-------obst_editor.js-----------
+function getObstarten(username, funcGetObstarten) {
+	new DB().getUserDB().child(username).child('obstarten').once("value", function(snapshot){
+		funcGetObstarten(snapshot);
+	});
+}
+
+
 //-------connect.js-----------
 function getTree(obj, key, funcGetTree) {
 	new DB().getWiesenDB().child(obj.wieseName).child('trees').child(key).once("value", function(snapshot){
