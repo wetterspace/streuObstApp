@@ -8,9 +8,9 @@ var Obst = {
 
 Obst.getArten = function (obstarten) {
 	if(obstarten){
-	   return Object.keys(obstarten);
+	   return Object.keys(obstarten).filter(function(elem){ return elem != "timestamp"; });
 	}else{
-	   return Object.keys(Obst.Arten);
+	   return Object.keys(Obst.Arten).filter(function(elem){ return elem != "timestamp"; });
 	}
 };
 
