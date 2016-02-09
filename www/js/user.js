@@ -91,7 +91,11 @@ User.prototype.init = function(){
 	$.each(wiesenArray, function(index, value) {
 		console.log(value);
 		//check if really orchard object
-		if(value.coordinates != undefined) {setOverview(index, value, value.image_id);}
+
+		//da gehören eig die offline obstarten rein
+		var obstarten = null;
+
+		if(value.coordinates != undefined) {setOverview(index, value, value.image_id, obstarten);}
 
 	});
 
@@ -111,12 +115,13 @@ User.prototype.init = function(){
 }
 User.prototype.getUserDataOnline = function() {
 this.getUserDataFromServer(function(){
+	var obstarten = this.data.obstarten;
 
 	getOrchardForUser(this.username, function(snapshot) {
 		snapshot.forEach(function(childSnapshot) {
 			var key = childSnapshot.key();
 			var childData = childSnapshot.val();
-			setOverview(key, childData, childData.image_id);
+			setOverview(key, childData, childData.image_id, obstarten);
 		});
 	}.bind(this));
 
@@ -126,34 +131,36 @@ this.getUserDataFromServer(function(){
 function getDataOffline() {
 }
 
-function setOverview(key, data, image_id) {
+function setOverview(key, data, image_id, obstarten) {
 			var t1 = $("#wiesen_list");
 			var d = $('<a/>', {class: "list-group-item text-center", href: "#"});
 			var hw = $('<h4/>', {class: "list-group-item-heading", text: 'Wiesenname: ' + key});
 			t1.append(d);
 			d.append(hw);
 
+			console.log(obstarten);
+
 			var himg = $('<img/>', {class: "img-responsive img-thumbnail",  click: function(){
-				new Wiese(key).show();
+				new Wiese(key, obstarten).show();
 			}});
 			ImageHelper.get_image_data_for(image_id, himg);
 			d.append(himg);
 
 			var btn_group = $('<div/>', {class: "btn-group btn-group-justified inline", style: "margin-top:8px"});
 				btn_group.append($('<a/>', {class: "btn btn-info btn-sm", html: "<img class='user_icon_svg' src='img/icons/eintstellungen.svg'/> <br/>  Bearbeiten", click: function(){
-					var wiese = new Wiese(key);
+					var wiese = new Wiese(key, obstarten);
 					//only able to edit coords of wiese
 					new RegisterWiese(wiese);
 				}}));
 				btn_group.append($('<a/>', {class: "btn btn-success btn-sm", html: "<img class='user_icon_svg' src='img/icons/Wiesenprofil.svg'/> <br/>  Öffnen", click: function(){
-					new Wiese(key).show();
+					new Wiese(key, obstarten).show();
 				}}));
 				btn_group.append($('<a/>', {class: "btn btn-warning btn-sm", 'data-toggle': "modal", 'data-target': "#deleteWieseModal", html: "<img class='user_icon_svg' src='img/icons/loeschen.svg'/> <br/> Löschen", click: function(){
 					var delete_btn = $('#really_wiese_delete_btn');
 						//enferne voerhergegane events sodass nicht mehree Wisen geslöscht werdeb
 						delete_btn.unbind();
 						delete_btn.click(function(){
-							var wiese = new Wiese(key);
+							var wiese = new Wiese(key, obstarten);
 								wiese.remove();
 						});
 				}}));

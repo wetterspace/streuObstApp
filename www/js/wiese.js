@@ -1,5 +1,7 @@
-    var Wiese = function(name) {
+    var Wiese = function(name, obstarten) {
         this.name = name;
+
+        this.obstarten = obstarten;
         //handles menu at right side
         this.submenu = null;
 

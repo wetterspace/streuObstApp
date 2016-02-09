@@ -1,5 +1,9 @@
-var TreeForm = function(tree){
+var TreeForm = function(tree, wiese){
 	//wenn man kein baum sondern ne extra sache anlegt;
+
+	if(wiese){
+		this.wiese = wiese;
+	}
 
 	this.create_edit_extra = false;
 
@@ -35,6 +39,10 @@ var TreeForm = function(tree){
 
 	this.image_uploader = new ImageUploader();
 
+	this.obst_form_helper = new ObstFormHelper(this.wiese.obstarten);
+
+	var obst_form = this.obst_form_helper;
+	var obstsorten = this.wiese.obstarten;
 
 	this.form_rows = [
 	//row 1
@@ -51,9 +59,11 @@ extra: true
 		},
 		{	id: TreeAttr.obstart.id,
 form: Form.Dropdown,
-options: Obst.getArten(),
+options: Obst.getArten(obstsorten),
 			//when another value gets selected
-onchange: TreeFormHelper.change_sorten_dropdown,
+onchange: function(val){
+	obst_form.change_sorten_dropdown(val);
+},
 title: TreeAttr.obstart.title
 		},
 
@@ -61,7 +71,7 @@ title: TreeAttr.obstart.title
 form: Form.Dropdown,
 options: [],
 on_append: function(){
-	TreeFormHelper.change_sorten_dropdown($('#' + TreeAttr.obstart.id).val());
+	obst_form.change_sorten_dropdown($('#' + TreeAttr.obstart.id).val());
 },
 title: TreeAttr.sortname.title},
 
@@ -440,6 +450,16 @@ TreeForm.prototype.init_camera_on_cordova = function(){
 	}
 }
 
+TreeForm.prototype.init_edit_obstarten = function(){
+	$('#edit_obstarten_btn').show();
+
+	$('#edit_obstarten_btn').click(function(){
+		NavbarHelper.make_all_unactive();
+		NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this.wiese);
+		new  ObstEditor(this.wiese.obstarten).show();
+	}.bind(this));
+}
+
 TreeForm.prototype.show_form = function(){
 
 	$('#HauptFenster').load("./html/tree/form.html",function(){
@@ -477,6 +497,8 @@ TreeForm.prototype.show_form = function(){
 
 			//if app version show tab to take picture directly from app
 			this.init_camera_on_cordova();
+
+			this.init_edit_obstarten();
 
 			//pass wiese
 			NavbarHelper.make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable(this.wiese);
@@ -550,6 +572,14 @@ TreeForm.prototype.fill_forms_if_tree_already_exists = function(form_rows){
 
 					//zwiege nur wenns kein exta type is also Baum oder Special und Form mit dem Field
 					if(this.create_edit_extra == false ||  (field.extra && field.extra == true) ){
+
+						if(field.id == TreeAttr.sortname.id || field.id == TreeAttr.obstart.id){
+							if($.inArray(this.tree[field.id], $("#" + field.id  + " option").map(function() {return $(this).val();}).get()) < 0){
+								//value befindet sich nicht meht in den options
+								console.log(this.tree[field.id]);
+								$('#' + field.id).append($('<option></option>').attr("value", this.tree[field.id]).text(this.tree[field.id]));
+							}
+						}
 
 						//sets value for each field
 						if(this.tree[field.id]){

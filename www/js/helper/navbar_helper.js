@@ -138,13 +138,13 @@ var NavbarHelper = {
 	make_karte_and_ubersicht_and_baum_anlegen_and_user_clickable: function(wiese){
 
 		NavbarHelper.click( NavbarHelper.btn.baum_anlegen, function(){
-			var tree_form = new TreeForm();
+			var tree_form = new TreeForm(null, wiese);
 				tree_form.set_wiese(wiese);
 				tree_form.show_form();
 		});
 
 		NavbarHelper.click( NavbarHelper.btn.extra_anlegen, function(){
-			var tree_form = new TreeForm();
+			var tree_form = new TreeForm(null, wiese);
 				tree_form.set_wiese(wiese);
 				tree_form.set_extra_anlegen(true);
 				tree_form.show_form();

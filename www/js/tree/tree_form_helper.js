@@ -1,20 +1,23 @@
-var TreeFormHelper = {};
+var ObstFormHelper = function(obstarten){
+	this.obstarten = obstarten;
+};
 
-
-TreeFormHelper.change_sorten_dropdown = function (art_key) {
-	var sorten = Obst.getSorten(art_key);
+ObstFormHelper.prototype.change_sorten_dropdown = function (art_key) {
+	console.log(this.obstarten);
+	var sorten = Obst.getSorten(art_key, this.obstarten);
 
 	var sortenDropdwon = $("#" + TreeAttr.sortname.id);
 		//empty options before select new ones
 		sortenDropdwon.find('option').remove();
 
-
-	sorten.forEach(function(sorte) {
-		sortenDropdwon.append($("<option />").val(sorte.Name).text(sorte.Name));
-	});
-
+	if(sorten){
+		sorten.forEach(function(sorte) {
+			sortenDropdwon.append($("<option />").val(sorte.Name).text(sorte.Name));
+		});
+	}
 }
 
+var TreeFormHelper = {};
 
 TreeFormHelper.create_tree_object_from_fields = function(form_rows, is_extra_form){
 	var tree = new Tree();

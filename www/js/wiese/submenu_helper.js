@@ -41,7 +41,7 @@ WieseSubmenuHelper.prototype.start_drag_action = function(){
 	    var pos = this.wiese.map.getCoordinateFromPixel([x, y]);
 	    var lonlat = ol.proj.transform(pos, 'EPSG:3857', 'EPSG:4326');
 
-	    var tree_form = new TreeForm();
+	    var tree_form = new TreeForm(null, this.wiese);
 			tree_form.set_wiese(this.wiese);
 			tree_form.set_lon_lat(lonlat[0], lonlat[1]);
 
@@ -225,7 +225,7 @@ var allSorts = getAllSortNames(this.trees)
 	var checkbox = document.createElement('input');
 	checkbox.type = "checkbox";
 	checkbox.name = "filterSort";
-	
+
 	var label = document.createElement('label')
 	var container = $('#sub_menu_filter');
 	container.append(checkboxDiv);
@@ -316,6 +316,7 @@ WieseSubmenuHelper.prototype.show_single_tree = function(tree_key){
 }
 
 WieseSubmenuHelper.prototype.display_tree_information = function(tree_key, tree){
+	var obstarten = this.wiese.obstarten;
 	//gets invoked by show_single_tree
 	//die die dargestellt werden sollen
 	var form_rows = [{
@@ -328,9 +329,11 @@ WieseSubmenuHelper.prototype.display_tree_information = function(tree_key, tree)
 		},
 		{	id: TreeAttr.obstart.id,
 			form: Form.Dropdown,
-			options: Obst.getArten(),
+			options: Obst.getArten(obstarten),
 						//when another value gets selected
-			onchange: TreeFormHelper.change_sorten_dropdown,
+			onchange: function(val){
+				new ObstFormHelper(obstarten).change_sorten_dropdown(val);
+			},
 			title: TreeAttr.obstart.title,
 			disabled: true
 		},
