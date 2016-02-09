@@ -206,11 +206,21 @@ ObstEditor.prototype.get_obst_object = function(){
 
 ObstEditor.prototype.save_changes = function(){
 	var username = sessionStorage.getItem('user');
-
+	var arten = this.get_obst_object();
+	arten.timestamp = Date.now();
+	
 	if(username && !(typeof username === 'undefined')){
-		new DB().getUserDB().child(username).child('obstarten').set(this.get_obst_object(), function(err){
-			//da muss wahrscheinlich offline auch gespeichert werden
-		});
+	if(username != 'Offline') {
+			new DB().getUserDB().child(username).child('obstarten').set(arten, function(err){
+			
+			//saveOffline(this.get_obst_object());
+				//da muss wahrscheinlich offline auch gespeichert werden
+			});
+		}
+		saveOffline("Arten", arten);
+		
+		console.log(arten);
+		console.log(localStorage.getItem("Arten"));
 	}else{
 		alert("Derzeit nicht möglich");
 	}

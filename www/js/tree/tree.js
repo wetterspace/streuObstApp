@@ -133,7 +133,6 @@ Tree.prototype.save = function() {
 	this.id = idNew;
 	this.timestamp = Date.now();
 	if(sessionStorage.getItem('user') == 'Offline') {
-		console.log(this);
 		this.wieseName = this.wiese.name;
 		this.wiese = null;
 

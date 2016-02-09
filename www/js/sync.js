@@ -24,9 +24,7 @@ function getWiesenObjects() {
 		}
 		}
 		catch(err) {
-		}
-		
-				
+		}	
 	}
 
 	return wiesenArray;
@@ -57,8 +55,23 @@ function compareStorageAndDB() {
 	}
 }
 
+function syncObstarten(username) {
+	if(localStorage.getItem("Arten")) {
+		var storedArten = JSON.parse(localStorage.getItem("Arten"));
+		getObstarten(username, function(snapshot) {
+                var obstData = snapshot.val();
+				if (storedArten.timestamp > obstData.timestamp) {
+					new DB().getUserDB().child(username).child('obstarten').set(storedArten, function(err){
+				});
+				}
+            }.bind(this));
+		
+	}
+}
+
+
+
 function syncTrees() {
-	console.log("asdasdasasddddddddddddddddddddddddddddddddddddddddddd");
 	for (var i = 0; i < localStorage.length; i++){
 		var obj;
 		try {
