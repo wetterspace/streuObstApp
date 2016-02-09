@@ -11,7 +11,7 @@ var ObstEditor = function(obstarten){
 };
 
 ObstEditor.prototype.getArten = function(){
-	return Object.keys(this.obst_object);
+	return Object.keys(this.obst_object).filter(function(elem){ return elem != "timestamp"; });
 };
 
 ObstEditor.prototype.getSorten = function(art){
@@ -208,17 +208,17 @@ ObstEditor.prototype.save_changes = function(){
 	var username = sessionStorage.getItem('user');
 	var arten = this.get_obst_object();
 	arten.timestamp = Date.now();
-	
+
 	if(username && !(typeof username === 'undefined')){
 	if(username != 'Offline') {
 			new DB().getUserDB().child(username).child('obstarten').set(arten, function(err){
-			
+
 			//saveOffline(this.get_obst_object());
 				//da muss wahrscheinlich offline auch gespeichert werden
 			});
 		}
 		saveOffline("Arten", arten);
-		
+
 		console.log(arten);
 		console.log(localStorage.getItem("Arten"));
 	}else{
