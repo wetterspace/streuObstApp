@@ -138,7 +138,7 @@ Tree.prototype.save = function() {
 
 
 		saveOffline(this.id, this);
-		new Wiese(this.wieseName, this.wiese.obstarten).show();
+		new Wiese(this.wieseName, localStorage.getItem("Arten")).show();
 
 
 	}else {
