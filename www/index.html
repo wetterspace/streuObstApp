@@ -1,215 +1,465 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Strueobstwiesenapp</title>
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+      
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        @font-face {
+            font-family: 'Besom';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/besom.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Brandon';
+            font-style: normal;
+            font-weight: 400;
+            src: url('fonts/brandon.otf') format('opentype');
+        }
+        
+        .row{
+            margin: 0;
+            padding: 0;
+        }
+        
+        #header { 
+            width: 100%; 
+            position: fixed;
+            background-color: #fff;
+            z-index: 999
+        }
+   
+        #ueberschrift{
+            font-family: 'Besom';
+            color: #0FA25F;
+            font-size: 64px;
+            padding-top: 50px;
+        }
+        
+        #info{
+            text-align: justify;
+        }
+          
+        #login{
+            display: block;
+        }
+
+        #login-text{
+            font-family: 'Besom';
+            color: #0FA25F;
+            font-size: 30px;
+            padding-top: 15px;
+            text-decoration: none;
+        }
+
+        #uBox{
+            padding-top: 130px;
+        }
+
+        #Text1{
+            text-align: justify;
+            font-family: 'Brandon';
+            padding-top: 30px;
+            padding: 30px;
+        }
+        #strich{
+            border: dashed 1px ;
+            border-color: #404040;
+            margin-top: 50px;
+        }
+
+        #funktionen{
+            font-family: 'Besom';
+            color: #1DB2DB;
+            font-size: 35px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        #ueberschrift2{
+            font-family: Brandon;
+            font-size: 18px;
+            color: #1DB2DB;
+        }
+        
+        #Block{
+            font-family: "Brandon";
+        }
+
+        #slide2{
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        
+        #slide3{
+            background-color: #FFC70C;
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+
+        }
+        
+        #handy{
+            font-family: 'Besom';
+            color: #0FA25F; 
+            text-align:left; 
+            padding-top:50px;
+
+        }
+        
+        #handy-text{
+            color: #404040; 
+            text-align:left; 
+            padding-top:30px; 
+            font-size: 18px;
+            font-family: 'Brandon';
+            text-align: justify;
+        }
+        
+        #slide4{
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 50px;
+            padding-bottom:50px;
+
+        }
+        
+        #uns-ueberschrift{
+            color: #EF4D49; 
+            text-align:center;
+            font-family: 'Besom';
+            font-size: 35px;
+            margin-bottom: 50px;
+        }
+
+        #uns-text{
+            color: #404040; 
+            text-align: justify; 
+            font-size: 18px;
+            margin-bottom: 50px;
+        }
+        
+        #person{
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            border: 1px solid #999999;
+            height: 100px;
+            width: 100px;
+        }
+        
+        #name{
+            font-family: 'Brandon';
+            margin-top: 10px;
+            color: #0AAC6A;
+        }
+        
+        #slide5{
+            background-color: #0AAC6A; 
+            padding-top:50px; 
+            padding-bottom:50px;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+        
+        #newsletter{
+            color: #FFC70C; 
+            text-align:center;
+            font-family: 'Besom'; 
+            font-size: 35px;
+            padding-bottom: 50px;
+        }
 
 
-        <title>Streuobstwiesenapp</title>
 
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="css/ol.css" />
-        <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+        p{
+          font-family: "Brandon";
+          font-size: 12px;
+          font-weight: regular;
+        }
 
-        <link rel="icon" type="image/png"  href="img/favicon.png">
+      </style>
+      
+      <script>
+   
+        $(document).ready(function() {
 
-         <style>
-      .map {
-        height: 400px;
-        width: 100%;
-      }
-      /* Benutzt bei Extras anlegen bei dem Icon Selector Window*/
-      .icon_selected_img {
-        border: 2px solid #15a589;
-      }
+            $('#navbar-logo').height($('#navbar').height() * 0.8);
+            $('#navbar-logo').css('margin-top', $('#navbar').height() * 0.1);
 
-      /*Damit Buttons nicht genau am ende der Seite dargestellt werden */
-      #HauptFenster{
-        margin-bottom: 20px;
-      }
+            $('a[href*=#]').each(function() {
+                if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname && this.hash.replace(/#/,'') ) {
+                    var $targetId = $(this.hash), $targetAnchor = $('[name=' + this.hash.slice(1) +']');
+                    var $target = $targetId.length ? $targetId : $targetAnchor.length ? $targetAnchor : false;
+                    if ($target) {
+                        var targetOffset = $target.offset().top;
+                        $(this).click(function() {
+                            $("#nav li a").removeClass("active");
+                            $(this).addClass('active');
+                            $('html, body').animate({scrollTop: targetOffset}, 1000);
+                            return false;
+                        });
+                    }
+                }
+            });
 
-    </style>
+        });
 
-    </head>
-    <body>
-
-        <div id="navbar_container"></div>
-
-        <div class="container" style="margin-top:70px">
-            <div id="FehlerFenster" class="row">
-
+      </script>
+  </head>
+    
+  <body>
+      
+      <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button id="nav_btn_dropdown" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html"  id="nav_btn_logo" class="pull-left navbar-brand" style="padding-top:0;"><img id="navbar-logo" src="img/logo.svg"></a>
             </div>
-
-            <div id="HauptFenster" class="row">
-                <div class="row">
-
-                    <div class="col-lg-4">
-
-                    </div>
-
-                    <div class="col-lg-4">
-
-                    </div>
-
-                    <div class="col-lg-4">
-
-
-
-                    <div>
-
-                </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li id="nav_btn_user"><a href="startindex.html">Mein Profil</a></li>
+              </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#slide1" class="active" title="Next Section" >Startseite</a></li>
+                    <li><a href="#slide2" title="Next Section">Funktionen</a></li>
+                    <li><a href="#slide3" title="Next Section">Mobile</a></li>
+                    <li><a  href="#slide4" title="Next Section">Über uns</a></li>
+                    <li><a href="#slide5" title="Next Section">Kontakt</a></li>
+                </ul>
             </div>
+          </div>
+      </nav>
+      
+      <div id="slide1">
+          
+          <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="uBox">
+                  <a href="index.html">
+                      <img src="img/index/logo1.svg">
+                  </a>
+                  <h1 id="ueberschrift">Die App für den modernen Gärtner</h1>
+              </div>
+          </div>
+          
+          <div class= "row" >
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" >
+                  <div class= "col-lg-4 col-md-3 col-sm-2 col-xs-1" ></div>
+
+                  <div class= "col-lg-4 col-md-6 col-sm-8 col-xs-10">
+                      <p id="Text1">Hier kannst du deine eigene Streuobstwiese online anlegen und von der Vielfallt unserer Funktionen ernten. Wir bieten eine Plattform für Gärtner mit  Wissen und sind der moderne Werkzeugkasten für Streuobstwiesen. Damit du immer den besten Überblick über deine Bäume hast.</p> 
+                  </div>
+
+                  <div class= "col-lg-4 col-md-3 col-sm-2 col-xs-1" ></div>
+              </div>
+          </div>
+          
+          <div class= "row" >
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" >
+                  <div class= "col-lg-4 col-md-4 col-sm-2 col-xs-1" ></div>
+                  <div class= "col-lg-4 col-md-4 col-sm-8 col-xs-10 text-center">
+                      <a href="startindex.html" id="login">
+                          <img src="img/index/Profil.svg" width="100">
+                          <h2 id="login-text">Jetzt Gärtner werden</h2>          
+                      </a>  
+                  </div>
+                  <div class= "col-lg-4 col-md-4 col-sm-2 col-xs-1" ></div>
+       
+              </div>
+          </div>
+          
+          <div class= "row" ></div>
+          
+          <hr id ="strich"></hr>
+      
+      </div>
+    
+      <div id="slide2">
+          
+          <div class="row">
+              <div class= "col-lg-12 text-center" >
+                  <div class= "col-lg-2 col-sm-0 text-center" ></div>
+
+                  <div class= "col-lg-8 col-sm-12 text-center">
+                      <h2 id="funktionen">Funktionen, Werkzeuge, Möglichkeiten</h2>  
+                  </div>
+
+                  <div class= "col-lg-2 col-sm-0" ></div>
+              </div>
+          </div>
+        
+          <div class="row" >
+              <div class= "col-lg-4 col-md-4 col-sm-6 text-center" style="height: 200px;">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-6 text-center" >
+                          <img src="img/index/info.svg" width="70">
+                      </div>
+                      <div class="col-lg-8 col-md-7 col-sm-6 text-center" id="Block">
+                          <p id="ueberschrift2">Informationen</p>
+                          <p id="info">Erhalte hilfreiche Tipps rund um das Thema Streuobstwiesen von uns und halte dich auf dem Laufenden. </p>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class= "col-lg-4 col-md-4 col-sm-6 text-center" style="height: 200px;">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-6 text-center" >
+                          <img src="img/index/profil.svg" width="70">
+                      </div>
+                      <div class="col-lg-8 col-md-7 col-sm-6 text-center" id="Block">
+                          <p id="ueberschrift2">Werde Gärtner</p>
+                          <p id="info">Erstelle dein eigenes Gärtnerprofil, lerne ander Gärtner kennen und verwalte deine Äcker.</p>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class= "col-lg-4 col-md-4 col-sm-6 text-center" style="height: 200px;">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-6 text-center" >
+                          <img src="img/index/apfel!icon.svg" width="70">
+                      </div>
+                      <div class="col-lg-8 col-md-7 col-sm-6 text-center" id="Block">
+                          <p id="ueberschrift2">Benachrichtigungen</p>
+                          <p id="info">Sei informiert darüber, wie es deinen Bäumen geht. Welche Aufgaben müssen als nächstes erledigt werden? </p>
+                      </div>
+                  </div>
+              </div>
+            <div class= "col-lg-4 col-md-4 col-sm-6 text-center" style="height: 200px;">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-6 text-center" >
+                          <img src="img/index/Baumprofil.svg" width="70">
+                      </div>
+                      <div class="col-lg-8 col-md-7 col-sm-6 text-center" id="Block">
+                          <p id="ueberschrift2">Baumprofil</p>
+                          <p id="info">Jeder Baum ist individuell. Trage alle wichtigen Eigenschaften in seine Seite ein und füge Fotos hinzu.  </p>
+                      </div>
+                  </div>
+              </div>
+              
+              
+              
+              <div class= "col-lg-4 col-md-4 col-sm-6 text-center"  style="height: 200px;">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-6 text-center" >
+                          <img src="img/index/karte.svg" width="70">
+                      </div>
+                      <div class="col-lg-8 col-md-7 col-sm-6 text-center" id="Block">
+                          <p id="ueberschrift2">Orte deine Bäume</p>
+                          <p id="info">Trage die Koordinaten deiner Bäume auf der Karte ein. Wenn du willst, rufen wir deinen Standpunkt automatisch ab.</p>
+                      </div>
+                  </div>
+              </div>
+              
+
+              <div class= "col-lg-4 col-md-4 col-sm-6 text-center"  style="height: 200px;">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="col-lg-4 col-md-5 col-sm-6 text-center" >
+                          <img src="img/index/ernte.svg" width="70">
+                      </div>
+                      <div class="col-lg-8 col-md-7 col-sm-6 text-center" id="Block">
+                          <p id="ueberschrift2">Höhere Erträge</p>
+                          <p id="info">Sieh die Veränderung der Bäume auf deinem Zeitstrahl und sei pünktlich zur Ernte auf der Wiese.  </p>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>                
+    </div>
+    
+    <div id="slide3">
+        <div class="row" style="position: relative;"> 
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h2 id="handy">Mit dem Handy auf die Wiese</h2>
+                <p id="handy-text">Viele Streuobstwiesengärtner wünschen sich eine besser Übersicht über die Bäume, die auf ihren Ackern stehen. Nicht nur die Obstsorte ist dabei entscheidend, sondern auch, ob es sich bei dem jeweiligen Baum um einen diploiden oder triplodiden handelt. Aber jeder Baume hat natürlich noch viel mehr Eigentschaften. Wir, von Streuobst! haben uns gedacht, wie kann man einen Acker besser als auf einer Karte in der der Vogelperspektive darstellen. Jeder Baum bekommt ein Icon und auch Brunnen und Werkstatt können gut eingezeichnet werden.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 hidden-sm hidden-xs" style="position: absolute; bottom: -50px; right: 0">
+                <img src="img/index/inside.png" style="width: 100%;">
+            </div>
+            
+
 
         </div>
+    </div>
+    
+    <div id="slide4">
+    <div class="row text-center">
+        <h2 id="uns-ueberschrift">Über uns - 5 Bachelor StudentInnen </h2>   
+        <p id="uns-text"> „Unter allen Erdgewächsen des Landmannes verursacht ihm keines weniger Mühe und Kosten als seine Obstbäume" ist ein Zitat aus dem Jahr 1814. Wir haben es uns zur Aufgabe gemacht, das Leben eines Streuobstwiesengärtners zu erleichtern. Dabei entstand ein Konzept, eine Anwendung und eine Website die jetzt getestet und eingesetzt werden können. Wie das geht, würden wir Ihnen gerne auf der diesjährigen Showtime präsentieren. 12.02.2016, HTW Wilheminenhof. 
 
+Wir freuen uns euch kennen zu lernen,
+Ihr Streu Obst! Team </p> 
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-2">
+                <img src="img/index/fabian.svg" width=70% id="person">
+                <p id="name">Fabian Gand</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <img src="img/index/solvejg.svg" width=70% id="person">
+                <p id="name">Solvejg Plank</p>                
 
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <img src="img/index/em.svg" width=70% id="person">
+                <p id="name">Emanuel Stadler</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <img src="img/index/stili.svg" width=70% id="person">
+                <p id="name">Stiliyana Yordanova</p>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+                <img src="img/index/kenny.svg" width=70% id="person">
+                <p id="name">Kenneth Kliehm</p>
+            </div>
+        </div> 
+    
+    </div>
+    
+    <div id="slide5">
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-3 col-sm-3 text-center"  >
+                <img src="img/index/mann.svg" width=100%>
+            </div> 
 
-        <script type="text/javascript" src="cordova.js"></script>
-        <!--Jquery bietet vereinfachte Javascript Funktionen -->
-        <script type="text/javascript" src="lib/jquery.js"></script>
-        <!--Bootstrap Javascript -->
-        <script type="text/javascript" src="lib/bootstrap.min.js"></script>
-        <!--Firebase um eine Verbindung zum Server herzustellen zu können-->
-        <script type="text/javascript" src="lib/firebase.js"></script>
-        <!--Openlayers Libaryy -->
-        <script type="text/javascript" src="lib/ol.js"></script>
-        <!--Zentraler Punkt um mit der Datenbank zu kommunizieren-->
-		<!--Crypto Library-->
-		<script type="text/javascript" src="lib/sjcl/sjcl.js"></script>
-		<script type="text/javascript" src="lib/sjcl/core/sha1.js"></script>
-        <!--Libary um QR-Codes zu erstellen-->
-        <script type="text/javascript" src="lib/qrcode.js"></script>
-        <!--Wrapper für FireBase-->
-        <script type="text/javascript" src="js/helper/db.js"></script>
-		<!--Enthält Code für Firebase Abfragen/Offline Version-->
-        <script type="text/javascript" src="js/helper/connect.js"></script>
-        <!--Enthält Code der dafür zuständig ist die Wiesen anzuzeigen-->
-        <script type="text/javascript" src="js/wiese.js"></script>
-        <!--Enthält Code der dafür zuständig ist die Ubersicht der Baume der Wiese anzuzeigen-->
-        <script type="text/javascript" src="js/ubersicht.js"></script>
-		<!--Enthält Code der dafür zuständig ist die User anzuzeigen-->
-        <script type="text/javascript" src="js/user.js"></script>
-        <!--Enthält Code der für die Registiereung zuständig ist-->
-        <script type="text/javascript" src="js/register.js"></script>
-		<!--Enthält Code der für die Registiereung zuständig ist-->
-        <script type="text/javascript" src="js/registerWiese.js"></script>
-        <!--Enthält Code der für das Login zuständig ist-->
-        <script type="text/javascript" src="js/login.js"></script>
-        <!--Main enthät den ersten Code der beim öffnen der Seite ausgeführt wird-->
-        <script type="text/javascript" src="js/main.js"></script>
+            <div class="col-lg-9 col-md-9 col-sm-9 text-center"  > 
 
-        <!-- Bei dem Pflege Status eines Baumes -->
-		<script type="text/javascript" src="js/tree/pflege.js"></script>
+                <h2 id="newsletter">Setz dich auf den Verteiler</h2>   
+                <p id="uns-text"> Erfahre mehr von uns, unserem Produkt und anderen Streuobstwiesen aus ganz Deutschland </p> 
+            </div>
+        </div>
 
-        <script type="text/javascript" src="js/tree/tree.js"></script>
+    </div>
 
-        <!--Hilft bei der Erstellung eines Baums-Inputs , create update -->
-        <script type="text/javascript" src="js/tree/tree_form.js"></script>
-        <!--hier sind alle Obstarten die im System vorhanden sien sollen gespeichert -->
-        <script type="text/javascript" src="js/tree/tree_form.js"></script>
+          
+  
 
-        <script type="text/javascript" src="js/tree/pflege_form.js"></script>
-
-        <script type="text/javascript" src="js/tree/tree_form_helper.js"></script>
-
-        <!--Camera um bei Tree Form Selfies zu machen-->
-        <script type="text/javascript" src="js/helper/camera.js"></script>
-        <!--Script to handle Postion Queries -->
-        <script type="text/javascript" src="js/helper/position.js"></script>
-        <!--Defines some helper methods for Forms -->
-        <script type="text/javascript" src="js/helper/form.js"></script>
-		<!--URL for tree icons -->
-        <script type="text/javascript" src="js/helper/url.js"></script>
-		<!--Time -->
-        <script type="text/javascript" src="js/helper/time.js"></script>
-
-
-        <script type="text/javascript" src="js/tree/pflege_form.js"></script>
-        <script type="text/javascript" src="js/tree/pflege_form_helper.js"></script>
-
-
-        <!--definiert Obst Obj -->
-        <script type="text/javascript" src="js/obst/obst.js"></script>
-        <!--ARRRTTTENNN-->
-        <script type="text/javascript" src="js/obst/arten/beerenobst.js"></script>
-        <script type="text/javascript" src="js/obst/arten/exotischefruechte.js"></script>
-        <!--Kernobst-->
-         <script type="text/javascript" src="js/obst/arten/kernobst.js"></script>
-         <script type="text/javascript" src="js/obst/arten/schalenobst.js"></script>
-        <!--Steinobst-->
-        <script type="text/javascript" src="js/obst/arten/steinobst.js"></script>
-        <script type="text/javascript" src="js/obst/arten/suedfruechte.js"></script>
-
-
-        <!--Camera um bei Tree Form Selfies zu machen-->
-        <script type="text/javascript" src="js/helper/camera.js"></script>
-        <!--Lets upload Image to imagur -->
-        <script type="text/javascript" src="js/helper/image_uploader.js"></script>
-        <!--gets images from image server -->
-        <script type="text/javascript" src="js/helper/image_helper.js"></script>
-        <!--Script to handle Postion Queries -->
-        <script type="text/javascript" src="js/helper/position.js"></script>
-        <!--Defines some helper methods for Forms -->
-        <script type="text/javascript" src="js/helper/form.js"></script>
-        <!--Helps to validate data and show errors-->
-        <script type="text/javascript" src="js/helper/validator.js"></script>
-        <!--Helps to interact with navbar -->
-        <script type="text/javascript" src="js/helper/navbar_helper.js"></script>
-        <!--Helps to render specific parts -->
-        <script type="text/javascript" src="js/helper/render_helper.js"></script>
-		<!--Returns a unique ID -->
-        <script type="text/javascript" src="js/helper/ID.js"></script>
-		<!--Filters -->
-        <script type="text/javascript" src="js/helper/filter.js"></script>
-
-
-        <!--Helps to render qrCodes -->
-        <script type="text/javascript" src="js/helper/qrcode_helper.js"></script>
-        <!--Lets scan qr codes -->
-        <script type="text/javascript" src="js/helper/scanner.js"></script>
-        <!--Lets take picture on the mobile app -->
-        <script type="text/javascript" src="js/helper/cordova_camera.js"></script>
-
-        <!--Helps to check on which display size its viewed -->
-        <script type="text/javascript" src="js/helper/device_detector.js"></script>
-        <!--Helps to display errors -->
-        <script type="text/javascript" src="js/helper/error_helper.js"></script>
-        <!--Um karte interactiv abgehen zu können und Wiese zu speichern -->
-        <script type="text/javascript" src="js/register/register_wiese_interactive.js"></script>
-
-         <!--Helps to display right page section on wiese page -->
-        <script type="text/javascript" src="js/wiese/submenu_helper.js"></script>
-
-        <!--Helps to display trees images on map  -->
-        <script type="text/javascript" src="js/helper/print_helper.js"></script>
-
-         <!--Helps to print stuff  -->
-        <script type="text/javascript" src="js/wiese/wiese_place_trees.js"></script>
-
-        <!--Helps to display weather -->
-        <script type="text/javascript" src="js/helper/weather.js"></script>
-
-        <!--Helps to edit Obstarten -->
-        <script type="text/javascript" src="js/obst/obst_editor.js"></script>
-
-        <!--Enthält Code für die Synchronisation-->
-        <script type="text/javascript" src="js/sync.js"></script>
-
-        <!-- <script type="text/javascript">window.setInterval(attemptSync, 9000);</script> -->
-
-        <script type="text/javascript">
-            //lädt /www/navbar.html in den navigation-container
-            NavbarHelper.load_navbar();
-
-            var IMAGE_SERVER = 'https://thawing-woodland-2366.herokuapp.com';
-            var IMAGE_SERVER_PASSWORD =  "aepfel_schmecken_lecker";
-
-            init();
-
-        </script>
-    </body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>

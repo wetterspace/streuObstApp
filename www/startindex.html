@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
+
+
+        <title>Streuobstwiesenapp</title>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="css/ol.css" />
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+
+        <link rel="icon" type="image/png"  href="img/favicon.png">
+
+         <style>
+      .map {
+        height: 400px;
+        width: 100%;
+      }
+      /* Benutzt bei Extras anlegen bei dem Icon Selector Window*/
+      .icon_selected_img {
+        border: 2px solid #15a589;
+      }
+
+      /*Damit Buttons nicht genau am ende der Seite dargestellt werden */
+      #HauptFenster{
+        margin-bottom: 20px;
+      }
+
+    </style>
+
+    </head>
+    <body>
+
+        <div id="navbar_container"></div>
+
+        <div class="container" style="margin-top:70px">
+            <div id="FehlerFenster" class="row">
+
+            </div>
+
+            <div id="HauptFenster" class="row">
+                <div class="row">
+
+                    <div class="col-lg-4">
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+
+
+                    <div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <!--Jquery bietet vereinfachte Javascript Funktionen -->
+        <script type="text/javascript" src="lib/jquery.js"></script>
+        <!--Bootstrap Javascript -->
+        <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+        <!--Firebase um eine Verbindung zum Server herzustellen zu können-->
+        <script type="text/javascript" src="lib/firebase.js"></script>
+        <!--Openlayers Libaryy -->
+        <script type="text/javascript" src="lib/ol.js"></script>
+        <!--Zentraler Punkt um mit der Datenbank zu kommunizieren-->
+		<!--Crypto Library-->
+		<script type="text/javascript" src="lib/sjcl/sjcl.js"></script>
+		<script type="text/javascript" src="lib/sjcl/core/sha1.js"></script>
+        <!--Libary um QR-Codes zu erstellen-->
+        <script type="text/javascript" src="lib/qrcode.js"></script>
+        <!--Wrapper für FireBase-->
+        <script type="text/javascript" src="js/helper/db.js"></script>
+		<!--Enthält Code für Firebase Abfragen/Offline Version-->
+        <script type="text/javascript" src="js/helper/connect.js"></script>
+        <!--Enthält Code der dafür zuständig ist die Wiesen anzuzeigen-->
+        <script type="text/javascript" src="js/wiese.js"></script>
+        <!--Enthält Code der dafür zuständig ist die Ubersicht der Baume der Wiese anzuzeigen-->
+        <script type="text/javascript" src="js/ubersicht.js"></script>
+		<!--Enthält Code der dafür zuständig ist die User anzuzeigen-->
+        <script type="text/javascript" src="js/user.js"></script>
+        <!--Enthält Code der für die Registiereung zuständig ist-->
+        <script type="text/javascript" src="js/register.js"></script>
+		<!--Enthält Code der für die Registiereung zuständig ist-->
+        <script type="text/javascript" src="js/registerWiese.js"></script>
+        <!--Enthält Code der für das Login zuständig ist-->
+        <script type="text/javascript" src="js/login.js"></script>
+        <!--Main enthät den ersten Code der beim öffnen der Seite ausgeführt wird-->
+        <script type="text/javascript" src="js/main.js"></script>
+
+        <!-- Bei dem Pflege Status eines Baumes -->
+		<script type="text/javascript" src="js/tree/pflege.js"></script>
+
+        <script type="text/javascript" src="js/tree/tree.js"></script>
+
+        <!--Hilft bei der Erstellung eines Baums-Inputs , create update -->
+        <script type="text/javascript" src="js/tree/tree_form.js"></script>
+        <!--hier sind alle Obstarten die im System vorhanden sien sollen gespeichert -->
+        <script type="text/javascript" src="js/tree/tree_form.js"></script>
+
+        <script type="text/javascript" src="js/tree/pflege_form.js"></script>
+
+        <script type="text/javascript" src="js/tree/tree_form_helper.js"></script>
+
+        <!--Camera um bei Tree Form Selfies zu machen-->
+        <script type="text/javascript" src="js/helper/camera.js"></script>
+        <!--Script to handle Postion Queries -->
+        <script type="text/javascript" src="js/helper/position.js"></script>
+        <!--Defines some helper methods for Forms -->
+        <script type="text/javascript" src="js/helper/form.js"></script>
+		<!--URL for tree icons -->
+        <script type="text/javascript" src="js/helper/url.js"></script>
+		<!--Time -->
+        <script type="text/javascript" src="js/helper/time.js"></script>
+
+
+        <script type="text/javascript" src="js/tree/pflege_form.js"></script>
+        <script type="text/javascript" src="js/tree/pflege_form_helper.js"></script>
+
+
+        <!--definiert Obst Obj -->
+        <script type="text/javascript" src="js/obst/obst.js"></script>
+        <!--ARRRTTTENNN-->
+        <script type="text/javascript" src="js/obst/arten/beerenobst.js"></script>
+        <script type="text/javascript" src="js/obst/arten/exotischefruechte.js"></script>
+        <!--Kernobst-->
+         <script type="text/javascript" src="js/obst/arten/kernobst.js"></script>
+         <script type="text/javascript" src="js/obst/arten/schalenobst.js"></script>
+        <!--Steinobst-->
+        <script type="text/javascript" src="js/obst/arten/steinobst.js"></script>
+        <script type="text/javascript" src="js/obst/arten/suedfruechte.js"></script>
+
+
+        <!--Camera um bei Tree Form Selfies zu machen-->
+        <script type="text/javascript" src="js/helper/camera.js"></script>
+        <!--Lets upload Image to imagur -->
+        <script type="text/javascript" src="js/helper/image_uploader.js"></script>
+        <!--gets images from image server -->
+        <script type="text/javascript" src="js/helper/image_helper.js"></script>
+        <!--Script to handle Postion Queries -->
+        <script type="text/javascript" src="js/helper/position.js"></script>
+        <!--Defines some helper methods for Forms -->
+        <script type="text/javascript" src="js/helper/form.js"></script>
+        <!--Helps to validate data and show errors-->
+        <script type="text/javascript" src="js/helper/validator.js"></script>
+        <!--Helps to interact with navbar -->
+        <script type="text/javascript" src="js/helper/navbar_helper.js"></script>
+        <!--Helps to render specific parts -->
+        <script type="text/javascript" src="js/helper/render_helper.js"></script>
+		<!--Returns a unique ID -->
+        <script type="text/javascript" src="js/helper/ID.js"></script>
+		<!--Filters -->
+        <script type="text/javascript" src="js/helper/filter.js"></script>
+
+
+        <!--Helps to render qrCodes -->
+        <script type="text/javascript" src="js/helper/qrcode_helper.js"></script>
+        <!--Lets scan qr codes -->
+        <script type="text/javascript" src="js/helper/scanner.js"></script>
+        <!--Lets take picture on the mobile app -->
+        <script type="text/javascript" src="js/helper/cordova_camera.js"></script>
+
+        <!--Helps to check on which display size its viewed -->
+        <script type="text/javascript" src="js/helper/device_detector.js"></script>
+        <!--Helps to display errors -->
+        <script type="text/javascript" src="js/helper/error_helper.js"></script>
+        <!--Um karte interactiv abgehen zu können und Wiese zu speichern -->
+        <script type="text/javascript" src="js/register/register_wiese_interactive.js"></script>
+
+         <!--Helps to display right page section on wiese page -->
+        <script type="text/javascript" src="js/wiese/submenu_helper.js"></script>
+
+        <!--Helps to display trees images on map  -->
+        <script type="text/javascript" src="js/helper/print_helper.js"></script>
+
+         <!--Helps to print stuff  -->
+        <script type="text/javascript" src="js/wiese/wiese_place_trees.js"></script>
+
+        <!--Helps to display weather -->
+        <script type="text/javascript" src="js/helper/weather.js"></script>
+
+        <!--Helps to edit Obstarten -->
+        <script type="text/javascript" src="js/obst/obst_editor.js"></script>
+
+        <!--Enthält Code für die Synchronisation-->
+        <script type="text/javascript" src="js/sync.js"></script>
+
+        <!-- <script type="text/javascript">window.setInterval(attemptSync, 9000);</script> -->
+
+        <script type="text/javascript">
+            //lädt /www/navbar.html in den navigation-container
+            NavbarHelper.load_navbar();
+
+            var IMAGE_SERVER = 'https://thawing-woodland-2366.herokuapp.com';
+            var IMAGE_SERVER_PASSWORD =  "aepfel_schmecken_lecker";
+
+            init();
+
+        </script>
+    </body>
+</html>
