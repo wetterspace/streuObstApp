@@ -57,9 +57,11 @@ Login.prototype.showLogin = function(){
 
 
 
-		$('#buttonLogin').click(function(){
-			var userName = $('#inputWiesenName').val();
-			var userPassword = $('#inputWiesenPassword').val();
+		$('#formLogin').submit(function(event){
+			event.preventDefault();
+
+			var userName = $('#inputUsername').val();
+			var userPassword = $('#inputPassword').val();
 			var out = sjcl.hash.sha1.hash(userPassword);
 			var hashedPassword = sjcl.codec.hex.fromBits(out)
 
