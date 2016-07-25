@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb-base/legacy",
+  "env": {
+    "jquery": true
+  },
+  "rules": {
+    "func-names": "off",
+    "indent": ["error", 4],
+    "newline-per-chained-call": "off",
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "max-len": "off",
+    "vars-on-top": "off",
+  }
+}
