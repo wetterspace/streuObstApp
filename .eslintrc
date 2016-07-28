@@ -4,6 +4,7 @@
     "jquery": true
   },
   "rules": {
+    "camelcase": "off",
     "func-names": "off",
     "indent": ["error", 4],
     "newline-per-chained-call": "off",
