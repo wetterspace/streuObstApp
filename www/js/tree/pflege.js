@@ -35,5 +35,25 @@ var PflegeAttr = {
     verbiss_spuren: {
         id: 'verbiss_spuren',
         title: 'Verbissspuren'
+    },
+
+    bluete_beginn: {
+        id: 'bluete_beginn',
+        title: 'Blütenbeginn'
+    },
+
+    bluete_end: {
+        id: 'bluete_end',
+        title: 'Blütenende'
+    },
+
+    bluehintensitaet: {
+        id: 'bluehintensitaet',
+        title: 'Blühintensität'
+    },
+
+    ertragsintensitaet: {
+        id: 'ertragsintensitaet',
+        title: 'Ertragsintensität'
     }
 };

@@ -67,20 +67,54 @@ var PflegeForm = function (tree) {
                 { id: PflegeAttr.schaedline.id,
                     form: Form.Textarea,
                     rows: 2,
-                    title: PflegeAttr.schaedline.title }
+                    title: PflegeAttr.schaedline.title
+                }
             ]
         },
-
         {
             id: 'pflege_row_4',
             fields: [
                 { id: PflegeAttr.verbiss_spuren.id,
                     form: Form.Textarea,
                     rows: 2,
-                    title: PflegeAttr.verbiss_spuren.title }
+                    title: PflegeAttr.verbiss_spuren.title
+                }
+            ]
+        },
+        {
+            id: 'pflege_row_5',
+            fields: [
+                { id: PflegeAttr.bluete_beginn.id,
+                    form: Form.Checkbox,
+                    title: PflegeAttr.bluete_beginn.title
+                },
+                { id: PflegeAttr.bluete_end.id,
+                    form: Form.Checkbox,
+                    title: PflegeAttr.bluete_end.title
+                }
+            ]
+        },
+        {
+            id: 'pflege_row_6',
+            fields: [
+                {
+                    id: PflegeAttr.bluehintensitaet.id,
+                    form: Form.Range,
+                    min: 0,
+                    max: 6,
+                    range_name: 'Blühintensität',
+                    title: PflegeAttr.bluehintensitaet.title
+                },
+                {
+                    id: PflegeAttr.ertragsintensitaet.id,
+                    form: Form.Range,
+                    min: 0,
+                    max: 6,
+                    range_name: 'Ertragsintensität',
+                    title: PflegeAttr.ertragsintensitaet.title
+                }
             ]
         }
-
     ];
 };
 
@@ -103,9 +137,9 @@ PflegeForm.prototype.init_pflegezustände = function () {
             var pflegezustand = this.tree.pflegezustaende[key];
 
             var list_group_item = $('<a/>', { class: 'list-group-item', href: '#', 'data-id': key }).append(
-                            $('<h4/>', { class: 'list-group-item-heading', text: PflegeFormHelper.transform_id_to_name(key) })
-                        ).append(
-                            $('<p/>', { class: 'list-group-item-text', text: 'Florian' })
+                            $('<h4/>', { text: PflegeFormHelper.transform_id_to_name(key) })
+                        // ).append(
+                        // $('<p/>', { class: 'list-group-item-text', text: 'Florian' })
                         );
 
             $(list_group_item).click(function () {
