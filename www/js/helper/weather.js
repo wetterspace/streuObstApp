@@ -44,8 +44,7 @@ Weather.prototype.render = function(){
 	if(window.weather_information){
 		var info = window.weather_information;
 		this.render_box.append($('<img>',{id:'weather_img',src: info.img}));
-        this.render_box.append($('<p/>', {html: "Wetter in " + info.location + " für heute, " + info.today}));
-        this.render_box.append($('<p/>', {html: info.desc + ". Die Temperatur beträgt " + info.temp + "&deg;C"}));
+        this.render_box.append($('<p/>', {html: "Das Wetter heute in " + info.location + ": " + info.desc + ". Die Temperatur beträgt " + info.temp + "&deg;C."}));
         this.render_box.append($('<p/>', {html: "Feuchtigkeit: " + info.humidity}));
         this.render_box.append($('<p/>', {html: "Wind: " + info.wind_dir + ", " + info.wind_speed + " km/h"}));
         this.render_box.append($('<p/>', {html: "Gefühlte: " + info.feelslike + "&deg;C"}));
