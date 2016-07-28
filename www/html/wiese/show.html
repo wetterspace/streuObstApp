@@ -1,141 +1,135 @@
 <div class="col-lg-9">
-   <div id="map" class="map"></div>
+    <div id="map" class="map"></div>
 </div>
+
 <!--not visible on phone -->
 <div class="col-lg-3 hidden-xs" id="right_menu_map">
 
-	<div id="general_right_submenu">
-		<!--Gets hidden when user click on tree in map-->
+    <div id="general_right_submenu">
+        <!--Gets hidden when user click on tree in map-->
 
-		<!-- Modal -->
-		<div class="modal fade" tabindex="-1" role="dialog" id="myModalOrchard">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		      	  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Wiese</h4>
-		      </div>
-		      <div class="modal-body">
-		        <p>Wiese kann nun offline genutzt werden.</p>
-		      </div>
-		      <div class="modal-footer">
-			   <div class="col-lg-12 text-center">
-		        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
-				</div>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+        <!-- Modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="myModalOrchard">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Wiese</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Wiese kann nun offline genutzt werden.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-lg-12 text-center">
+                            <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-			<div id="header_submenu">
-				<!-- wenn man hier clicked werden unten die submenus angezeigt oder ausgeblendet !-->
-				<ul id="sub_menu_breadcrumb" class="breadcrumb" style="text-align:center">
-				  <li data-submenu="info">Info</li>
-				  <li data-submenu="baume">B&auml;ume</li>
-				  <li data-submenu="filter">Filter</li>
-				</ul>
+        <div id="header_submenu">
+            <!-- wenn man hier clicked werden unten die submenus angezeigt oder ausgeblendet !-->
+            <ul id="sub_menu_breadcrumb" class="breadcrumb" style="text-align:center">
+                <li data-submenu="info">Info</li>
+                <li data-submenu="baume">B&auml;ume</li>
+                <li data-submenu="filter">Filter</li>
+            </ul>
 
-				<hr>
-			</div>
+            <hr>
+        </div>
 
-			<!--diese menus werden uber die breadcrumbs gesteuert !-->
-			<!--wird an die größe des viewports angepasst -->
-			<div id="sub_box_menu" style="overflow-y: auto">
+        <!--diese menus werden uber die breadcrumbs gesteuert !-->
+        <!--wird an die größe des viewports angepasst -->
+        <div id="sub_box_menu" style="overflow-y: auto">
 
-				<div id="sub_menu_info" style="display: none">
-						<h3 id="wiesenName"></h3>
-
-
-						<ul class="nav nav-tabs">
-						  <li class="active"><a href="#wiesen_info_tab" data-toggle="tab">Wiesen-Info</a></li>
-						  <li><a href="#wetter_info_tab" data-toggle="tab">Wetter-Info</a></li>
-						</ul>
-						<div class="tab-content">
-						  <div class="tab-pane fade active in" id="wiesen_info_tab">
-						  </div>
-						  <div class="tab-pane fade" id="wetter_info_tab">
-						  </div>
-						</div>
+            <div id="sub_menu_info" style="display: none">
+                <h3 id="wiesenName"></h3>
 
 
-
-
-						<hr>
-
-						<div class="col-sm-12 well well-lg">
-							<p align="justify">Ziehen sie eines der Icon direkt auf die Wiese um ein neues Objekt anzulegen</p>
-
-							<div class="row">
-										<div class="col-sm-6 text-center">
-											<a>Baum-Icon</a>
-											<img src="img/Baumprofil.svg" data-dragname="tree_icon_drag"  draggable="true"/>
-										</div>
-
-										<div class="col-sm-6 text-center">
-											<a> Extra-Icon</a>
-											<img src="img/Baumschneiden.svg"  data-dragname="extra_icon_drag"  draggable="true"/>
-										</div>
-
-
-							</div>
-						</div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#wiesen_info_tab" data-toggle="tab">Wiesen-Info</a></li>
+                    <li><a href="#wetter_info_tab" data-toggle="tab">Wetter-Info</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="wiesen_info_tab">
+                    </div>
+                    <div class="tab-pane fade" id="wetter_info_tab">
+                    </div>
+                </div>
 
 
 
 
-						<div class="btn-group inline">
-							<a href="#" id="buttonOrchardOffline" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
+                <hr>
 
-						  <a class="btn btn-info" id="print_map_btn" data-toggle="dropdown">Drucken</a>
-						  <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-						  <ul class="dropdown-menu pull-right" id="print_options">
-						    <li data-option="complete_map"><a href="#">Komplette Kartenansicht</a></li>
-						    <li data-option="map_sector"><a href="#">Nur aktueller Auschnitt</a></li>
-						  </ul>
-						</div>
+                <div class="col-sm-12 well well-lg">
+                    <p align="justify">Ziehen sie eines der Icon direkt auf die Wiese um ein neues Objekt anzulegen</p>
 
-				</div>
+                    <div class="row">
+                        <div class="col-sm-6 text-center">
+                            <a>Baum-Icon</a>
+                            <img src="img/Baumprofil.svg" data-dragname="tree_icon_drag"  draggable="true"/>
+                        </div>
 
-
-				<div id="sub_menu_baume" style="display:none">
-					<div id="trees_list">
-
-					</div>
-				</div>
-
-				<div id="sub_menu_filter" style="display:none">
+                        <div class="col-sm-6 text-center">
+                            <a> Extra-Icon</a>
+                            <img src="img/Baumschneiden.svg"  data-dragname="extra_icon_drag"  draggable="true"/>
+                        </div>
 
 
-				<div class="checkbox">
-            <label><input type="checkbox" value="alle"  onClick="toggle(this)" id="checkboxAll">alle</label>
-         </div>
-         <script type="text/javascript">
-            function toggle(source) {
-             checkboxes = document.getElementsByName('filterSort');
-             for(var i=0, n=checkboxes.length;i<n;i++) {
-            if(source.checked) {
-             checkboxes[i].checked = source.checked;
-             checkboxes[i].disabled = true;
-            }
-            else {
-            checkboxes[i].disabled = false;
-            }
-             }
-            }
-         </script>
+                    </div>
+                </div>
 
 
 
-				</div>
 
-			</div>
+                <div class="btn-group inline">
+                    <a href="#" id="buttonOrchardOffline" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Nutzen Sie die aktuelle Wiese offline">Offline setzen</a>
 
-	</div>
+                    <a class="btn btn-info" id="print_map_btn" data-toggle="dropdown">Drucken</a>
+                    <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu pull-right" id="print_options">
+                        <li data-option="complete_map"><a href="#">Komplette Kartenansicht</a></li>
+                        <li data-option="map_sector"><a href="#">Nur aktueller Auschnitt</a></li>
+                    </ul>
+                </div>
 
-	<div id="tree_right_submenu" style="display:none">
+            </div>
 
-		<!--Gets shown when user clicks on tree in map -->
 
-	</div>
+            <div id="sub_menu_baume" style="display:none">
+                <div id="trees_list">
+
+                </div>
+            </div>
+
+            <div id="sub_menu_filter" style="display:none">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="alle"  onClick="toggle(this)" id="checkboxAll">alle</label>
+                </div>
+                <script type="text/javascript">
+                    function toggle(source) {
+                        checkboxes = document.getElementsByName('filterSort');
+                        for(var i=0, n=checkboxes.length;i<n;i++) {
+                            if(source.checked) {
+                                checkboxes[i].checked = source.checked;
+                                checkboxes[i].disabled = true;
+                            }
+                            else {
+                                checkboxes[i].disabled = false;
+                            }
+                        }
+                    }
+                </script>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="tree_right_submenu" style="display:none">
+        <!--Gets shown when user clicks on tree in map -->
+    </div>
 
 </div>
