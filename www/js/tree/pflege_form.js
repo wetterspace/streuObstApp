@@ -248,7 +248,7 @@ PflegeForm.prototype.fill_forms_with_pflegezustand = function (pflegezustand) {
             // renders each field
             row.fields.forEach(function (field) {
                 // sets value for each field
-                if (pflegezustand && pflegezustand[field.id]) {
+                if (pflegezustand && typeof pflegezustand[field.id] != 'undefined') {
                     var form = $('#' + field.id);
 
                     if (field.form == Form.Checkbox) {
