@@ -57,23 +57,6 @@ title: "Gepflanzt"},
 anmerkungen: {	id: "anmerkungen",
 title: "Anmerkungen"},
 
-	bluete_beginn: {	id: "bluete_beginn",
-title: "Blüte Begin"},
-
-	bluete_end: {	id: "bluete_end",
-title: "Blüte Ende"},
-
-blueintensitaet: {	id: "blueintensitaet",
-title: "Blühintensität"},
-
-ertragsintensitaet: {	id: "ertragsintensitaet",
-title: "Ertragsintensität"},
-
-	temperatur_beginn: {	id: "temperatur_beginn",
-title: "Temperatur bei Beginn"},
-	temperatur_ende: {		id: "temperatur_ende",
-							title: "Temperatur bei Ende"},
-
 	images: {
 		id: "images"
 	},

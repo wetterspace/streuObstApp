@@ -1,25 +1,27 @@
 
 <div class="col-lg-12">
-	<ul class="breadcrumb" id="tree_form_selector" style="display:none">
-	  <li data-tabselector="allgemeine_angaben" class="active tabselector" >
-	  	Allgemeine Angaben
+	<ul class="nav nav-tabs nav-justified" id="tree_form_selector" style="display:none">
+	  <li data-tabselector="allgemeine_angaben" class="active tabselector">
+	  	<a href="#">Allgemeine Angaben</a>
 	  </li>
 	  <li data-tabselector="pflegezustand" class="tabselector">
-	  	<a href="#" >Pflegezustand</a>
+	  	<a href="#">Pflegezustand</a>
 	  </li>
-	  <li data-tabselector="blüte_und_ertrag" class="tabselector">
-	  	<a href="#" >Blüte und Ertrag</a>
+	  <li data-tabselector="wetterdaten" class="tabselector">
+	  	<a href="#">Wetterdaten</a>
 	  </li>
 	  <!-- Wird nur bei computernn/nicht bei mobile gezeigt -->
-	  <li data-tabselector="qr_code" class="visible-lg-inline tabselector">
-	  	<a href="#" >QR-Code</a>
+	  <li data-tabselector="qr_code" class="hidden-xs hidden-sm hidden-md tabselector">
+	  	<a href="#">QR-Code</a>
 	  </li>
 	  <!-- Wird nur bei mobile / cordova gezeigt -->
 	  <li data-tabselector="camera" class="tabselector" style="display:none">
-	  	<a href="#" >Kamera</a>
+	  	<a href="#">Kamera</a>
 	  </li>
 	</ul>
 </div>
+
+<br><br><br>
 
 <div class="form_tab" data-tab="allgemeine_angaben">
 	<div class="col-lg-12">
@@ -116,9 +118,18 @@
 	<div class="col-lg-4" id="tree_form_row_3_2">
 	</div>
 
-	<div class="col-lg-4" id="tree_form_row_3_3">
-	</div>
+</div>
 
+
+<div class="form_tab" data-tab="wetterdaten" id="tree_form_wetterdaten" style="display:none">
+	<div id="dashboard_div" style="display: block; width: 100%"></div>
+	<div id="chart_overlay" style="display: block; width: 100%"></div>
+	<div id="slider_overlay" style="display: block; width: 100%"></div>
+	<br><br><br>
+	<div id="dashboard_div_precitipation" style="display: block; width: 100%"></div>
+	<div id="chart_overlay_precitipation" style="display: block; width: 100%"></div>
+	<div id="slider_overlay_precitipation" style="display: block; width: 100%"></div>
+	<br><br><br>
 </div>
 
 
@@ -170,7 +181,3 @@
 			<a href="#" class="btn btn-success" id="save_tree_form">Speichern</a>
 		</div>
 	</div>
-
-
-
-
