@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
 
 
-        <title>Streuobstwiesenapp</title>
+        <title>StreuObst!</title>
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="css/ol.css" />
@@ -199,6 +199,9 @@
         <!--Enthält Code für die Synchronisation-->
         <script type="text/javascript" src="js/sync.js"></script>
 
+        <!--WeatherSpace related functions -->
+        <script type="text/javascript" src="js/helper/weatherSpace_helper.js"></script>
+
         <!-- <script type="text/javascript">window.setInterval(attemptSync, 9000);</script> -->
 
         <script type="text/javascript">
@@ -210,6 +213,13 @@
 
             init();
 
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw79V9rKFksZLgO3_PBX_LDbNjqBO0jAQ" defer></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.charts.load('current', { packages: ['corechart', 'controls'] });
         </script>
     </body>
 </html>
