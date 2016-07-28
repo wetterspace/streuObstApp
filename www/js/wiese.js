@@ -1,3 +1,5 @@
+/* globals WeatherSpaceHelper, getOrchard */
+
 var Wiese = function (name, obstarten) {
     this.name = name;
 
@@ -244,6 +246,20 @@ Wiese.prototype.init_page = function () {
 Wiese.prototype.init = function () {
     this.getWiesenDataFromServer(function () {
         // callback
+
+        // Get weather data if not present already
+        if (!this.data.weather) {
+            var self = this;
+
+            self.data.weather = {};
+
+            WeatherSpaceHelper.getTemperatureByLatLong(this.data.coordinates[0][0][0], this.data.coordinates[0][0][1]).done(function (response) {
+                self.data.weather.temperature = response;
+            });
+            WeatherSpaceHelper.getPrecitipationByLatLong(this.data.coordinates[0][0][0], this.data.coordinates[0][0][1]).done(function (response) {
+                self.data.weather.precitipation = response;
+            });
+        }
 
         this.init_page();
         this.init_map();
